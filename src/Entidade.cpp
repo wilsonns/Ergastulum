@@ -20,12 +20,12 @@ Entidade::~Entidade()
 
 void Entidade::render()
 {
-    if (engine.mapa->eVisivel(x,y))
-    {
+    //if (engine.mapa->eVisivel(x,y))
+    //{
         attron(COLOR_PAIR(1));
         mvprintw(y, x, "%c", simbolo);
         attroff(COLOR_PAIR(1));
-    }
+    //}
 }
 
 void Entidade::atualizar()

@@ -106,11 +106,14 @@ void aiMonstro::atualizar(Entidade *owner)
 
 bool aiMonstro::moverOuAtacar(Entidade *owner,int xalvo, int yalvo)
 {
-    /*
     owner->caminho = engine.pathMapa->acharCaminho(owner, engine.jogador);
+    for (int i = 0; i < owner->caminho.size(); i++)
+    {
+        engine.log->inserirmsg("Caminho[" + std::to_string(i) + "] X:" + std::to_string(owner->caminho[i]->x) + "Y:" + std::to_string(owner->caminho[i]->y));
+    }
     owner->x = owner->caminho[0]->x;
     owner->y = owner->caminho[0]->y;
-    owner->caminho.erase(owner->caminho.begin());
+    /*owner->caminho.erase(owner->caminho.begin());
     int dx = xalvo - owner->x;
     int dy = yalvo - owner->y;
     float distancia = sqrtf((dx * dx) + (dy * dy));

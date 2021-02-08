@@ -17,6 +17,7 @@
 #include<algorithm>
 #include<unordered_map>
 #include<array>
+#include<Windows.h>
 
 class Destrutivel;
 class Atacador;
