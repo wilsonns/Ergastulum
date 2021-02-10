@@ -11,16 +11,24 @@ AI::~AI()
     //dtor
 }
 
-void aiJogador::atualizar(Entidade *owner)
+aiJogador::aiJogador(float velocidade)
 {
-    if(owner->destrutivel && owner->destrutivel->morreu())
+    this->velocidade = velocidade;
+    barraTurno = 0;
+}
+
+void aiJogador::atualizar(Entidade* owner)
+{
+    if (owner->ai->barraTurno >= 1)
     {
-        return;
-    }
-    int dx = 0, dy =0;
-    int key = getch();
-    switch(key)
-    {
+        if (owner->destrutivel && owner->destrutivel->morreu())
+        {
+            return;
+        }
+        int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 1
+        int key = getch();
+        switch (key)
+        {
         case KEY_UP:
         case 56://cima
             dy = -1;
@@ -55,6 +63,44 @@ void aiJogador::atualizar(Entidade *owner)
             break;
         case 53://fazer nada tecla 5
             break;
+        case 'g':
+        case 'G'://tecla g/G - Pegar item;
+        {
+            bool achado = false;
+            for (unsigned short int i = 0; i < engine.entidades.size();i++)
+            {
+                if (engine.entidades[i]->pegavel && engine.entidades[i]->x == owner->x && engine.entidades[i]->y == owner->y)
+                {
+                    if (engine.entidades[i]->pegavel->pegar(engine.entidades[i], owner))
+                    {
+                        achado = true;
+                        // MENSAGEM - VOCÊ PEGOU O ITEM
+                        break;
+                    }
+                    else if (!achado)
+                    {
+                        achado = true;
+                        //MENSAGEM - INVENTARIO CHEIO
+                    }
+                }
+                if (!achado)
+                {
+                    ///MENSAGEM - NÃO TEM NADA PRA PEGAR AQUI
+                }
+            }
+        }
+        break;
+        case 'i':
+        case 'I':
+        {
+            Entidade* entidade = escolherDoInventario(owner);
+            if (entidade)
+            {
+                entidade->pegavel->usar(entidade, owner);
+
+            }
+        }
+        break;
         case KEY_F(1):
             engine.rodando = false;
             break;
@@ -64,12 +110,18 @@ void aiJogador::atualizar(Entidade *owner)
         case KEY_F(3):
             engine.mostrarPath = !engine.mostrarPath;
             break;
+        }
+        if (dx != 0 || dy != 0)
+        {
+            moverOuAtacar(owner, owner->x + dx, owner->y + dy);
+        }
+        engine.log->inserirmsg("Turno do jogador finalizado");
+        owner->ai->barraTurno -= 1;
     }
-    if(dx != 0 || dy != 0)
+    else
     {
-        moverOuAtacar(owner,owner->x+dx,owner->y+dy);
+        owner->ai->barraTurno += owner->ai->velocidade;
     }
-    engine.log->inserirmsg("Turno do jogador finalizado");
 }
 
 bool aiJogador::moverOuAtacar(Entidade *owner, int xalvo, int yalvo)
@@ -94,25 +146,86 @@ bool aiJogador::moverOuAtacar(Entidade *owner, int xalvo, int yalvo)
     return true;
 }
 
-void aiMonstro::atualizar(Entidade *owner)
+
+Entidade* aiJogador::escolherDoInventario(Entidade* owner)
 {
-    if(owner->destrutivel && owner->destrutivel->morreu())
+    static const int LARGURA_INVENTARIO = 40;
+    static const int ALTURA_INVENTARIO = 12;
+    for (int x = (engine.mapa->largura - LARGURA_INVENTARIO) / 2; x < LARGURA_INVENTARIO; x++)
     {
-        return;
+        for (int y = (engine.mapa->altura - ALTURA_INVENTARIO) / 2; y < LARGURA_INVENTARIO; y++)
+        {
+            mvprintw(y, x, "#");
+        }
+    }//DESENHAR A MOLDURA DO INVENTARIO
+    int atalho = 'a';
+    int i = 1;
+    int x = (engine.mapa->largura - LARGURA_INVENTARIO) / 2;
+    int y = (engine.mapa->altura - ALTURA_INVENTARIO) / 2;
+    for (int j = 0; j < owner->container->inventario.size();j++)
+    {
+        mvprintw(y + j + 1, x + 1, "(%c)- %c", atalho, owner->container->inventario[j]->nome);
+        atalho++;
     }
-    moverOuAtacar(owner,engine.jogador->x,engine.jogador->y);
-    engine.log->inserirmsg("Turno do monstro finalizado");
+    refresh();/*
+    int key = getch();
+    while (key < 97 || key > 122)
+    {
+        if (key > 96 || key < 123)
+        {
+            int entidadeIndex = key - 'a';
+            if (entidadeIndex >= 0 && entidadeIndex < owner->container->inventario.size())
+            {
+                return owner->container->inventario[entidadeIndex];
+            }
+        }*/
+        return NULL;
+    
+    
 }
 
-bool aiMonstro::moverOuAtacar(Entidade *owner,int xalvo, int yalvo)
+aiMonstro::aiMonstro(float velocidade)
 {
-    owner->caminho = engine.pathMapa->acharCaminho(owner, engine.jogador);
+    this->velocidade = velocidade;
+    barraTurno = 0;
+}
+
+void aiMonstro::atualizar(Entidade* owner)
+{
+    if (owner->ai->barraTurno >= 1)
+    {
+        if (owner->destrutivel && owner->destrutivel->morreu())
+        {
+            return;
+        }
+        moverOuAtacar(owner, engine.jogador);
+        engine.log->inserirmsg("Turno do monstro finalizado");
+        owner->ai->barraTurno -= 1;
+    }
+    else
+    {
+        owner->ai->barraTurno += velocidade;
+    }
+}
+
+bool aiMonstro::moverOuAtacar(Entidade *owner,Entidade *alvo)
+{
+    
+    owner->caminho = engine.pathMapa->acharCaminho(owner, alvo);
     for (int i = 0; i < owner->caminho.size(); i++)
     {
         engine.log->inserirmsg("Caminho[" + std::to_string(i) + "] X:" + std::to_string(owner->caminho[i]->x) + "Y:" + std::to_string(owner->caminho[i]->y));
     }
-    owner->x = owner->caminho[0]->x;
-    owner->y = owner->caminho[0]->y;
+    if (owner->caminho.size() > 1 && engine.mapa->podeAndar(owner->caminho[0]->x, owner->caminho[0]->y) 
+        &&  owner->caminho[0]->x != alvo->x && owner->caminho[0]->y != alvo->y)
+    {
+        owner->x = owner->caminho[0]->x;
+        owner->y = owner->caminho[0]->y;
+    }
+    else if (owner->caminho[0]->x == alvo->x && owner->caminho[0]->y == alvo->y)
+    {
+        owner->atacador->atacar(owner, alvo);
+    }
     /*owner->caminho.erase(owner->caminho.begin());
     int dx = xalvo - owner->x;
     int dy = yalvo - owner->y;

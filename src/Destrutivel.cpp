@@ -1,5 +1,4 @@
 #include "Destrutivel.h"
-#include "main.h"
 
 Destrutivel::Destrutivel(float hpMax, float defesa, const char *nomeCadaver)
 {
@@ -24,6 +23,17 @@ float Destrutivel::tomarDano(Entidade *owner, float dano)
         morrer(owner);
     }
     return dano;
+}
+
+float Destrutivel::curar(float valor)
+{
+    hp += valor;
+    if (hp > hpMax)
+    {
+        valor = hp - hpMax;
+        hp = hpMax;
+    }
+    return valor;
 }
 
 void Destrutivel::morrer(Entidade *owner)

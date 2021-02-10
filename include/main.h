@@ -22,6 +22,8 @@
 class Destrutivel;
 class Atacador;
 class AI;
+class Pegavel;
+class Container;
 class Pathfinding;
 class Entidade;
 class Mapa;
@@ -32,6 +34,8 @@ class GUI;
 #include<Destrutivel.h>
 #include<Atacador.h>
 #include<AI.h>
+#include<Pegavel.h>
+#include<Container.h>
 #include<Pathfinding.h>
 #include<Entidade.h>
 #include<Mapa.h>

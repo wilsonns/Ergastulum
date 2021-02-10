@@ -10,7 +10,8 @@ Engine::Engine()
     jogador = new Entidade(1,9,"Jogador",'@');
     jogador->destrutivel = new destrutivelJogador(20,0,"Seu Cadavi");
     jogador->atacador = new Atacador(2);
-    jogador->ai = new aiJogador();
+    jogador->ai = new aiJogador(1);
+    jogador->container = new Container(10);
     entidades.push_back(jogador);
     rodando = true;
     debug = false;
@@ -34,7 +35,9 @@ void Engine::render()
     for (unsigned int i = 0; i < entidades.size(); i++)
     {
         entidades[i]->render();
-    }/*
+    }
+    refresh();
+    /*
     if (mostrarPath == true)
     {
         for (int i = 0; i < mapa->largura; i++)
@@ -77,8 +80,10 @@ void Engine::render()
             mvprintw(i, 70, "x:%i/y:%i", entidades[i]->x, entidades[i]->y);
         }
     }
-    gui->render();
+
     refresh();
+    gui->render();
+    wrefresh(gui->msgs);
 }
 void Engine::atualizar()
 {
@@ -102,6 +107,6 @@ void Engine::adcmonstro(int x, int y)
     Entidade *monstro = new Entidade(x,y,"Orc" ,'O');
     monstro->destrutivel = new destrutivelMonstro(20,2,"Cadavi");
     monstro->atacador = new Atacador(1);
-    monstro->ai = new aiMonstro();
+    monstro->ai = new aiMonstro(0.25);
     entidades.push_back(monstro);
 }

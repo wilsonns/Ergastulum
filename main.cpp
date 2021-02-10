@@ -6,10 +6,11 @@ Engine engine;
 
 int main()
 {
-    
     initscr();
     noecho();
+    cbreak();
     raw();
+//    nodelay(stdscr, true);
 
     start_color();
 
@@ -17,8 +18,8 @@ int main()
     init_pair(2, 8, 0); // BRANCO
     init_pair(3, 10, 0);//VERDE
     init_pair(4, 12, 0);//vermelho
- 
-    
+
+
     keypad(stdscr, true);
 
     for (int x = 1; x < 10; x++)
@@ -49,17 +50,18 @@ int main()
     {
         for (int y = 21; y < 23;y++)
         {
-            engine.mapa->cavar(x,y);
+            engine.mapa->cavar(x, y);
         }
     }
 
     engine.adcmonstro(15, 1);
     engine.adcmonstro(29, 20);
+    engine.mapa->adcionarItem(3, 3);
 
     while (engine.rodando == true)
     {
-        engine.render();
         engine.atualizar();
+        engine.render();
     }
 
     clear();
@@ -69,3 +71,4 @@ int main()
 
     return 0;
 }
+

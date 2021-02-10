@@ -5,20 +5,20 @@
 
 struct Tile
 {
-    bool visivel;
-    bool passavel;
-    bool explorado;
-    int tipo;
+    bool visivel;//o jogador pode enxergar o que tem aqui?
+    bool passavel;//as entidades podem passar por aqui?
+    bool explorado;//o jogador ja explorou aqui?
+    int tipo;//não utilizado ainda
     
 };
 
 class Mapa
 {
     public:
-        int altura, largura;
-        Tile *tiles;
-        Mapa(int largura, int altura);
-        virtual ~Mapa();
+        int altura, largura;//altura e altura do mapa de jogo
+        Tile *tiles;//array de Tiles que contém as informações do mapa de jogo
+        Mapa(int largura, int altura);//ctor
+        virtual ~Mapa();//dtor
 
         ///FUNÇÕES
         void render();//Desenha o mapa na tela;;;;
@@ -35,8 +35,11 @@ class Mapa
         void tornarNaoVisivel(int x, int y); //Deixa x/y nao visivel
 
         //EXPLORAÇÃO
-        bool eExplorado(int x, int y);
-        void tornarExplorado(int x, int y);
+        bool eExplorado(int x, int y);//x/y já foi explorado? se sim, retorna verdadeiro, se não, falso
+        void tornarExplorado(int x, int y);//Torna x/y explorado
+
+        //ADCIONAR ITEMS
+        void adcionarItem(int x, int y);//adciona um item(atualmente, uma poção de cura, o único item nessa porra) na posição x/y
 
     protected:
 

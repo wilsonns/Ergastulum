@@ -1,6 +1,4 @@
 #include "Entidade.h"
-#include "main.h"
-#include "AI.h"
 
 Entidade::Entidade(int x, int y, const char *nome, char simbolo)
 {
@@ -9,23 +7,32 @@ Entidade::Entidade(int x, int y, const char *nome, char simbolo)
     this->nome = nome;
     this->simbolo = simbolo;
     visao = 6;
-    //ai = new AI();
+    atacador = NULL;
+    destrutivel = NULL;
+    ai = NULL;
+    pegavel = NULL;
+    container = NULL;
     //ctor
 }
 
 Entidade::~Entidade()
 {
+    if (atacador) { delete atacador; }
+    if (destrutivel) { delete destrutivel; }
+    if (ai) { delete ai; }
+    if (pegavel) { delete pegavel; }
+    if (container) { delete container; }
     //dtor
 }
 
 void Entidade::render()
 {
-    //if (engine.mapa->eVisivel(x,y))
-    //{
+    if (engine.mapa->eVisivel(x,y))
+    {
         attron(COLOR_PAIR(1));
         mvprintw(y, x, "%c", simbolo);
         attroff(COLOR_PAIR(1));
-    //}
+    }
 }
 
 void Entidade::atualizar()
@@ -90,25 +97,4 @@ void Entidade::FOV()
             }
         }
     }
-}
-
-void Entidade::fazerFOV(float i, float j,int v)
-{
-    int h;
-    float ox, oy;
-    ox = (float)x + 0.5f;
-    oy = (float)y + 0.5f;
-    for (h = 0; h < 360; h++)
-    {
-        engine.mapa->tornarVisivel((int)ox,(int)oy);
-        engine.mapa->tornarExplorado((int)ox,(int)oy);
-        if(engine.mapa->eParede((int)ox,(int)oy))
-        {
-            return;
-        }
-        ox += i;
-        oy += j;
-    }
-    
-    return;
 }

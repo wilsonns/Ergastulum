@@ -1,259 +1,70 @@
 Turno do jogador finalizado
+Turno do jogador finalizado
 Caminho[0] X:15Y:2
-Caminho[1] X:16Y:2
-Caminho[2] X:15Y:3
-Caminho[3] X:16Y:3
-Caminho[4] X:15Y:4
-Caminho[5] X:16Y:4
-Caminho[6] X:15Y:5
-Caminho[7] X:16Y:5
-Caminho[8] X:15Y:6
-Caminho[9] X:16Y:6
-Caminho[10] X:15Y:7
-Caminho[11] X:14Y:8
-Caminho[12] X:13Y:8
-Caminho[13] X:12Y:8
-Caminho[14] X:11Y:8
-Caminho[15] X:10Y:8
-Caminho[16] X:9Y:7
-Caminho[17] X:9Y:6
-Caminho[18] X:8Y:6
-Caminho[19] X:7Y:6
-Caminho[20] X:6Y:7
-Caminho[21] X:5Y:7
-Caminho[22] X:5Y:6
-Caminho[23] X:4Y:7
-Caminho[24] X:4Y:8
-Caminho[25] X:4Y:9
-Caminho[26] X:3Y:8
-Caminho[27] X:3Y:9
-Caminho[28] X:2Y:8
-Caminho[29] X:2Y:9
+Caminho[1] X:15Y:3
+Caminho[2] X:15Y:4
+Caminho[3] X:15Y:5
+Caminho[4] X:15Y:6
+Caminho[5] X:15Y:7
+Caminho[6] X:14Y:8
+Caminho[7] X:13Y:8
+Caminho[8] X:12Y:8
+Caminho[9] X:11Y:8
+Caminho[10] X:10Y:8
+Caminho[11] X:9Y:7
+Caminho[12] X:8Y:6
+Caminho[13] X:7Y:5
+Caminho[14] X:6Y:5
+Caminho[15] X:5Y:5
+Caminho[16] X:4Y:6
+Caminho[17] X:3Y:7
+Caminho[18] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:28Y:21
 Caminho[1] X:27Y:21
-Caminho[2] X:27Y:22
-Caminho[3] X:26Y:21
-Caminho[4] X:26Y:22
-Caminho[5] X:25Y:21
-Caminho[6] X:25Y:22
-Caminho[7] X:24Y:21
-Caminho[8] X:24Y:22
-Caminho[9] X:23Y:21
-Caminho[10] X:23Y:22
-Caminho[11] X:22Y:21
-Caminho[12] X:22Y:22
-Caminho[13] X:21Y:21
-Caminho[14] X:21Y:22
-Caminho[15] X:20Y:21
-Caminho[16] X:20Y:20
-Caminho[17] X:20Y:19
-Caminho[18] X:20Y:18
-Caminho[19] X:20Y:17
-Caminho[20] X:20Y:16
-Caminho[21] X:20Y:15
-Caminho[22] X:20Y:14
-Caminho[23] X:20Y:13
-Caminho[24] X:20Y:12
-Caminho[25] X:20Y:11
-Caminho[26] X:20Y:10
-Caminho[27] X:19Y:9
-Caminho[28] X:18Y:9
-Caminho[29] X:17Y:9
-Caminho[30] X:17Y:8
-Caminho[31] X:16Y:9
-Caminho[32] X:16Y:8
-Caminho[33] X:15Y:9
-Caminho[34] X:15Y:8
-Caminho[35] X:15Y:7
-Caminho[36] X:14Y:8
-Caminho[37] X:13Y:8
-Caminho[38] X:12Y:8
-Caminho[39] X:11Y:8
-Caminho[40] X:10Y:8
-Caminho[41] X:9Y:9
-Caminho[42] X:9Y:8
-Caminho[43] X:8Y:9
-Caminho[44] X:8Y:8
-Caminho[45] X:7Y:9
-Caminho[46] X:7Y:8
-Caminho[47] X:6Y:9
-Caminho[48] X:6Y:8
-Caminho[49] X:5Y:9
-Caminho[50] X:5Y:8
-Caminho[51] X:4Y:9
-Caminho[52] X:4Y:8
-Caminho[53] X:3Y:9
-Caminho[54] X:3Y:8
-Caminho[55] X:2Y:9
+Caminho[2] X:26Y:21
+Caminho[3] X:25Y:21
+Caminho[4] X:24Y:21
+Caminho[5] X:23Y:21
+Caminho[6] X:22Y:21
+Caminho[7] X:21Y:21
+Caminho[8] X:20Y:20
+Caminho[9] X:20Y:19
+Caminho[10] X:20Y:18
+Caminho[11] X:20Y:17
+Caminho[12] X:20Y:16
+Caminho[13] X:20Y:15
+Caminho[14] X:20Y:14
+Caminho[15] X:20Y:13
+Caminho[16] X:20Y:12
+Caminho[17] X:20Y:11
+Caminho[18] X:20Y:10
+Caminho[19] X:19Y:9
+Caminho[20] X:18Y:9
+Caminho[21] X:17Y:9
+Caminho[22] X:16Y:9
+Caminho[23] X:15Y:9
+Caminho[24] X:14Y:8
+Caminho[25] X:13Y:8
+Caminho[26] X:12Y:8
+Caminho[27] X:11Y:8
+Caminho[28] X:10Y:8
+Caminho[29] X:9Y:9
+Caminho[30] X:8Y:9
+Caminho[31] X:7Y:9
+Caminho[32] X:6Y:9
+Caminho[33] X:5Y:9
+Caminho[34] X:4Y:9
+Caminho[35] X:3Y:9
+Caminho[36] X:2Y:8
 Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
 Turno do jogador finalizado
 Caminho[0] X:15Y:3
-Caminho[1] X:16Y:3
-Caminho[2] X:15Y:4
-Caminho[3] X:16Y:4
-Caminho[4] X:15Y:5
-Caminho[5] X:16Y:5
-Caminho[6] X:15Y:6
-Caminho[7] X:16Y:6
-Caminho[8] X:15Y:7
-Caminho[9] X:14Y:8
-Caminho[10] X:13Y:8
-Caminho[11] X:12Y:8
-Caminho[12] X:11Y:8
-Caminho[13] X:10Y:8
-Caminho[14] X:9Y:7
-Caminho[15] X:9Y:8
-Caminho[16] X:9Y:9
-Caminho[17] X:8Y:8
-Caminho[18] X:8Y:7
-Caminho[19] X:7Y:7
-Caminho[20] X:7Y:6
-Caminho[21] X:6Y:6
-Caminho[22] X:6Y:5
-Caminho[23] X:5Y:6
-Caminho[24] X:5Y:7
-Caminho[25] X:5Y:8
-Caminho[26] X:5Y:9
-Caminho[27] X:4Y:8
-Caminho[28] X:4Y:9
-Caminho[29] X:3Y:9
-Turno do monstro finalizado
-Caminho[0] X:27Y:21
-Caminho[1] X:27Y:22
-Caminho[2] X:26Y:21
-Caminho[3] X:26Y:22
-Caminho[4] X:25Y:21
-Caminho[5] X:25Y:22
-Caminho[6] X:24Y:21
-Caminho[7] X:24Y:22
-Caminho[8] X:23Y:21
-Caminho[9] X:23Y:22
-Caminho[10] X:22Y:21
-Caminho[11] X:22Y:22
-Caminho[12] X:21Y:21
-Caminho[13] X:21Y:22
-Caminho[14] X:20Y:21
-Caminho[15] X:20Y:20
-Caminho[16] X:20Y:19
-Caminho[17] X:20Y:18
-Caminho[18] X:20Y:17
-Caminho[19] X:20Y:16
-Caminho[20] X:20Y:15
-Caminho[21] X:20Y:14
-Caminho[22] X:20Y:13
-Caminho[23] X:20Y:12
-Caminho[24] X:20Y:11
-Caminho[25] X:20Y:10
-Caminho[26] X:20Y:9
-Caminho[27] X:19Y:9
-Caminho[28] X:19Y:8
-Caminho[29] X:18Y:9
-Caminho[30] X:18Y:8
-Caminho[31] X:17Y:9
-Caminho[32] X:16Y:9
-Caminho[33] X:15Y:9
-Caminho[34] X:16Y:8
-Caminho[35] X:15Y:8
-Caminho[36] X:14Y:8
-Caminho[37] X:13Y:8
-Caminho[38] X:12Y:8
-Caminho[39] X:11Y:8
-Caminho[40] X:10Y:8
-Caminho[41] X:9Y:9
-Caminho[42] X:9Y:8
-Caminho[43] X:8Y:9
-Caminho[44] X:8Y:8
-Caminho[45] X:7Y:9
-Caminho[46] X:7Y:8
-Caminho[47] X:6Y:9
-Caminho[48] X:6Y:8
-Caminho[49] X:5Y:9
-Caminho[50] X:4Y:9
-Caminho[51] X:3Y:9
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:15Y:4
-Caminho[1] X:16Y:4
+Caminho[1] X:15Y:4
 Caminho[2] X:15Y:5
-Caminho[3] X:16Y:5
-Caminho[4] X:15Y:6
-Caminho[5] X:16Y:6
-Caminho[6] X:15Y:7
-Caminho[7] X:14Y:8
-Caminho[8] X:13Y:8
-Caminho[9] X:12Y:8
-Caminho[10] X:11Y:8
-Caminho[11] X:10Y:8
-Caminho[12] X:9Y:8
-Caminho[13] X:9Y:7
-Caminho[14] X:9Y:6
-Caminho[15] X:8Y:6
-Caminho[16] X:9Y:5
-Caminho[17] X:8Y:5
-Caminho[18] X:7Y:5
-Caminho[19] X:7Y:4
-Caminho[20] X:6Y:4
-Caminho[21] X:6Y:5
-Caminho[22] X:6Y:6
-Caminho[23] X:5Y:7
-Caminho[24] X:5Y:8
-Caminho[25] X:5Y:9
-Caminho[26] X:4Y:9
-Turno do monstro finalizado
-Caminho[0] X:26Y:21
-Caminho[1] X:26Y:22
-Caminho[2] X:25Y:21
-Caminho[3] X:25Y:22
-Caminho[4] X:24Y:21
-Caminho[5] X:24Y:22
-Caminho[6] X:23Y:21
-Caminho[7] X:23Y:22
-Caminho[8] X:22Y:21
-Caminho[9] X:22Y:22
-Caminho[10] X:21Y:21
-Caminho[11] X:20Y:20
-Caminho[12] X:20Y:19
-Caminho[13] X:20Y:18
-Caminho[14] X:20Y:17
-Caminho[15] X:20Y:16
-Caminho[16] X:20Y:15
-Caminho[17] X:20Y:14
-Caminho[18] X:20Y:13
-Caminho[19] X:20Y:12
-Caminho[20] X:20Y:11
-Caminho[21] X:20Y:10
-Caminho[22] X:20Y:9
-Caminho[23] X:19Y:9
-Caminho[24] X:19Y:8
-Caminho[25] X:18Y:9
-Caminho[26] X:18Y:8
-Caminho[27] X:17Y:9
-Caminho[28] X:16Y:9
-Caminho[29] X:15Y:9
-Caminho[30] X:15Y:8
-Caminho[31] X:14Y:8
-Caminho[32] X:13Y:8
-Caminho[33] X:12Y:8
-Caminho[34] X:11Y:8
-Caminho[35] X:10Y:8
-Caminho[36] X:9Y:9
-Caminho[37] X:9Y:8
-Caminho[38] X:8Y:9
-Caminho[39] X:8Y:8
-Caminho[40] X:7Y:9
-Caminho[41] X:7Y:8
-Caminho[42] X:6Y:9
-Caminho[43] X:6Y:8
-Caminho[44] X:5Y:9
-Caminho[45] X:5Y:8
-Caminho[46] X:4Y:9
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:15Y:5
-Caminho[1] X:16Y:5
-Caminho[2] X:15Y:6
-Caminho[3] X:16Y:6
+Caminho[3] X:15Y:6
 Caminho[4] X:15Y:7
 Caminho[5] X:14Y:8
 Caminho[6] X:13Y:8
@@ -261,80 +72,20 @@ Caminho[7] X:12Y:8
 Caminho[8] X:11Y:8
 Caminho[9] X:10Y:8
 Caminho[10] X:9Y:7
-Caminho[11] X:9Y:8
-Caminho[12] X:8Y:7
-Caminho[13] X:8Y:8
-Caminho[14] X:7Y:7
-Caminho[15] X:7Y:8
-Caminho[16] X:6Y:7
-Caminho[17] X:6Y:8
-Caminho[18] X:6Y:9
-Caminho[19] X:5Y:9
+Caminho[11] X:8Y:7
+Caminho[12] X:7Y:6
+Caminho[13] X:6Y:6
+Caminho[14] X:5Y:6
+Caminho[15] X:4Y:6
+Caminho[16] X:3Y:7
+Caminho[17] X:2Y:8
 Turno do monstro finalizado
-Caminho[0] X:25Y:21
-Caminho[1] X:25Y:22
-Caminho[2] X:24Y:21
-Caminho[3] X:24Y:22
+Caminho[0] X:27Y:21
+Caminho[1] X:26Y:21
+Caminho[2] X:25Y:21
+Caminho[3] X:24Y:21
 Caminho[4] X:23Y:21
-Caminho[5] X:23Y:22
-Caminho[6] X:22Y:21
-Caminho[7] X:22Y:22
-Caminho[8] X:21Y:21
-Caminho[9] X:20Y:20
-Caminho[10] X:20Y:19
-Caminho[11] X:20Y:18
-Caminho[12] X:20Y:17
-Caminho[13] X:20Y:16
-Caminho[14] X:20Y:15
-Caminho[15] X:20Y:14
-Caminho[16] X:20Y:13
-Caminho[17] X:20Y:12
-Caminho[18] X:20Y:11
-Caminho[19] X:20Y:10
-Caminho[20] X:19Y:9
-Caminho[21] X:18Y:9
-Caminho[22] X:17Y:9
-Caminho[23] X:17Y:8
-Caminho[24] X:16Y:9
-Caminho[25] X:16Y:8
-Caminho[26] X:16Y:7
-Caminho[27] X:15Y:7
-Caminho[28] X:14Y:8
-Caminho[29] X:13Y:8
-Caminho[30] X:12Y:8
-Caminho[31] X:11Y:8
-Caminho[32] X:10Y:8
-Caminho[33] X:9Y:9
-Caminho[34] X:9Y:8
-Caminho[35] X:8Y:9
-Caminho[36] X:7Y:9
-Caminho[37] X:6Y:9
-Caminho[38] X:6Y:8
-Caminho[39] X:5Y:9
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:15Y:6
-Caminho[1] X:16Y:6
-Caminho[2] X:15Y:7
-Caminho[3] X:14Y:8
-Caminho[4] X:13Y:8
-Caminho[5] X:12Y:8
-Caminho[6] X:11Y:8
-Caminho[7] X:10Y:8
-Caminho[8] X:9Y:8
-Caminho[9] X:9Y:9
-Caminho[10] X:8Y:8
-Caminho[11] X:8Y:9
-Caminho[12] X:7Y:8
-Caminho[13] X:7Y:9
-Caminho[14] X:6Y:9
-Turno do monstro finalizado
-Caminho[0] X:24Y:21
-Caminho[1] X:24Y:22
-Caminho[2] X:23Y:21
-Caminho[3] X:23Y:22
-Caminho[4] X:22Y:21
-Caminho[5] X:22Y:22
+Caminho[5] X:22Y:21
 Caminho[6] X:21Y:21
 Caminho[7] X:20Y:20
 Caminho[8] X:20Y:19
@@ -349,27 +100,188 @@ Caminho[16] X:20Y:11
 Caminho[17] X:20Y:10
 Caminho[18] X:19Y:9
 Caminho[19] X:18Y:9
-Caminho[20] X:18Y:8
-Caminho[21] X:17Y:9
-Caminho[22] X:17Y:8
-Caminho[23] X:16Y:9
-Caminho[24] X:16Y:8
-Caminho[25] X:15Y:9
-Caminho[26] X:15Y:8
-Caminho[27] X:15Y:7
-Caminho[28] X:14Y:8
-Caminho[29] X:13Y:8
-Caminho[30] X:12Y:8
-Caminho[31] X:11Y:8
-Caminho[32] X:10Y:8
-Caminho[33] X:9Y:8
-Caminho[34] X:9Y:9
-Caminho[35] X:8Y:9
-Caminho[36] X:8Y:8
-Caminho[37] X:7Y:9
-Caminho[38] X:7Y:8
-Caminho[39] X:6Y:9
+Caminho[20] X:17Y:9
+Caminho[21] X:16Y:9
+Caminho[22] X:15Y:9
+Caminho[23] X:14Y:8
+Caminho[24] X:13Y:8
+Caminho[25] X:12Y:8
+Caminho[26] X:11Y:8
+Caminho[27] X:10Y:8
+Caminho[28] X:9Y:9
+Caminho[29] X:8Y:9
+Caminho[30] X:7Y:9
+Caminho[31] X:6Y:9
+Caminho[32] X:5Y:9
+Caminho[33] X:4Y:9
+Caminho[34] X:3Y:9
+Caminho[35] X:2Y:8
 Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:15Y:4
+Caminho[1] X:15Y:5
+Caminho[2] X:15Y:6
+Caminho[3] X:15Y:7
+Caminho[4] X:14Y:8
+Caminho[5] X:13Y:8
+Caminho[6] X:12Y:8
+Caminho[7] X:11Y:8
+Caminho[8] X:10Y:8
+Caminho[9] X:9Y:7
+Caminho[10] X:8Y:6
+Caminho[11] X:7Y:6
+Caminho[12] X:6Y:6
+Caminho[13] X:5Y:6
+Caminho[14] X:4Y:6
+Caminho[15] X:3Y:7
+Caminho[16] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:26Y:21
+Caminho[1] X:25Y:21
+Caminho[2] X:24Y:21
+Caminho[3] X:23Y:21
+Caminho[4] X:22Y:21
+Caminho[5] X:21Y:21
+Caminho[6] X:20Y:20
+Caminho[7] X:20Y:19
+Caminho[8] X:20Y:18
+Caminho[9] X:20Y:17
+Caminho[10] X:20Y:16
+Caminho[11] X:20Y:15
+Caminho[12] X:20Y:14
+Caminho[13] X:20Y:13
+Caminho[14] X:20Y:12
+Caminho[15] X:20Y:11
+Caminho[16] X:20Y:10
+Caminho[17] X:19Y:9
+Caminho[18] X:18Y:9
+Caminho[19] X:17Y:9
+Caminho[20] X:16Y:9
+Caminho[21] X:15Y:9
+Caminho[22] X:14Y:8
+Caminho[23] X:13Y:8
+Caminho[24] X:12Y:8
+Caminho[25] X:11Y:8
+Caminho[26] X:10Y:8
+Caminho[27] X:9Y:9
+Caminho[28] X:8Y:9
+Caminho[29] X:7Y:9
+Caminho[30] X:6Y:9
+Caminho[31] X:5Y:9
+Caminho[32] X:4Y:9
+Caminho[33] X:3Y:9
+Caminho[34] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:15Y:5
+Caminho[1] X:15Y:6
+Caminho[2] X:15Y:7
+Caminho[3] X:14Y:8
+Caminho[4] X:13Y:8
+Caminho[5] X:12Y:8
+Caminho[6] X:11Y:8
+Caminho[7] X:10Y:8
+Caminho[8] X:9Y:7
+Caminho[9] X:8Y:7
+Caminho[10] X:7Y:7
+Caminho[11] X:6Y:7
+Caminho[12] X:5Y:7
+Caminho[13] X:4Y:7
+Caminho[14] X:3Y:7
+Caminho[15] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:25Y:21
+Caminho[1] X:24Y:21
+Caminho[2] X:23Y:21
+Caminho[3] X:22Y:21
+Caminho[4] X:21Y:21
+Caminho[5] X:20Y:20
+Caminho[6] X:20Y:19
+Caminho[7] X:20Y:18
+Caminho[8] X:20Y:17
+Caminho[9] X:20Y:16
+Caminho[10] X:20Y:15
+Caminho[11] X:20Y:14
+Caminho[12] X:20Y:13
+Caminho[13] X:20Y:12
+Caminho[14] X:20Y:11
+Caminho[15] X:20Y:10
+Caminho[16] X:19Y:9
+Caminho[17] X:18Y:9
+Caminho[18] X:17Y:9
+Caminho[19] X:16Y:9
+Caminho[20] X:15Y:9
+Caminho[21] X:14Y:8
+Caminho[22] X:13Y:8
+Caminho[23] X:12Y:8
+Caminho[24] X:11Y:8
+Caminho[25] X:10Y:8
+Caminho[26] X:9Y:9
+Caminho[27] X:8Y:9
+Caminho[28] X:7Y:9
+Caminho[29] X:6Y:9
+Caminho[30] X:5Y:9
+Caminho[31] X:4Y:9
+Caminho[32] X:3Y:9
+Caminho[33] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:15Y:6
+Caminho[1] X:15Y:7
+Caminho[2] X:14Y:8
+Caminho[3] X:13Y:8
+Caminho[4] X:12Y:8
+Caminho[5] X:11Y:8
+Caminho[6] X:10Y:8
+Caminho[7] X:9Y:8
+Caminho[8] X:8Y:8
+Caminho[9] X:7Y:8
+Caminho[10] X:6Y:8
+Caminho[11] X:5Y:8
+Caminho[12] X:4Y:8
+Caminho[13] X:3Y:8
+Caminho[14] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:24Y:21
+Caminho[1] X:23Y:21
+Caminho[2] X:22Y:21
+Caminho[3] X:21Y:21
+Caminho[4] X:20Y:20
+Caminho[5] X:20Y:19
+Caminho[6] X:20Y:18
+Caminho[7] X:20Y:17
+Caminho[8] X:20Y:16
+Caminho[9] X:20Y:15
+Caminho[10] X:20Y:14
+Caminho[11] X:20Y:13
+Caminho[12] X:20Y:12
+Caminho[13] X:20Y:11
+Caminho[14] X:20Y:10
+Caminho[15] X:19Y:9
+Caminho[16] X:18Y:9
+Caminho[17] X:17Y:9
+Caminho[18] X:16Y:9
+Caminho[19] X:15Y:9
+Caminho[20] X:14Y:8
+Caminho[21] X:13Y:8
+Caminho[22] X:12Y:8
+Caminho[23] X:11Y:8
+Caminho[24] X:10Y:8
+Caminho[25] X:9Y:8
+Caminho[26] X:8Y:9
+Caminho[27] X:7Y:9
+Caminho[28] X:6Y:9
+Caminho[29] X:5Y:9
+Caminho[30] X:4Y:9
+Caminho[31] X:3Y:9
+Caminho[32] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
 Turno do jogador finalizado
 Caminho[0] X:15Y:7
 Caminho[1] X:14Y:8
@@ -378,64 +290,17 @@ Caminho[3] X:12Y:8
 Caminho[4] X:11Y:8
 Caminho[5] X:10Y:8
 Caminho[6] X:9Y:8
-Caminho[7] X:9Y:9
-Caminho[8] X:8Y:8
-Caminho[9] X:8Y:9
-Caminho[10] X:7Y:9
+Caminho[7] X:8Y:8
+Caminho[8] X:7Y:8
+Caminho[9] X:6Y:8
+Caminho[10] X:5Y:8
+Caminho[11] X:4Y:8
+Caminho[12] X:3Y:8
+Caminho[13] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:23Y:21
-Caminho[1] X:23Y:22
-Caminho[2] X:22Y:21
-Caminho[3] X:22Y:22
-Caminho[4] X:21Y:21
-Caminho[5] X:21Y:22
-Caminho[6] X:20Y:21
-Caminho[7] X:20Y:20
-Caminho[8] X:20Y:19
-Caminho[9] X:20Y:18
-Caminho[10] X:20Y:17
-Caminho[11] X:20Y:16
-Caminho[12] X:20Y:15
-Caminho[13] X:20Y:14
-Caminho[14] X:20Y:13
-Caminho[15] X:20Y:12
-Caminho[16] X:20Y:11
-Caminho[17] X:20Y:10
-Caminho[18] X:20Y:9
-Caminho[19] X:19Y:9
-Caminho[20] X:19Y:8
-Caminho[21] X:18Y:9
-Caminho[22] X:17Y:9
-Caminho[23] X:17Y:8
-Caminho[24] X:16Y:9
-Caminho[25] X:16Y:8
-Caminho[26] X:15Y:9
-Caminho[27] X:15Y:8
-Caminho[28] X:15Y:7
-Caminho[29] X:14Y:8
-Caminho[30] X:13Y:8
-Caminho[31] X:12Y:8
-Caminho[32] X:11Y:8
-Caminho[33] X:10Y:8
-Caminho[34] X:9Y:8
-Caminho[35] X:9Y:7
-Caminho[36] X:8Y:8
-Caminho[37] X:8Y:9
-Caminho[38] X:7Y:9
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:14Y:8
-Caminho[1] X:13Y:8
-Caminho[2] X:12Y:8
-Caminho[3] X:11Y:8
-Caminho[4] X:10Y:8
-Caminho[5] X:9Y:8
-Caminho[6] X:9Y:9
-Caminho[7] X:8Y:9
-Turno do monstro finalizado
-Caminho[0] X:22Y:21
-Caminho[1] X:21Y:21
-Caminho[2] X:20Y:21
+Caminho[1] X:22Y:21
+Caminho[2] X:21Y:21
 Caminho[3] X:20Y:20
 Caminho[4] X:20Y:19
 Caminho[5] X:20Y:18
@@ -449,29 +314,87 @@ Caminho[12] X:20Y:11
 Caminho[13] X:20Y:10
 Caminho[14] X:19Y:9
 Caminho[15] X:18Y:9
-Caminho[16] X:18Y:8
-Caminho[17] X:17Y:9
-Caminho[18] X:17Y:8
-Caminho[19] X:16Y:9
-Caminho[20] X:16Y:8
-Caminho[21] X:15Y:9
-Caminho[22] X:15Y:8
-Caminho[23] X:15Y:7
-Caminho[24] X:14Y:8
-Caminho[25] X:13Y:8
-Caminho[26] X:12Y:8
-Caminho[27] X:11Y:8
-Caminho[28] X:10Y:8
-Caminho[29] X:9Y:9
-Caminho[30] X:9Y:8
-Caminho[31] X:8Y:9
+Caminho[16] X:17Y:9
+Caminho[17] X:16Y:9
+Caminho[18] X:15Y:9
+Caminho[19] X:14Y:8
+Caminho[20] X:13Y:8
+Caminho[21] X:12Y:8
+Caminho[22] X:11Y:8
+Caminho[23] X:10Y:8
+Caminho[24] X:9Y:8
+Caminho[25] X:8Y:8
+Caminho[26] X:7Y:9
+Caminho[27] X:6Y:9
+Caminho[28] X:5Y:9
+Caminho[29] X:4Y:9
+Caminho[30] X:3Y:9
+Caminho[31] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:13Y:8
-Caminho[1] X:12Y:8
-Caminho[2] X:11Y:8
-Caminho[3] X:10Y:8
-Caminho[4] X:9Y:8
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:22Y:21
+Caminho[1] X:21Y:21
+Caminho[2] X:20Y:20
+Caminho[3] X:20Y:19
+Caminho[4] X:20Y:18
+Caminho[5] X:20Y:17
+Caminho[6] X:20Y:16
+Caminho[7] X:20Y:15
+Caminho[8] X:20Y:14
+Caminho[9] X:20Y:13
+Caminho[10] X:20Y:12
+Caminho[11] X:20Y:11
+Caminho[12] X:20Y:10
+Caminho[13] X:19Y:9
+Caminho[14] X:18Y:9
+Caminho[15] X:17Y:9
+Caminho[16] X:16Y:9
+Caminho[17] X:15Y:9
+Caminho[18] X:14Y:8
+Caminho[19] X:13Y:8
+Caminho[20] X:12Y:8
+Caminho[21] X:11Y:8
+Caminho[22] X:10Y:8
+Caminho[23] X:9Y:9
+Caminho[24] X:8Y:9
+Caminho[25] X:7Y:9
+Caminho[26] X:6Y:9
+Caminho[27] X:5Y:9
+Caminho[28] X:4Y:9
+Caminho[29] X:3Y:9
+Caminho[30] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:21Y:21
 Caminho[1] X:20Y:20
@@ -487,26 +410,38 @@ Caminho[10] X:20Y:11
 Caminho[11] X:20Y:10
 Caminho[12] X:19Y:9
 Caminho[13] X:18Y:9
-Caminho[14] X:18Y:8
-Caminho[15] X:17Y:9
-Caminho[16] X:17Y:8
-Caminho[17] X:16Y:9
-Caminho[18] X:16Y:8
-Caminho[19] X:15Y:9
-Caminho[20] X:15Y:8
-Caminho[21] X:15Y:7
-Caminho[22] X:14Y:8
-Caminho[23] X:13Y:8
-Caminho[24] X:12Y:8
-Caminho[25] X:11Y:8
-Caminho[26] X:10Y:8
-Caminho[27] X:9Y:8
+Caminho[14] X:17Y:9
+Caminho[15] X:16Y:9
+Caminho[16] X:15Y:9
+Caminho[17] X:14Y:8
+Caminho[18] X:13Y:8
+Caminho[19] X:12Y:8
+Caminho[20] X:11Y:8
+Caminho[21] X:10Y:8
+Caminho[22] X:9Y:9
+Caminho[23] X:8Y:9
+Caminho[24] X:7Y:9
+Caminho[25] X:6Y:9
+Caminho[26] X:5Y:9
+Caminho[27] X:4Y:9
+Caminho[28] X:3Y:9
+Caminho[29] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:12Y:8
-Caminho[1] X:11Y:8
-Caminho[2] X:10Y:8
-Caminho[3] X:9Y:8
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:20Y:20
 Caminho[1] X:20Y:19
@@ -521,25 +456,39 @@ Caminho[9] X:20Y:11
 Caminho[10] X:20Y:10
 Caminho[11] X:19Y:9
 Caminho[12] X:18Y:9
-Caminho[13] X:18Y:8
-Caminho[14] X:17Y:9
-Caminho[15] X:17Y:8
-Caminho[16] X:16Y:9
-Caminho[17] X:16Y:8
-Caminho[18] X:15Y:9
-Caminho[19] X:15Y:8
-Caminho[20] X:15Y:7
-Caminho[21] X:14Y:8
-Caminho[22] X:13Y:8
-Caminho[23] X:12Y:8
-Caminho[24] X:11Y:8
-Caminho[25] X:10Y:8
-Caminho[26] X:9Y:8
+Caminho[13] X:17Y:9
+Caminho[14] X:16Y:9
+Caminho[15] X:15Y:9
+Caminho[16] X:14Y:8
+Caminho[17] X:13Y:8
+Caminho[18] X:12Y:8
+Caminho[19] X:11Y:8
+Caminho[20] X:10Y:8
+Caminho[21] X:9Y:9
+Caminho[22] X:8Y:9
+Caminho[23] X:7Y:9
+Caminho[24] X:6Y:9
+Caminho[25] X:5Y:9
+Caminho[26] X:4Y:9
+Caminho[27] X:3Y:9
+Caminho[28] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:11Y:8
-Caminho[1] X:10Y:8
-Caminho[2] X:9Y:8
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:20Y:19
 Caminho[1] X:20Y:18
@@ -553,24 +502,38 @@ Caminho[8] X:20Y:11
 Caminho[9] X:20Y:10
 Caminho[10] X:19Y:9
 Caminho[11] X:18Y:9
-Caminho[12] X:18Y:8
-Caminho[13] X:17Y:9
-Caminho[14] X:17Y:8
-Caminho[15] X:16Y:9
-Caminho[16] X:16Y:8
-Caminho[17] X:15Y:9
-Caminho[18] X:15Y:8
-Caminho[19] X:15Y:7
-Caminho[20] X:14Y:8
-Caminho[21] X:13Y:8
-Caminho[22] X:12Y:8
-Caminho[23] X:11Y:8
-Caminho[24] X:10Y:8
-Caminho[25] X:9Y:8
+Caminho[12] X:17Y:9
+Caminho[13] X:16Y:9
+Caminho[14] X:15Y:9
+Caminho[15] X:14Y:8
+Caminho[16] X:13Y:8
+Caminho[17] X:12Y:8
+Caminho[18] X:11Y:8
+Caminho[19] X:10Y:8
+Caminho[20] X:9Y:9
+Caminho[21] X:8Y:9
+Caminho[22] X:7Y:9
+Caminho[23] X:6Y:9
+Caminho[24] X:5Y:9
+Caminho[25] X:4Y:9
+Caminho[26] X:3Y:9
+Caminho[27] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:10Y:8
-Caminho[1] X:9Y:8
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:20Y:18
 Caminho[1] X:20Y:17
@@ -583,24 +546,39 @@ Caminho[7] X:20Y:11
 Caminho[8] X:20Y:10
 Caminho[9] X:19Y:9
 Caminho[10] X:18Y:9
-Caminho[11] X:18Y:8
-Caminho[12] X:17Y:9
-Caminho[13] X:17Y:8
-Caminho[14] X:16Y:9
-Caminho[15] X:16Y:8
-Caminho[16] X:15Y:9
-Caminho[17] X:15Y:8
-Caminho[18] X:14Y:8
-Caminho[19] X:13Y:8
-Caminho[20] X:12Y:8
-Caminho[21] X:11Y:8
-Caminho[22] X:10Y:8
-Caminho[23] X:9Y:8
+Caminho[11] X:17Y:9
+Caminho[12] X:16Y:9
+Caminho[13] X:15Y:9
+Caminho[14] X:14Y:8
+Caminho[15] X:13Y:8
+Caminho[16] X:12Y:8
+Caminho[17] X:11Y:8
+Caminho[18] X:10Y:8
+Caminho[19] X:9Y:9
+Caminho[20] X:8Y:9
+Caminho[21] X:7Y:9
+Caminho[22] X:6Y:9
+Caminho[23] X:5Y:9
+Caminho[24] X:4Y:9
+Caminho[25] X:3Y:9
+Caminho[26] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:9Y:8
-Caminho[1] X:9Y:9
-Caminho[2] X:8Y:8
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:20Y:17
 Caminho[1] X:20Y:16
@@ -612,27 +590,38 @@ Caminho[6] X:20Y:11
 Caminho[7] X:20Y:10
 Caminho[8] X:19Y:9
 Caminho[9] X:18Y:9
-Caminho[10] X:18Y:8
-Caminho[11] X:17Y:9
-Caminho[12] X:17Y:8
-Caminho[13] X:16Y:9
-Caminho[14] X:16Y:8
-Caminho[15] X:15Y:9
-Caminho[16] X:15Y:8
-Caminho[17] X:15Y:7
-Caminho[18] X:14Y:8
-Caminho[19] X:13Y:8
-Caminho[20] X:12Y:8
-Caminho[21] X:11Y:8
-Caminho[22] X:10Y:8
-Caminho[23] X:9Y:8
-Caminho[24] X:9Y:7
-Caminho[25] X:8Y:8
+Caminho[10] X:17Y:9
+Caminho[11] X:16Y:9
+Caminho[12] X:15Y:9
+Caminho[13] X:14Y:8
+Caminho[14] X:13Y:8
+Caminho[15] X:12Y:8
+Caminho[16] X:11Y:8
+Caminho[17] X:10Y:8
+Caminho[18] X:9Y:8
+Caminho[19] X:8Y:8
+Caminho[20] X:7Y:9
+Caminho[21] X:6Y:9
+Caminho[22] X:5Y:9
+Caminho[23] X:4Y:9
+Caminho[24] X:3Y:9
+Caminho[25] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:8Y:8
-Caminho[1] X:8Y:9
-Caminho[2] X:7Y:8
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:20Y:16
 Caminho[1] X:20Y:15
@@ -643,30 +632,39 @@ Caminho[5] X:20Y:11
 Caminho[6] X:20Y:10
 Caminho[7] X:19Y:9
 Caminho[8] X:18Y:9
-Caminho[9] X:18Y:8
-Caminho[10] X:17Y:9
-Caminho[11] X:17Y:8
-Caminho[12] X:16Y:9
-Caminho[13] X:16Y:8
-Caminho[14] X:15Y:9
-Caminho[15] X:15Y:8
-Caminho[16] X:15Y:7
-Caminho[17] X:14Y:8
-Caminho[18] X:13Y:8
-Caminho[19] X:12Y:8
-Caminho[20] X:11Y:8
-Caminho[21] X:10Y:8
-Caminho[22] X:9Y:9
-Caminho[23] X:9Y:8
-Caminho[24] X:8Y:9
-Caminho[25] X:8Y:8
-Caminho[26] X:7Y:9
-Caminho[27] X:7Y:8
+Caminho[9] X:17Y:9
+Caminho[10] X:16Y:9
+Caminho[11] X:15Y:9
+Caminho[12] X:14Y:8
+Caminho[13] X:13Y:8
+Caminho[14] X:12Y:8
+Caminho[15] X:11Y:8
+Caminho[16] X:10Y:8
+Caminho[17] X:9Y:9
+Caminho[18] X:8Y:9
+Caminho[19] X:7Y:9
+Caminho[20] X:6Y:9
+Caminho[21] X:5Y:9
+Caminho[22] X:4Y:9
+Caminho[23] X:3Y:9
+Caminho[24] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:7Y:8
-Caminho[1] X:7Y:9
-Caminho[2] X:6Y:8
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:20Y:15
 Caminho[1] X:20Y:14
@@ -676,33 +674,38 @@ Caminho[4] X:20Y:11
 Caminho[5] X:20Y:10
 Caminho[6] X:19Y:9
 Caminho[7] X:18Y:9
-Caminho[8] X:18Y:8
-Caminho[9] X:17Y:9
-Caminho[10] X:17Y:8
-Caminho[11] X:16Y:9
-Caminho[12] X:16Y:8
-Caminho[13] X:15Y:9
-Caminho[14] X:15Y:8
-Caminho[15] X:15Y:7
-Caminho[16] X:14Y:8
-Caminho[17] X:13Y:8
-Caminho[18] X:12Y:8
-Caminho[19] X:11Y:8
-Caminho[20] X:10Y:8
-Caminho[21] X:9Y:8
-Caminho[22] X:9Y:9
-Caminho[23] X:8Y:9
-Caminho[24] X:8Y:8
-Caminho[25] X:8Y:7
-Caminho[26] X:7Y:7
-Caminho[27] X:7Y:8
-Caminho[28] X:6Y:7
-Caminho[29] X:6Y:8
+Caminho[8] X:17Y:9
+Caminho[9] X:16Y:9
+Caminho[10] X:15Y:9
+Caminho[11] X:14Y:8
+Caminho[12] X:13Y:8
+Caminho[13] X:12Y:8
+Caminho[14] X:11Y:8
+Caminho[15] X:10Y:8
+Caminho[16] X:9Y:8
+Caminho[17] X:8Y:9
+Caminho[18] X:7Y:9
+Caminho[19] X:6Y:9
+Caminho[20] X:5Y:9
+Caminho[21] X:4Y:9
+Caminho[22] X:3Y:9
+Caminho[23] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:6Y:8
-Caminho[1] X:6Y:9
-Caminho[2] X:5Y:8
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:20Y:14
 Caminho[1] X:20Y:13
@@ -711,32 +714,39 @@ Caminho[3] X:20Y:11
 Caminho[4] X:20Y:10
 Caminho[5] X:19Y:9
 Caminho[6] X:18Y:9
-Caminho[7] X:18Y:8
-Caminho[8] X:17Y:9
-Caminho[9] X:17Y:8
-Caminho[10] X:16Y:9
-Caminho[11] X:15Y:9
-Caminho[12] X:15Y:8
-Caminho[13] X:14Y:8
-Caminho[14] X:13Y:8
-Caminho[15] X:12Y:8
-Caminho[16] X:11Y:8
-Caminho[17] X:10Y:8
-Caminho[18] X:9Y:9
-Caminho[19] X:9Y:8
-Caminho[20] X:8Y:9
-Caminho[21] X:8Y:8
-Caminho[22] X:7Y:9
-Caminho[23] X:7Y:8
-Caminho[24] X:6Y:9
-Caminho[25] X:6Y:8
-Caminho[26] X:5Y:9
-Caminho[27] X:5Y:8
+Caminho[7] X:17Y:9
+Caminho[8] X:16Y:9
+Caminho[9] X:15Y:9
+Caminho[10] X:14Y:8
+Caminho[11] X:13Y:8
+Caminho[12] X:12Y:8
+Caminho[13] X:11Y:8
+Caminho[14] X:10Y:8
+Caminho[15] X:9Y:9
+Caminho[16] X:8Y:9
+Caminho[17] X:7Y:9
+Caminho[18] X:6Y:9
+Caminho[19] X:5Y:9
+Caminho[20] X:4Y:9
+Caminho[21] X:3Y:9
+Caminho[22] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:5Y:8
-Caminho[1] X:5Y:9
-Caminho[2] X:4Y:8
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:20Y:13
 Caminho[1] X:20Y:12
@@ -744,670 +754,1115 @@ Caminho[2] X:20Y:11
 Caminho[3] X:20Y:10
 Caminho[4] X:19Y:9
 Caminho[5] X:18Y:9
-Caminho[6] X:18Y:8
-Caminho[7] X:17Y:9
-Caminho[8] X:17Y:8
-Caminho[9] X:16Y:9
-Caminho[10] X:16Y:8
-Caminho[11] X:15Y:9
-Caminho[12] X:15Y:8
-Caminho[13] X:15Y:7
-Caminho[14] X:14Y:8
-Caminho[15] X:13Y:8
-Caminho[16] X:12Y:8
-Caminho[17] X:11Y:8
-Caminho[18] X:10Y:8
-Caminho[19] X:9Y:8
-Caminho[20] X:9Y:7
-Caminho[21] X:8Y:8
-Caminho[22] X:8Y:9
-Caminho[23] X:7Y:9
-Caminho[24] X:6Y:9
-Caminho[25] X:5Y:9
-Caminho[26] X:5Y:8
-Caminho[27] X:4Y:9
-Caminho[28] X:4Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:4Y:8
-Caminho[1] X:4Y:7
-Caminho[2] X:3Y:7
-Turno do monstro finalizado
-Caminho[0] X:20Y:12
-Caminho[1] X:20Y:11
-Caminho[2] X:20Y:10
-Caminho[3] X:19Y:9
-Caminho[4] X:18Y:9
-Caminho[5] X:18Y:8
 Caminho[6] X:17Y:9
-Caminho[7] X:17Y:8
-Caminho[8] X:16Y:9
-Caminho[9] X:16Y:8
-Caminho[10] X:15Y:9
-Caminho[11] X:15Y:8
-Caminho[12] X:15Y:7
-Caminho[13] X:14Y:8
-Caminho[14] X:13Y:8
-Caminho[15] X:12Y:8
-Caminho[16] X:11Y:8
-Caminho[17] X:10Y:8
-Caminho[18] X:9Y:9
-Caminho[19] X:9Y:8
-Caminho[20] X:8Y:9
-Caminho[21] X:8Y:8
-Caminho[22] X:7Y:9
-Caminho[23] X:7Y:8
-Caminho[24] X:6Y:9
-Caminho[25] X:6Y:8
-Caminho[26] X:5Y:9
-Caminho[27] X:5Y:8
-Caminho[28] X:4Y:9
-Caminho[29] X:4Y:8
-Caminho[30] X:3Y:9
-Caminho[31] X:3Y:8
-Caminho[32] X:3Y:7
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:3Y:7
-Caminho[1] X:2Y:6
-Turno do monstro finalizado
-Caminho[0] X:20Y:11
-Caminho[1] X:20Y:10
-Caminho[2] X:19Y:9
-Caminho[3] X:18Y:9
-Caminho[4] X:18Y:8
-Caminho[5] X:17Y:9
-Caminho[6] X:17Y:8
 Caminho[7] X:16Y:9
-Caminho[8] X:16Y:8
-Caminho[9] X:15Y:9
-Caminho[10] X:15Y:8
-Caminho[11] X:14Y:8
-Caminho[12] X:13Y:8
-Caminho[13] X:12Y:8
-Caminho[14] X:11Y:8
-Caminho[15] X:10Y:8
-Caminho[16] X:9Y:8
-Caminho[17] X:9Y:7
-Caminho[18] X:8Y:8
-Caminho[19] X:8Y:7
-Caminho[20] X:7Y:8
-Caminho[21] X:7Y:7
-Caminho[22] X:6Y:8
-Caminho[23] X:6Y:7
-Caminho[24] X:5Y:8
-Caminho[25] X:5Y:7
-Caminho[26] X:4Y:8
-Caminho[27] X:4Y:7
-Caminho[28] X:3Y:7
-Caminho[29] X:2Y:6
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:2Y:6
-Caminho[1] X:1Y:5
-Turno do monstro finalizado
-Caminho[0] X:20Y:10
-Caminho[1] X:19Y:9
-Caminho[2] X:18Y:9
-Caminho[3] X:18Y:8
-Caminho[4] X:17Y:9
-Caminho[5] X:17Y:8
-Caminho[6] X:16Y:9
-Caminho[7] X:15Y:9
-Caminho[8] X:15Y:8
+Caminho[8] X:15Y:9
 Caminho[9] X:14Y:8
 Caminho[10] X:13Y:8
 Caminho[11] X:12Y:8
 Caminho[12] X:11Y:8
 Caminho[13] X:10Y:8
 Caminho[14] X:9Y:8
-Caminho[15] X:9Y:9
-Caminho[16] X:8Y:8
-Caminho[17] X:8Y:9
-Caminho[18] X:7Y:8
-Caminho[19] X:7Y:9
-Caminho[20] X:6Y:8
-Caminho[21] X:6Y:7
-Caminho[22] X:6Y:6
-Caminho[23] X:5Y:7
-Caminho[24] X:5Y:6
-Caminho[25] X:5Y:5
-Caminho[26] X:4Y:6
-Caminho[27] X:4Y:7
-Caminho[28] X:4Y:8
-Caminho[29] X:3Y:7
-Caminho[30] X:3Y:6
-Caminho[31] X:2Y:7
-Caminho[32] X:2Y:6
-Caminho[33] X:2Y:5
-Caminho[34] X:2Y:4
-Caminho[35] X:1Y:5
+Caminho[15] X:8Y:8
+Caminho[16] X:7Y:9
+Caminho[17] X:6Y:9
+Caminho[18] X:5Y:9
+Caminho[19] X:4Y:9
+Caminho[20] X:3Y:9
+Caminho[21] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:2Y:5
-Caminho[1] X:1Y:5
-Caminho[2] X:1Y:4
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:20Y:12
+Caminho[1] X:20Y:11
+Caminho[2] X:20Y:10
+Caminho[3] X:19Y:9
+Caminho[4] X:18Y:9
+Caminho[5] X:17Y:9
+Caminho[6] X:16Y:9
+Caminho[7] X:15Y:9
+Caminho[8] X:14Y:8
+Caminho[9] X:13Y:8
+Caminho[10] X:12Y:8
+Caminho[11] X:11Y:8
+Caminho[12] X:10Y:8
+Caminho[13] X:9Y:9
+Caminho[14] X:8Y:9
+Caminho[15] X:7Y:9
+Caminho[16] X:6Y:9
+Caminho[17] X:5Y:9
+Caminho[18] X:4Y:9
+Caminho[19] X:3Y:9
+Caminho[20] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:20Y:11
+Caminho[1] X:20Y:10
+Caminho[2] X:19Y:9
+Caminho[3] X:18Y:9
+Caminho[4] X:17Y:9
+Caminho[5] X:16Y:9
+Caminho[6] X:15Y:9
+Caminho[7] X:14Y:8
+Caminho[8] X:13Y:8
+Caminho[9] X:12Y:8
+Caminho[10] X:11Y:8
+Caminho[11] X:10Y:8
+Caminho[12] X:9Y:8
+Caminho[13] X:8Y:8
+Caminho[14] X:7Y:8
+Caminho[15] X:6Y:8
+Caminho[16] X:5Y:8
+Caminho[17] X:4Y:8
+Caminho[18] X:3Y:8
+Caminho[19] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:20Y:10
+Caminho[1] X:19Y:9
+Caminho[2] X:18Y:9
+Caminho[3] X:17Y:9
+Caminho[4] X:16Y:9
+Caminho[5] X:15Y:9
+Caminho[6] X:14Y:8
+Caminho[7] X:13Y:8
+Caminho[8] X:12Y:8
+Caminho[9] X:11Y:8
+Caminho[10] X:10Y:8
+Caminho[11] X:9Y:8
+Caminho[12] X:8Y:8
+Caminho[13] X:7Y:8
+Caminho[14] X:6Y:8
+Caminho[15] X:5Y:8
+Caminho[16] X:4Y:8
+Caminho[17] X:3Y:8
+Caminho[18] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:19Y:9
 Caminho[1] X:18Y:9
-Caminho[2] X:18Y:8
-Caminho[3] X:17Y:9
-Caminho[4] X:17Y:8
-Caminho[5] X:16Y:9
-Caminho[6] X:16Y:8
-Caminho[7] X:15Y:9
-Caminho[8] X:15Y:8
-Caminho[9] X:15Y:7
-Caminho[10] X:14Y:8
-Caminho[11] X:13Y:8
-Caminho[12] X:12Y:8
-Caminho[13] X:11Y:8
-Caminho[14] X:10Y:8
-Caminho[15] X:9Y:8
-Caminho[16] X:9Y:7
-Caminho[17] X:8Y:7
-Caminho[18] X:9Y:6
-Caminho[19] X:8Y:6
-Caminho[20] X:7Y:7
-Caminho[21] X:7Y:6
-Caminho[22] X:6Y:7
-Caminho[23] X:6Y:6
-Caminho[24] X:5Y:7
-Caminho[25] X:5Y:6
-Caminho[26] X:4Y:7
-Caminho[27] X:4Y:6
-Caminho[28] X:3Y:7
-Caminho[29] X:3Y:6
-Caminho[30] X:3Y:5
-Caminho[31] X:3Y:4
-Caminho[32] X:2Y:5
-Caminho[33] X:2Y:4
-Caminho[34] X:2Y:3
-Caminho[35] X:1Y:4
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:2Y:4
-Caminho[1] X:1Y:4
-Caminho[2] X:1Y:3
-Turno do monstro finalizado
-Caminho[0] X:18Y:8
-Caminho[1] X:17Y:8
-Caminho[2] X:17Y:7
-Caminho[3] X:16Y:8
-Caminho[4] X:16Y:7
-Caminho[5] X:15Y:8
-Caminho[6] X:15Y:7
-Caminho[7] X:14Y:8
-Caminho[8] X:13Y:8
-Caminho[9] X:12Y:8
-Caminho[10] X:11Y:8
-Caminho[11] X:10Y:8
-Caminho[12] X:9Y:7
-Caminho[13] X:9Y:6
-Caminho[14] X:8Y:6
-Caminho[15] X:9Y:5
-Caminho[16] X:8Y:5
-Caminho[17] X:7Y:6
-Caminho[18] X:7Y:5
-Caminho[19] X:7Y:4
-Caminho[20] X:6Y:4
-Caminho[21] X:6Y:3
-Caminho[22] X:5Y:3
-Caminho[23] X:5Y:2
-Caminho[24] X:4Y:2
-Caminho[25] X:4Y:1
-Caminho[26] X:3Y:1
-Caminho[27] X:3Y:2
-Caminho[28] X:2Y:2
-Caminho[29] X:1Y:3
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:2Y:3
-Caminho[1] X:3Y:3
-Caminho[2] X:2Y:2
-Turno do monstro finalizado
-Caminho[0] X:17Y:7
-Caminho[1] X:16Y:7
-Caminho[2] X:16Y:6
-Caminho[3] X:15Y:7
-Caminho[4] X:16Y:8
-Caminho[5] X:15Y:9
-Caminho[6] X:15Y:8
-Caminho[7] X:14Y:8
-Caminho[8] X:13Y:8
-Caminho[9] X:12Y:8
-Caminho[10] X:11Y:8
-Caminho[11] X:10Y:8
-Caminho[12] X:9Y:7
-Caminho[13] X:9Y:6
-Caminho[14] X:9Y:5
-Caminho[15] X:8Y:5
-Caminho[16] X:9Y:4
-Caminho[17] X:8Y:4
-Caminho[18] X:7Y:4
-Caminho[19] X:7Y:3
-Caminho[20] X:6Y:4
-Caminho[21] X:6Y:3
-Caminho[22] X:5Y:4
-Caminho[23] X:4Y:4
-Caminho[24] X:3Y:3
-Caminho[25] X:4Y:3
-Caminho[26] X:3Y:4
-Caminho[27] X:2Y:3
-Caminho[28] X:2Y:2
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:2Y:2
-Caminho[1] X:3Y:2
-Caminho[2] X:3Y:1
-Turno do monstro finalizado
-Caminho[0] X:16Y:8
-Caminho[1] X:16Y:7
-Caminho[2] X:15Y:7
-Caminho[3] X:15Y:8
+Caminho[2] X:17Y:9
+Caminho[3] X:16Y:9
 Caminho[4] X:15Y:9
 Caminho[5] X:14Y:8
 Caminho[6] X:13Y:8
 Caminho[7] X:12Y:8
 Caminho[8] X:11Y:8
 Caminho[9] X:10Y:8
-Caminho[10] X:9Y:7
-Caminho[11] X:9Y:6
-Caminho[12] X:9Y:5
-Caminho[13] X:8Y:5
-Caminho[14] X:9Y:4
-Caminho[15] X:8Y:4
-Caminho[16] X:7Y:4
-Caminho[17] X:7Y:3
-Caminho[18] X:6Y:3
-Caminho[19] X:6Y:2
-Caminho[20] X:5Y:3
-Caminho[21] X:5Y:2
-Caminho[22] X:5Y:1
-Caminho[23] X:4Y:2
-Caminho[24] X:4Y:1
-Caminho[25] X:3Y:1
+Caminho[10] X:9Y:8
+Caminho[11] X:8Y:8
+Caminho[12] X:7Y:8
+Caminho[13] X:6Y:8
+Caminho[14] X:5Y:8
+Caminho[15] X:4Y:8
+Caminho[16] X:3Y:8
+Caminho[17] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:3Y:2
-Caminho[1] X:3Y:1
-Caminho[2] X:4Y:1
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
-Caminho[0] X:15Y:9
-Caminho[1] X:15Y:8
+Caminho[0] X:18Y:9
+Caminho[1] X:17Y:9
+Caminho[2] X:16Y:9
+Caminho[3] X:15Y:9
+Caminho[4] X:14Y:8
+Caminho[5] X:13Y:8
+Caminho[6] X:12Y:8
+Caminho[7] X:11Y:8
+Caminho[8] X:10Y:8
+Caminho[9] X:9Y:8
+Caminho[10] X:8Y:8
+Caminho[11] X:7Y:8
+Caminho[12] X:6Y:8
+Caminho[13] X:5Y:8
+Caminho[14] X:4Y:8
+Caminho[15] X:3Y:8
+Caminho[16] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:17Y:9
+Caminho[1] X:16Y:9
+Caminho[2] X:15Y:9
+Caminho[3] X:14Y:8
+Caminho[4] X:13Y:8
+Caminho[5] X:12Y:8
+Caminho[6] X:11Y:8
+Caminho[7] X:10Y:8
+Caminho[8] X:9Y:8
+Caminho[9] X:8Y:8
+Caminho[10] X:7Y:8
+Caminho[11] X:6Y:8
+Caminho[12] X:5Y:8
+Caminho[13] X:4Y:8
+Caminho[14] X:3Y:8
+Caminho[15] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:16Y:9
+Caminho[1] X:15Y:9
 Caminho[2] X:14Y:8
 Caminho[3] X:13Y:8
 Caminho[4] X:12Y:8
 Caminho[5] X:11Y:8
 Caminho[6] X:10Y:8
-Caminho[7] X:9Y:7
-Caminho[8] X:9Y:6
-Caminho[9] X:8Y:6
-Caminho[10] X:9Y:5
-Caminho[11] X:8Y:5
-Caminho[12] X:9Y:4
-Caminho[13] X:8Y:4
-Caminho[14] X:7Y:4
-Caminho[15] X:7Y:3
-Caminho[16] X:6Y:3
-Caminho[17] X:6Y:2
-Caminho[18] X:5Y:2
-Caminho[19] X:5Y:1
-Caminho[20] X:4Y:1
+Caminho[7] X:9Y:8
+Caminho[8] X:8Y:8
+Caminho[9] X:7Y:8
+Caminho[10] X:6Y:8
+Caminho[11] X:5Y:8
+Caminho[12] X:4Y:8
+Caminho[13] X:3Y:8
+Caminho[14] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:4Y:2
-Caminho[1] X:4Y:1
-Caminho[2] X:5Y:1
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:15Y:9
+Caminho[1] X:14Y:8
+Caminho[2] X:13Y:8
+Caminho[3] X:12Y:8
+Caminho[4] X:11Y:8
+Caminho[5] X:10Y:8
+Caminho[6] X:9Y:8
+Caminho[7] X:8Y:8
+Caminho[8] X:7Y:8
+Caminho[9] X:6Y:8
+Caminho[10] X:5Y:8
+Caminho[11] X:4Y:8
+Caminho[12] X:3Y:8
+Caminho[13] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Caminho[0] X:14Y:8
 Caminho[1] X:13Y:8
 Caminho[2] X:12Y:8
 Caminho[3] X:11Y:8
 Caminho[4] X:10Y:8
-Caminho[5] X:9Y:7
-Caminho[6] X:9Y:6
-Caminho[7] X:8Y:6
-Caminho[8] X:9Y:5
-Caminho[9] X:9Y:4
-Caminho[10] X:8Y:4
-Caminho[11] X:7Y:4
-Caminho[12] X:6Y:4
-Caminho[13] X:6Y:3
-Caminho[14] X:5Y:3
-Caminho[15] X:5Y:2
-Caminho[16] X:4Y:2
-Caminho[17] X:5Y:1
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:5Y:2
-Caminho[1] X:5Y:1
-Caminho[2] X:6Y:1
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:8
+Caminho[12] X:2Y:8
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:7
+Turno do monstro finalizado
+Caminho[0] X:14Y:8
+Caminho[1] X:13Y:8
+Caminho[2] X:12Y:8
+Caminho[3] X:11Y:8
+Caminho[4] X:10Y:8
+Caminho[5] X:9Y:8
+Caminho[6] X:8Y:8
+Caminho[7] X:7Y:8
+Caminho[8] X:6Y:8
+Caminho[9] X:5Y:8
+Caminho[10] X:4Y:8
+Caminho[11] X:3Y:7
+Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:13Y:8
+Caminho[1] X:12Y:8
+Caminho[2] X:11Y:8
+Caminho[3] X:10Y:8
+Caminho[4] X:9Y:8
+Caminho[5] X:8Y:8
+Caminho[6] X:7Y:8
+Caminho[7] X:6Y:8
+Caminho[8] X:5Y:8
+Caminho[9] X:4Y:8
+Caminho[10] X:3Y:7
 Turno do monstro finalizado
 Caminho[0] X:13Y:8
 Caminho[1] X:12Y:8
 Caminho[2] X:11Y:8
 Caminho[3] X:10Y:8
-Caminho[4] X:9Y:7
-Caminho[5] X:9Y:6
-Caminho[6] X:8Y:6
-Caminho[7] X:9Y:5
-Caminho[8] X:8Y:5
-Caminho[9] X:9Y:4
-Caminho[10] X:8Y:4
-Caminho[11] X:9Y:3
-Caminho[12] X:8Y:3
-Caminho[13] X:9Y:2
-Caminho[14] X:8Y:2
-Caminho[15] X:7Y:2
-Caminho[16] X:7Y:1
-Caminho[17] X:6Y:1
+Caminho[4] X:9Y:8
+Caminho[5] X:8Y:8
+Caminho[6] X:7Y:8
+Caminho[7] X:6Y:8
+Caminho[8] X:5Y:8
+Caminho[9] X:4Y:8
+Caminho[10] X:3Y:7
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:6Y:2
-Caminho[1] X:6Y:1
-Caminho[2] X:7Y:1
+Turno do jogador finalizado
+Caminho[0] X:12Y:8
+Caminho[1] X:11Y:8
+Caminho[2] X:10Y:8
+Caminho[3] X:9Y:8
+Caminho[4] X:8Y:8
+Caminho[5] X:7Y:8
+Caminho[6] X:6Y:8
+Caminho[7] X:5Y:8
+Caminho[8] X:4Y:8
+Caminho[9] X:3Y:7
 Turno do monstro finalizado
 Caminho[0] X:12Y:8
 Caminho[1] X:11Y:8
 Caminho[2] X:10Y:8
-Caminho[3] X:9Y:7
-Caminho[4] X:9Y:6
-Caminho[5] X:8Y:6
-Caminho[6] X:9Y:5
-Caminho[7] X:8Y:5
-Caminho[8] X:9Y:4
-Caminho[9] X:8Y:4
-Caminho[10] X:9Y:3
-Caminho[11] X:8Y:3
-Caminho[12] X:9Y:2
-Caminho[13] X:8Y:2
-Caminho[14] X:7Y:2
-Caminho[15] X:6Y:2
-Caminho[16] X:7Y:1
+Caminho[3] X:9Y:8
+Caminho[4] X:8Y:8
+Caminho[5] X:7Y:8
+Caminho[6] X:6Y:8
+Caminho[7] X:5Y:8
+Caminho[8] X:4Y:8
+Caminho[9] X:3Y:7
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:7Y:2
-Caminho[1] X:7Y:3
-Caminho[2] X:8Y:2
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:11Y:8
+Caminho[1] X:10Y:8
+Caminho[2] X:9Y:8
+Caminho[3] X:8Y:8
+Caminho[4] X:7Y:8
+Caminho[5] X:6Y:8
+Caminho[6] X:5Y:8
+Caminho[7] X:4Y:8
+Caminho[8] X:3Y:7
 Turno do monstro finalizado
 Caminho[0] X:11Y:8
 Caminho[1] X:10Y:8
-Caminho[2] X:9Y:7
-Caminho[3] X:9Y:6
-Caminho[4] X:8Y:6
-Caminho[5] X:9Y:5
-Caminho[6] X:8Y:5
-Caminho[7] X:9Y:4
-Caminho[8] X:8Y:4
-Caminho[9] X:9Y:3
-Caminho[10] X:8Y:3
-Caminho[11] X:9Y:2
-Caminho[12] X:8Y:2
+Caminho[2] X:9Y:8
+Caminho[3] X:8Y:8
+Caminho[4] X:7Y:8
+Caminho[5] X:6Y:8
+Caminho[6] X:5Y:8
+Caminho[7] X:4Y:8
+Caminho[8] X:3Y:7
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:8Y:2
-Caminho[1] X:8Y:3
-Caminho[2] X:9Y:3
+Turno do jogador finalizado
+Caminho[0] X:10Y:8
+Caminho[1] X:9Y:8
+Caminho[2] X:8Y:8
+Caminho[3] X:7Y:8
+Caminho[4] X:6Y:8
+Caminho[5] X:5Y:8
+Caminho[6] X:4Y:8
+Caminho[7] X:3Y:7
 Turno do monstro finalizado
 Caminho[0] X:10Y:8
-Caminho[1] X:9Y:7
-Caminho[2] X:9Y:6
-Caminho[3] X:8Y:6
-Caminho[4] X:9Y:5
-Caminho[5] X:8Y:5
-Caminho[6] X:9Y:4
-Caminho[7] X:8Y:4
-Caminho[8] X:9Y:3
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:8Y:3
-Caminho[1] X:9Y:3
-Caminho[2] X:9Y:4
-Turno do monstro finalizado
-Caminho[0] X:9Y:7
-Caminho[1] X:9Y:6
-Caminho[2] X:8Y:6
-Caminho[3] X:9Y:5
-Caminho[4] X:8Y:5
-Caminho[5] X:9Y:4
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:8Y:4
-Caminho[1] X:9Y:4
-Caminho[2] X:9Y:5
-Turno do monstro finalizado
-Caminho[0] X:9Y:6
-Caminho[1] X:8Y:6
-Caminho[2] X:9Y:5
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:8Y:5
-Caminho[1] X:9Y:5
-Caminho[2] X:8Y:6
-Turno do monstro finalizado
-Caminho[0] X:8Y:6
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:8Y:6
-Caminho[1] X:7Y:6
-Caminho[2] X:7Y:7
-Turno do monstro finalizado
-Caminho[0] X:7Y:7
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:8Y:7
-Caminho[1] X:9Y:7
-Caminho[2] X:8Y:8
-Turno do monstro finalizado
-Caminho[0] X:8Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:8Y:8
 Caminho[1] X:9Y:8
-Caminho[2] X:9Y:9
+Caminho[2] X:8Y:8
+Caminho[3] X:7Y:8
+Caminho[4] X:6Y:8
+Caminho[5] X:5Y:8
+Caminho[6] X:4Y:8
+Caminho[7] X:3Y:7
 Turno do monstro finalizado
-Caminho[0] X:9Y:9
-Turno do monstro finalizado
+Turno do jogador finalizado
+Turno do jogador finalizado
 Turno do jogador finalizado
 Caminho[0] X:9Y:8
-Caminho[1] X:9Y:9
-Caminho[2] X:10Y:8
+Caminho[1] X:8Y:8
+Caminho[2] X:7Y:8
+Caminho[3] X:6Y:8
+Caminho[4] X:5Y:8
+Caminho[5] X:4Y:8
+Caminho[6] X:3Y:7
 Turno do monstro finalizado
-Caminho[0] X:10Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:10Y:8
-Caminho[1] X:11Y:8
-Turno do monstro finalizado
-Caminho[0] X:11Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:11Y:8
-Caminho[1] X:12Y:8
-Turno do monstro finalizado
-Caminho[0] X:12Y:8
+Caminho[0] X:9Y:8
+Caminho[1] X:8Y:8
+Caminho[2] X:7Y:8
+Caminho[3] X:6Y:8
+Caminho[4] X:5Y:8
+Caminho[5] X:4Y:8
+Caminho[6] X:3Y:7
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:12Y:8
-Caminho[1] X:13Y:8
+Turno do jogador finalizado
+Caminho[0] X:8Y:8
+Caminho[1] X:7Y:8
+Caminho[2] X:6Y:8
+Caminho[3] X:5Y:8
+Caminho[4] X:4Y:8
+Caminho[5] X:3Y:7
 Turno do monstro finalizado
-Caminho[0] X:13Y:8
+Caminho[0] X:8Y:8
+Caminho[1] X:7Y:8
+Caminho[2] X:6Y:8
+Caminho[3] X:5Y:8
+Caminho[4] X:4Y:8
+Caminho[5] X:3Y:7
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:13Y:8
-Caminho[1] X:14Y:8
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:7Y:8
+Caminho[1] X:6Y:8
+Caminho[2] X:5Y:8
+Caminho[3] X:4Y:8
+Caminho[4] X:3Y:7
 Turno do monstro finalizado
-Caminho[0] X:14Y:8
+Caminho[0] X:7Y:8
+Caminho[1] X:6Y:8
+Caminho[2] X:5Y:8
+Caminho[3] X:4Y:8
+Caminho[4] X:3Y:7
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:14Y:8
-Caminho[1] X:15Y:8
+Turno do jogador finalizado
+Caminho[0] X:6Y:8
+Caminho[1] X:5Y:8
+Caminho[2] X:4Y:8
+Caminho[3] X:3Y:7
 Turno do monstro finalizado
-Caminho[0] X:15Y:8
+Caminho[0] X:6Y:8
+Caminho[1] X:5Y:8
+Caminho[2] X:4Y:8
+Caminho[3] X:3Y:7
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:15Y:8
-Caminho[1] X:15Y:9
-Caminho[2] X:16Y:8
+Turno do jogador finalizado
+Turno do jogador finalizado
+Caminho[0] X:5Y:8
+Caminho[1] X:4Y:8
+Caminho[2] X:3Y:7
 Turno do monstro finalizado
-Caminho[0] X:16Y:8
+Caminho[0] X:5Y:8
+Caminho[1] X:4Y:8
+Caminho[2] X:3Y:7
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:16Y:8
-Caminho[1] X:16Y:9
-Caminho[2] X:17Y:8
+Turno do jogador finalizado
+Caminho[0] X:4Y:8
+Caminho[1] X:3Y:7
 Turno do monstro finalizado
-Caminho[0] X:17Y:8
+Caminho[0] X:4Y:8
+Caminho[1] X:3Y:7
 Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:17Y:8
-Caminho[1] X:17Y:9
-Caminho[2] X:18Y:8
-Turno do monstro finalizado
-Caminho[0] X:18Y:8
-Turno do monstro finalizado
 Turno do jogador finalizado
-Caminho[0] X:18Y:8
-Caminho[1] X:18Y:9
-Caminho[2] X:19Y:8
-Turno do monstro finalizado
-Caminho[0] X:19Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:19Y:8
-Caminho[1] X:19Y:7
-Caminho[2] X:20Y:7
-Turno do monstro finalizado
-Caminho[0] X:20Y:7
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:20Y:7
-Caminho[1] X:21Y:6
-Turno do monstro finalizado
-Caminho[0] X:21Y:6
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:20Y:6
-Caminho[1] X:21Y:6
-Caminho[2] X:20Y:5
-Turno do monstro finalizado
-Caminho[0] X:20Y:5
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:20Y:5
-Caminho[1] X:19Y:5
-Caminho[2] X:19Y:4
-Turno do monstro finalizado
-Caminho[0] X:19Y:4
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:19Y:4
-Caminho[1] X:18Y:3
-Turno do monstro finalizado
-Caminho[0] X:18Y:3
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:18Y:3
-Caminho[1] X:17Y:2
-Turno do monstro finalizado
-Caminho[0] X:17Y:2
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:17Y:2
-Caminho[1] X:16Y:1
-Turno do monstro finalizado
-Caminho[0] X:16Y:1
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:16Y:2
-Caminho[1] X:16Y:3
-Caminho[2] X:15Y:2
-Turno do monstro finalizado
-Caminho[0] X:15Y:2
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:15Y:3
-Turno do monstro finalizado
-Caminho[0] X:15Y:3
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:15Y:4
-Turno do monstro finalizado
-Caminho[0] X:15Y:4
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:15Y:5
-Turno do monstro finalizado
-Caminho[0] X:15Y:5
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:15Y:6
-Turno do monstro finalizado
-Caminho[0] X:15Y:6
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:15Y:7
-Turno do monstro finalizado
-Caminho[0] X:15Y:7
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:14Y:8
-Turno do monstro finalizado
-Caminho[0] X:14Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:13Y:8
-Turno do monstro finalizado
-Caminho[0] X:13Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:12Y:8
-Turno do monstro finalizado
-Caminho[0] X:12Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:11Y:8
-Turno do monstro finalizado
-Caminho[0] X:11Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:10Y:8
-Turno do monstro finalizado
-Caminho[0] X:10Y:8
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:9Y:7
-Turno do monstro finalizado
-Caminho[0] X:9Y:7
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:8Y:6
-Turno do monstro finalizado
-Caminho[0] X:8Y:6
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:8Y:5
-Turno do monstro finalizado
-Caminho[0] X:8Y:5
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:7Y:4
-Turno do monstro finalizado
-Caminho[0] X:7Y:4
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:6Y:4
-Turno do monstro finalizado
-Caminho[0] X:6Y:4
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:5Y:4
-Turno do monstro finalizado
-Caminho[0] X:5Y:4
-Turno do monstro finalizado
-Turno do jogador finalizado
-Caminho[0] X:4Y:4
-Turno do monstro finalizado
-Caminho[0] X:4Y:4
-Turno do monstro finalizado

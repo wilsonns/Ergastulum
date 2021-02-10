@@ -6,12 +6,11 @@
 class GUI
 {
     public:
-        GUI();
-        virtual ~GUI();
-        WINDOW* msgs;
-        PANEL* pmsgs;
-        
-        void render();
+        GUI();//ctor
+        virtual ~GUI();//dtor
+        WINDOW* msgs;//cria a janela de mensagens da interface
+ 
+        void render();//desenhar a interface na tela
 
     protected:
 

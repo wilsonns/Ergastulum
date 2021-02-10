@@ -80,6 +80,14 @@ void Mapa::tornarExplorado(int x, int y)
     tiles[x + y * largura].explorado = true;
 }
 
+void Mapa::adcionarItem(int x, int y)
+{
+    Entidade* pocaoDeCura = new Entidade(x, y, "Pocao de Cura", '!');
+    pocaoDeCura->denso = false;
+    pocaoDeCura->pegavel = new Curador(10);
+    engine.entidades.insert(engine.entidades.begin(),pocaoDeCura);
+}
+
 void Mapa::render()
 {
     for(int x = 0; x < largura;x++)

@@ -28,12 +28,6 @@ void Atacador::atacar(Entidade *owner, Entidade *alvo)
             std::cout << owner->nome << " atacou " << alvo->nome << " sem efeito!" << std::endl;
         }
         alvo->destrutivel->tomarDano(alvo, dano);
-            if(alvo->ai)
-            {
-                delete alvo->ai;
-                alvo->ai = new aiMonstro();
-                
-            }
     }
     else
     {

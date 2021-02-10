@@ -5,26 +5,25 @@
 
 Pathfinding::Pathfinding()
 {
-    nodos = new Nodo[engine.mapa->largura * engine.mapa->altura];
+    nodos = new Nodo[engine.mapa->largura * engine.mapa->altura];//inicializa nodos como uma array de Nodo com tamanho de largura*altura do mapa
     for (int x = 0; x < engine.mapa->largura; x++)
     {
         for (int y = 0; y < engine.mapa->altura; y++)
         {
             nodos[x + y * engine.mapa->largura].x = x;
             nodos[x + y * engine.mapa->largura].y = y;
-            nodos[x + y * engine.mapa->largura].visitado = false;
             nodos[x + y * engine.mapa->largura].pai = nullptr;
         }
-    }
+    }//inicializa todos os nodos individuais
     for (int x = 0; x < engine.mapa->largura; x++)
     {
         for (int y = 0; y < engine.mapa->altura;y++)
         {
-            if (y > 0 )
+            if (y > 0)
             {
                 nodos[x + y * engine.mapa->largura].vizinhos.push_back(&nodos[(x + 0) + (y - 1) * engine.mapa->largura]);
             }
-            if (y < engine.mapa->altura-1)
+            if (y < engine.mapa->altura - 1)
             {
                 nodos[x + y * engine.mapa->largura].vizinhos.push_back(&nodos[(x + 0) + (y + 1) * engine.mapa->largura]);
             }
@@ -37,25 +36,25 @@ Pathfinding::Pathfinding()
             {
                 nodos[x + y * engine.mapa->largura].vizinhos.push_back(&nodos[(x + 1) + (y + 0) * engine.mapa->largura]);
             }
-            if (y > 0 && x > 0 )
+            if (y > 0 && x > 0)
             {
                 nodos[x + y * engine.mapa->largura].vizinhos.push_back(&nodos[(x - 1) + (y - 1) * engine.mapa->largura]);
             }
-            if (y < engine.mapa->altura-1 && x > 0 )
+            if (y < engine.mapa->altura - 1 && x > 0)
             {
                 nodos[x + y * engine.mapa->largura].vizinhos.push_back(&nodos[(x - 1) + (y + 1) * engine.mapa->largura]);
             }
-            if (y > 0 && x < engine.mapa->largura-1)
+            if (y > 0 && x < engine.mapa->largura - 1)
             {
                 nodos[x + y * engine.mapa->largura].vizinhos.push_back(&nodos[(x + 1) + (y - 1) * engine.mapa->largura]);
             }
 
-            if (y < engine.mapa->altura - 1 && x < engine.mapa->largura-1)
+            if (y < engine.mapa->altura - 1 && x < engine.mapa->largura - 1)
             {
                 nodos[x + y * engine.mapa->largura].vizinhos.push_back(&nodos[(x + 1) + (y + 1) * engine.mapa->largura]);
             }
         }
-    }
+    }//incializa os 8 vizinhos de cada nodo
     //CTOR
 }
 
@@ -65,29 +64,18 @@ Pathfinding::~Pathfinding()
     //DTOR
 }
 
-void Pathfinding::atualizar()
-{
-}
-
-
-/*bool Pathfinding::estaNaLista(std::list<Nodo*>& lista, Nodo* nodo)
-{
-
-}
-*/
 std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* owner, Entidade* alvo)
 {
-    // 1. Begin at the starting point A and add it to an “open list” of squares to be considered. The open list is kind of like
-    //    a shopping list.Right now there is just one item on the list, but we will have more later.It contains squares that
-    //    might fall along the path you want to take, but maybe not.Basically, this is a list of squares that need to be
-    //    checked out.
-    //    2. Look at all the reachable or walkable squares adjacent to the starting point, ignoring squares with walls, water,
-    //    or other illegal terrain.Add them to the open list, too.For each of these squares, save point A as its “parent
-    //    square”.This parent square stuff is important when we want to trace our path.It will be explained more later.
-    //    3. Drop the starting square A from your open list, and add it to a “closed list” of squares that you don’t need to
-    //    look at again for now.
-    aberta.clear();
-    fechada.clear();
+    /// Loop do Pathfinding:
+    /// 1. reseta todos os nodos, limpa as listas aberta e fechada
+    /// 2. insere o nodo inicial na lista aberta e define ele como atual
+    /// 3. Inicia o loop:processa o nodo atual , tirando-o da lista aberta e colocando na lista fechada. Todos os vizinhos do nodo inicial são inseridos na lista aberta
+    /// 4.  Reorganize a lista aberta de forma crescente baseado na variavel F; O nodo com o menor F agora é o atual;
+    /// 5. Repita o passo 3 até que a lista aberta fique vazia(significa que o caminho não foi encontrado) OU até que o nodo atual seja == ao nodo objetivo
+    /// 6. Se o objetivo for encontrado, trace o caminho de volta através do nodo pai do objetivo, repetindo isso até formar o caminho do inicio ao objetivo
+    /// 7. Retorne um vetor revertido com os nodos que compoem o caminho
+    aberta.clear();//limpa a lista aberta
+    fechada.clear();//limpa a lista fechada
     for (int x = 0; x < engine.mapa->largura; x++)
     {
         for (int y = 0; y < engine.mapa->altura; y++)
@@ -97,24 +85,21 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* owner, Entidade* alvo)
             nodos[x + y * engine.mapa->largura].h = 0;
             nodos[x + y * engine.mapa->largura].pai = nullptr;
         }
-    }
+    }//reseta todos os nodos do mapa
 
-    Nodo* inicio = &nodos[owner->x + owner->y * engine.mapa->largura];
-    Nodo* objetivo = &nodos[alvo->x + alvo->y * engine.mapa->largura];
-    Nodo* atual = nullptr;
+    Nodo* inicio = &nodos[owner->x + owner->y * engine.mapa->largura];//setta o Nodo incial baseado na posição do owner que chamou a função
+    Nodo* objetivo = &nodos[alvo->x + alvo->y * engine.mapa->largura];//setta o Nodo objetivo baseado no alvo
+    Nodo* atual = nullptr;//declara nodo atual
     inicio->f = 0;
     inicio->g = 0;
     inicio->h = calcularH(inicio,objetivo);
 
     atual = inicio;
 
-    aberta.push_back(atual);
+    aberta.push_back(atual);//insere o nodo atual na lista aberta
 
     while (!aberta.empty())
     {
-        
-        //std::sort(aberta.begin(), aberta.end(), [](Nodo const* l, Nodo const* r) {return l->f < r->f;});
-        //aberta.sort([](const Nodo& x, const Nodo& y) {return x.f < y.f;});
         aberta = organizarPorF(aberta);
         atual = aberta.front();
         aberta.pop_front();
@@ -129,14 +114,18 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* owner, Entidade* alvo)
                     atual->vizinhos[i]->h = calcularH(atual->vizinhos[i], objetivo);
                     atual->vizinhos[i]->f = calcularF(atual->vizinhos[i]);
                     aberta.push_back(atual->vizinhos[i]);
-                }
+                }//Se o vizinho em questão não for uma parede, não estiver na lista aberta nem na fechada, sete o nodo atual como o pai dele,
+                //defina as suas variaveis e o insira na lista aberta
                 else if (!engine.mapa->eParede(atual->vizinhos[i]->x, atual->vizinhos[i]->y) 
                     && estaNaLista(aberta, atual->vizinhos[i]) && !estaNaLista(fechada, atual->vizinhos[i]))
+                {
+                if (atual->vizinhos[i]->pai->g > calcularG(atual,inicio))
                 {
                     atual->vizinhos[i]->g = calcularG(atual->vizinhos[i], inicio);
                     atual->vizinhos[i]->f = calcularF(atual->vizinhos[i]);
                     atual->vizinhos[i]->pai = atual;
                 }
+                }//Se então o nodo não for uma parede, mas já estiver na lista aberta, recalcule o valor G e se esse for menor, sette o nodo atual como o pai dele
         }
         if(atual == objetivo)
         {

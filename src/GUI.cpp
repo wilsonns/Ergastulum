@@ -3,9 +3,7 @@
 
 GUI::GUI()
 {
-    msgs = newwin(5,COLS-2,LINES-6,0);
-    pmsgs = new_panel(msgs);
-
+    msgs = newwin(2,2,0,0);
     //ctor
 }
 
@@ -16,7 +14,9 @@ GUI::~GUI()
 
 void GUI::render()
 {
-    show_panel(pmsgs);
-    update_panels();
-    doupdate();
+    box(msgs, 0, 0);
+    mvwprintw(msgs, 1, 1, "TESTE DESGRAÇA");
+    refresh();
+    wrefresh(msgs);
+    refresh();
 }

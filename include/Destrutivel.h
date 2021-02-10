@@ -5,12 +5,12 @@
 class Destrutivel
 {
     public:
-        float hpMax;
-        float hp;
-        float defesa;
-        const char *nomeCadaver;
+        float hpMax;//maximo de pontos de vida
+        float hp;//pontos de vida atual
+        float defesa;//a quantidade de dano que a entidade consegue tankar
+        const char *nomeCadaver;//o nome que a entidade terá quando morrer
 
-        Destrutivel(float hpMax, float defesa, const char *nomeCadaver);
+        Destrutivel(float hpMax, float defesa, const char *nomeCadaver);//ctor
         inline bool morreu()
         {
             if(hp<=0)
@@ -18,13 +18,15 @@ class Destrutivel
                 return true;
             }
             return false;
-        }
+        }//Retorna verdadeiro se tiver morrido, falso se não
 
-        float tomarDano(Entidade *owner, float dano);
+        float tomarDano(Entidade *owner, float dano);//subtrai o dano sofrido dos pontos de vida atuais e retorna a quantidade de dano que foi causada
 
-        virtual void morrer(Entidade *owner);
+        float curar(float valor);//recupera pontos de vida da entidade e retorna a quantidade de pvs curados
 
-        virtual ~Destrutivel();
+        virtual void morrer(Entidade *owner);//Função virtual que mata a entidade, tirando-a do vetor entidades e enfiando-a no vetor mortos
+
+        virtual ~Destrutivel();//dtor
 
     protected:
 
@@ -34,14 +36,14 @@ class Destrutivel
 class destrutivelMonstro : public Destrutivel
 {
     public:
-        destrutivelMonstro(float hpMax, float defesa, const char *nomeCadaver);
+        destrutivelMonstro(float hpMax, float defesa, const char *nomeCadaver);//ctor
         void morrer(Entidade *owner);
 };
 
 class destrutivelJogador : public Destrutivel
 {
     public:
-        destrutivelJogador(float hpMax, float defesa, const char *nomeCadaver);
+        destrutivelJogador(float hpMax, float defesa, const char* nomeCadaver);//ctor
         void morrer(Entidade *owner);
 };
 
