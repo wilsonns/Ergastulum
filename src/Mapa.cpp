@@ -94,29 +94,48 @@ void Mapa::render()
     {
         for(int y = 0; y < altura;y+=1)
         {
-            if (eParede(x, y) && eVisivel(x, y) && eExplorado(x, y))
+            if (engine.debug == false)
             {
-                attron(COLOR_PAIR(1));
-                mvprintw(y, x, "#");
-                attroff(COLOR_PAIR(1));
+                if (eParede(x, y) && eVisivel(x, y) && eExplorado(x, y))
+                {
+                    attron(COLOR_PAIR(1));
+                    mvprintw(y, x, "#");
+                    attroff(COLOR_PAIR(1));
+                }
+                else if (!eParede(x, y) && eVisivel(x, y) && eExplorado(x, y))
+                {
+                    attron(COLOR_PAIR(1));
+                    mvprintw(y, x, ".");
+                    attron(COLOR_PAIR(1));
+                }
+                else if (eParede(x, y) && !eVisivel(x, y) && eExplorado(x, y))
+                {
+                    attron(COLOR_PAIR(2));
+                    mvprintw(y, x, "#");
+                    attroff(COLOR_PAIR(2));
+                }
+                else if (!eParede(x, y) && !eVisivel(x, y) && eExplorado(x, y))
+                {
+                    attron(COLOR_PAIR(2));
+                    mvprintw(y, x, ".");
+                    attron(COLOR_PAIR(2));
+                }
             }
-            else if (!eParede(x, y) && eVisivel(x, y) && eExplorado(x, y))
+            else
             {
-                attron(COLOR_PAIR(1));
-                mvprintw(y, x, ".");
-                attron(COLOR_PAIR(1));
-            } 
-            else if (eParede(x, y) && !eVisivel(x, y) && eExplorado(x, y))
-            {
-                attron(COLOR_PAIR(2));
-                mvprintw(y, x, "#");
-                attroff(COLOR_PAIR(2));
-            }
-            else if (!eParede(x, y) && !eVisivel(x, y) && eExplorado(x, y))
-            {
-                attron(COLOR_PAIR(2));
-                mvprintw(y, x, ".");
-                attron(COLOR_PAIR(2));
+                if (eParede(x, y))
+                {
+                    attron(COLOR_PAIR(1));
+                    mvprintw(y, x, "#");
+                    attroff(COLOR_PAIR(1));
+                }
+                else
+                {
+                    attron(COLOR_PAIR(1));
+                    mvprintw(y, x, ".");
+                    attroff(COLOR_PAIR(1));
+
+                }
             }
             
         }

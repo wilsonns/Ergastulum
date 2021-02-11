@@ -14,7 +14,7 @@ Engine::Engine()
     jogador->container = new Container(10);
     entidades.push_back(jogador);
     rodando = true;
-    debug = false;
+    debug = true;
     mostrarPath = false;
     //ctor
 }
@@ -28,7 +28,7 @@ void Engine::render()
 {
     clear();
     mapa->render();
-    for(unsigned int i = 0; i < mortos.size(); i++)
+    for (unsigned int i = 0; i < mortos.size(); i++)
     {
         mortos[i]->render();
     }
@@ -37,42 +37,28 @@ void Engine::render()
         entidades[i]->render();
     }
     refresh();
-    /*
-    if (mostrarPath == true)
+
+    if (debug == true && mostrarPath == true)
     {
-        for (int i = 0; i < mapa->largura; i++)
+        for (int i = 0; i < entidades.size();i++)
         {
-            for (int j = 0; j < mapa->altura; j++)
+            if (entidades[i]->caminho.size() != 0)
             {
-                if (engine.pathMapa->nodos[i + j * mapa->largura].obstaculo)
-                {
-                    attron(COLOR_PAIR(4));
-                    mvprintw(j, i, "X");
-                    attroff(COLOR_PAIR(4));
-                }
-                else
+                for (int j = 0; j < entidades[i]->caminho.size();j++)
                 {
                     attron(COLOR_PAIR(3));
-                    mvprintw(j, i, "O");
+                    mvprintw(entidades[i]->caminho[j]->y, entidades[i]->caminho[j]->x, "x");
                     attroff(COLOR_PAIR(3));
-
                 }
             }
+            else
+            {
+                attron(COLOR_PAIR(4));
+                mvprintw(entidades[i]->y, entidades[i]->x, "X");
+                attroff(COLOR_PAIR(4));
+            }
         }
-        if (engine.pathMapa->nodos[jogador->x + jogador->y * mapa->largura].obstaculo)
-        {
-            attron(COLOR_PAIR(4));
-            mvprintw(22,0,"Obstaculo");
-            attroff(COLOR_PAIR(4));
-        }
-        else
-        {
-           attron(COLOR_PAIR(3));
-           mvprintw(22, 0, "Sem obstaculo");
-           attroff(COLOR_PAIR(3));
-        }
-    }*/
-
+    }
     if (debug == true)
     {
         for (unsigned int i = 0; i < entidades.size(); i++)
@@ -80,7 +66,8 @@ void Engine::render()
             mvprintw(i, 70, "x:%i/y:%i", entidades[i]->x, entidades[i]->y);
         }
     }
-
+     
+    
     refresh();
     gui->render();
     wrefresh(gui->msgs);
@@ -107,6 +94,6 @@ void Engine::adcmonstro(int x, int y)
     Entidade *monstro = new Entidade(x,y,"Orc" ,'O');
     monstro->destrutivel = new destrutivelMonstro(20,2,"Cadavi");
     monstro->atacador = new Atacador(1);
-    monstro->ai = new aiMonstro(0.25);
+    monstro->ai = new aiMonstro(1);
     entidades.push_back(monstro);
 }

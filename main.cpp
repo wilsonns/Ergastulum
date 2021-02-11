@@ -42,10 +42,6 @@ int main()
     {
         engine.mapa->cavar(x, 8);
     }
-    for (int y = 9; y < 22;y++)
-    {
-        engine.mapa->cavar(20, y);
-    }
     for (int x = 19; x < 31; x++)
     {
         for (int y = 21; y < 23;y++)

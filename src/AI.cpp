@@ -226,25 +226,5 @@ bool aiMonstro::moverOuAtacar(Entidade *owner,Entidade *alvo)
     {
         owner->atacador->atacar(owner, alvo);
     }
-    /*owner->caminho.erase(owner->caminho.begin());
-    int dx = xalvo - owner->x;
-    int dy = yalvo - owner->y;
-    float distancia = sqrtf((dx * dx) + (dy * dy));
-
-    if (distancia >= 2)
-    {
-        dx = (int)(round(dx / distancia));
-        dy = (int)(round(dy / distancia));
-        
-        if(engine.mapa->podeAndar(owner->x +dx, owner->y + dy))
-        {
-            owner->x += dx;
-            owner->y += dy;
-        }
-    }
-    else if(owner->atacador)
-    {
-        owner->atacador->atacar(owner, engine.jogador);
-    }*/
     return true;
 }

@@ -46,23 +46,37 @@ public:
     ///F G H
     inline int calcularF(Nodo* nodo)
     {
-        nodo->f = nodo->g + nodo->h;
+        nodo->f = (nodo->g + nodo->h);
         return nodo->f;
     }
     inline int calcularG(Nodo* nodo, Nodo* inicio)
     {
-        int dx = nodo->x - inicio->x;
-        int dy = nodo->y - inicio->y;
-        int distancia = sqrt((dx * dx) + (dy * dy));
-        nodo->g = nodo->pai->g + distancia;
-        return nodo->g;
+        if ((
+            ((nodo->pai->x == nodo->x - 1) && (nodo->pai->y == nodo->y - 1))
+            ||
+            ((nodo->pai->x == nodo->x - 1) && (nodo->pai->y == nodo->y + 1))
+            ||
+            ((nodo->pai->x == nodo->x + 1) && (nodo->pai->y == nodo->y + 1))
+            ||
+            ((nodo->pai->x == nodo->x + 1) && (nodo->pai->y == nodo->y - 1))
+            ))
+        {
+            nodo->g = nodo->pai->g + 14;
+            return nodo->g;
+        }
+        else
+        {
+
+            nodo->g = nodo->pai->g + 10;
+            return nodo->g;
+        }
     }
     inline int calcularH(Nodo* nodo, Nodo* objetivo)
     {
-        int dx = objetivo->x - nodo->x;
-        int dy = objetivo->y - nodo->y;
-        int distancia = sqrt((dx * dx) + (dy * dy));
-        return distancia;
+        int dx = nodo->x - objetivo->x;
+        int dy = nodo->y - objetivo->y;
+        int distancia = (int)(sqrtf((dx * dx) + (dy * dy)));
+        return distancia*10;
     }
 
     bool compararF(Nodo l, Nodo r);//Compara o valor F de dois nodos e retorna verdadeiro se forem iguais, falso se não forem
@@ -71,8 +85,8 @@ public:
 
     bool estaNaLista(std::list<Nodo*>& lista, Nodo* nodo);//recebe uma lista e um nodo e retorna veradadeiro se esse nodo estiver na lista
 
+    std::vector<Nodo*> acharCaminho(Entidade* owner, Entidade* alvo);//retorna o vetor caminho para a entidade proprietaria
 
-   std::vector<Nodo*> acharCaminho(Entidade* owner, Entidade* alvo);//retorna o vetor caminho para a entidade proprietaria
 protected:
 
 private:

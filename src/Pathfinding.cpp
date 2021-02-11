@@ -95,9 +95,13 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* owner, Entidade* alvo)
     inicio->h = calcularH(inicio,objetivo);
 
     atual = inicio;
-
     aberta.push_back(atual);//insere o nodo atual na lista aberta
-
+/*
+    for (int i = 0; i < atual->vizinhos.size();i++)
+    {
+        atual->vizinhos[i]->g = 0;
+    }
+    */
     while (!aberta.empty())
     {
         aberta = organizarPorF(aberta);
@@ -107,27 +111,51 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* owner, Entidade* alvo)
         for (int i = 0; i < atual->vizinhos.size(); i++)
         {
             if (!engine.mapa->eParede(atual->vizinhos[i]->x, atual->vizinhos[i]->y)
-                    && !estaNaLista(aberta, atual->vizinhos[i]) && !estaNaLista(fechada,atual->vizinhos[i]))
-                {
-                    atual->vizinhos[i]->pai = atual;
-                    atual->vizinhos[i]->g = calcularG(atual->vizinhos[i], inicio);
-                    atual->vizinhos[i]->h = calcularH(atual->vizinhos[i], objetivo);
-                    atual->vizinhos[i]->f = calcularF(atual->vizinhos[i]);
-                    aberta.push_back(atual->vizinhos[i]);
-                }//Se o vizinho em questão não for uma parede, não estiver na lista aberta nem na fechada, sete o nodo atual como o pai dele,
+                && !estaNaLista(aberta, atual->vizinhos[i]) && !estaNaLista(fechada, atual->vizinhos[i]))
+            {
+                atual->vizinhos[i]->pai = atual;
+                atual->vizinhos[i]->g = calcularG(atual->vizinhos[i], inicio);
+                atual->vizinhos[i]->h = calcularH(atual->vizinhos[i], objetivo);
+                atual->vizinhos[i]->f = calcularF(atual->vizinhos[i]);
+                aberta.push_back(atual->vizinhos[i]);
+            }//Se o vizinho em questão não for uma parede, não estiver na lista aberta nem na fechada, sete o nodo atual como o pai dele,
                 //defina as suas variaveis e o insira na lista aberta
-                else if (!engine.mapa->eParede(atual->vizinhos[i]->x, atual->vizinhos[i]->y) 
-                    && estaNaLista(aberta, atual->vizinhos[i]) && !estaNaLista(fechada, atual->vizinhos[i]))
-                {
-                if (atual->vizinhos[i]->pai->g > calcularG(atual,inicio))
+            else if (!engine.mapa->eParede(atual->vizinhos[i]->x, atual->vizinhos[i]->y)
+                && estaNaLista(aberta, atual->vizinhos[i]) && !estaNaLista(fechada, atual->vizinhos[i]))
+            {
+                if (atual->vizinhos[i]->pai->g > calcularG(atual, inicio))
                 {
                     atual->vizinhos[i]->g = calcularG(atual->vizinhos[i], inicio);
                     atual->vizinhos[i]->f = calcularF(atual->vizinhos[i]);
                     atual->vizinhos[i]->pai = atual;
                 }
-                }//Se então o nodo não for uma parede, mas já estiver na lista aberta, recalcule o valor G e se esse for menor, sette o nodo atual como o pai dele
+            }//Se então o nodo não for uma parede, mas já estiver na lista aberta, recalcule o valor G e se esse for menor, sette o nodo atual como o pai dele
         }
-        if(atual == objetivo)
+        if(aberta.empty())
+        {
+            break;
+        }
+        if (engine.debug)
+        {
+            if (fechada.size() != 0)
+            {
+                for (auto& it : fechada)
+                {
+                    Sleep(50);
+                    mvprintw(it->y, it->x, "x");
+                }
+                refresh();
+            }
+            if (aberta.size() != 0)
+            {
+                for (auto& it : aberta)
+                {
+                    mvprintw(it->y, it->x, "o");
+                }
+                refresh();
+            }
+        }
+            if(atual == objetivo)
         {
             break;
         }
@@ -142,6 +170,13 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* owner, Entidade* alvo)
         {
             caminho.push_back(atual);
             atual = atual->pai;
+            if (engine.debug == true)
+            {
+                attron(COLOR_PAIR(3));
+                mvprintw(caminho[i]->y, caminho[i]->x, "x");
+                attroff(COLOR_PAIR(3));
+                refresh();
+            }
         }
         std::reverse(caminho.begin(), caminho.end());
         return caminho;
@@ -187,12 +222,31 @@ std::list<Nodo*> Pathfinding::organizarPorF(std::list<Nodo*> lista)
     while (copialista.size() != tam)
     {
         int menorF = 999;
-        for (auto const &it: lista)
+        Nodo* nodoMenorF;
+        Nodo nodor;
+        nodor.f = 999;
+        nodoMenorF = &nodor;
+        for (auto const& it : lista)
         {
-            if (it->f < menorF)
+            if (menorF > 1)
             {
-                menorF = it->f;
+                if (menorF > it->f)
+                {
+                    menorF = 0;
+                    nodoMenorF = it;
+                }
             }
+            if (it->f < nodoMenorF->f)
+            {
+                nodoMenorF = it;
+            }
+            else if (it->f == nodoMenorF->f)
+            {
+                if (it->h < nodoMenorF->h)
+                {
+                    nodoMenorF = it;
+                }
+            }//Acha o nodo com meno0r valor F na lista. Se encontrar nodos com valor F igual, prioriza o com menor valor H
         }
         std::list<Nodo*>::iterator it1 = lista.begin();
         int index = 0;
@@ -200,7 +254,7 @@ std::list<Nodo*> Pathfinding::organizarPorF(std::list<Nodo*> lista)
         {
             if (lista.size() != 0)
             {
-                if (it->f == menorF)
+                if (it->f == nodoMenorF->f && it->h == nodoMenorF->h)
                 {
 
                    copialista.push_back(it);
