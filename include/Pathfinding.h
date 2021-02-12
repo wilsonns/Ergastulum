@@ -85,7 +85,7 @@ public:
 
     bool estaNaLista(std::list<Nodo*>& lista, Nodo* nodo);//recebe uma lista e um nodo e retorna veradadeiro se esse nodo estiver na lista
 
-    std::vector<Nodo*> acharCaminho(Entidade* owner, Entidade* alvo);//retorna o vetor caminho para a entidade proprietaria
+    std::vector<Nodo*> acharCaminho(Entidade* self, Entidade* alvo);//retorna o vetor caminho para a entidade proprietaria
 
 protected:
 

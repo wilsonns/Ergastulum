@@ -46,4 +46,17 @@ class Mapa
     private:
 };
 
+struct Folha
+{
+    int xinic, xfim;
+    int yinic, yfim;
+
+    Folha* filha1;
+    Folha* filha2;
+};
+struct BSP
+{
+    
+};
+
 #endif // MAPA_H

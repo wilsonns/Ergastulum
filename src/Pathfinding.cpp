@@ -64,7 +64,7 @@ Pathfinding::~Pathfinding()
     //DTOR
 }
 
-std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* owner, Entidade* alvo)
+std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* self, Entidade* alvo)
 {
     /// Loop do Pathfinding:
     /// 1. reseta todos os nodos, limpa as listas aberta e fechada
@@ -87,7 +87,7 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* owner, Entidade* alvo)
         }
     }//reseta todos os nodos do mapa
 
-    Nodo* inicio = &nodos[owner->x + owner->y * engine.mapa->largura];//setta o Nodo incial baseado na posição do owner que chamou a função
+    Nodo* inicio = &nodos[self->x + self->y * engine.mapa->largura];//setta o Nodo incial baseado na posição do self que chamou a função
     Nodo* objetivo = &nodos[alvo->x + alvo->y * engine.mapa->largura];//setta o Nodo objetivo baseado no alvo
     Nodo* atual = nullptr;//declara nodo atual
     inicio->f = 0;

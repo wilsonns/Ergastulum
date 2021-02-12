@@ -1,9 +1,10 @@
 #include "Atacador.h"
 #include "main.h"
 
-Atacador::Atacador(float poder)
+Atacador::Atacador(int forca, int destreza)
 {
-    this->poder = poder;
+    this->forca = forca;
+    this->destreza = destreza;
     //ctor
 }
 
@@ -12,26 +13,39 @@ Atacador::~Atacador()
     //dtor
 }
 
-void Atacador::atacar(Entidade *owner, Entidade *alvo)
+void Atacador::atacar(Entidade *self, Entidade *alvo)
 {
-    if(alvo->destrutivel && !alvo->destrutivel->morreu())
+    if (alvo->destrutivel && !alvo->destrutivel->morreu())
     {
-        float dano;
-        dano = (engine.random(1,2,(int)(poder))-(alvo->destrutivel->defesa));
+        //Primeiro passo: self ataca e o alvo tenta se esquivar
+        int acerto = engine.random(1, 20, destreza);
+        int esquiva = engine.random(1, 20, alvo->destrutivel->agilidade);
 
-        if(dano > 0)
+        if (acerto - esquiva <= 0)
         {
-            std::cout << owner->nome << " atacou " << alvo->nome << " causando " << int(dano)  << " dano!" << std::endl;
+            ///MENSAGEM DE FALHA
         }
         else
         {
-            std::cout << owner->nome << " atacou " << alvo->nome << " sem efeito!" << std::endl;
+            int dano = (engine.random(1, 6, forca) - alvo->destrutivel->resistencia);
+
+            if (dano > 0)
+            {
+                /// MENSAGEM DE CAUSAR DANO
+                std::cout << self->nome << " atacou " << alvo->nome << " causando " << int(dano) << " dano!" << std::endl;
+            }
+            else
+            {
+                ///MENSAGEM DE FALHAR EM CAUSAR DANO
+                std::cout << self->nome << " atacou " << alvo->nome << " sem efeito!" << std::endl;
+            }
+            alvo->destrutivel->tomarDano(alvo, dano);
         }
-        alvo->destrutivel->tomarDano(alvo, dano);
     }
     else
     {
-        std::cout << owner->nome << " ataca em vao!" << std::endl;
+        ///MENSAGEM DE NÃO ATACAR NADA
+        std::cout << self->nome << " ataca em vao!" << std::endl;
     }
 }
 

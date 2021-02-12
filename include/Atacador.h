@@ -5,13 +5,16 @@
 class Atacador
 {
     public:
-        float poder;//A quantidade de dano que a entidade é capaz de causar em um destrutivel
+        //Atributos
+        int forca;//A quantidade de dano que a entidade é capaz de causar em um destrutivel
+        int destreza;//A capacidade do atacador de acertar uym alvo
+                  //Habilidades
+        //int manoamano;//habilidade com as mãos para bnrigar
 
-
-        Atacador(float poder);//ctor
+        Atacador(int forca,int destreza);//ctor
         virtual ~Atacador();//dtor
 
-        void atacar(Entidade *owner, Entidade *alvo);//owner ataca o alvo destrutivel e causa dano
+        void atacar(Entidade *self, Entidade *alvo);//self ataca o alvo destrutivel e causa dano
 
     protected:
 

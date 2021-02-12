@@ -14,7 +14,7 @@ class AI
 
         AI();//CTOR
         virtual ~AI();//DTOR
-        virtual void atualizar(Entidade *owner)=0;//Função virtual para atualizar a IA da entidade
+        virtual void atualizar(Entidade *self)=0;//Função virtual para atualizar a IA da entidade
 
     protected:
 
@@ -26,21 +26,21 @@ class aiJogador : public AI
 {
     public:
         aiJogador(float velocidade);//ctor
-        void atualizar(Entidade *owner);
+        void atualizar(Entidade *self);
 
     protected:
-        bool moverOuAtacar(Entidade* owner, int xalvo, int yalvo);//Retorna true se o jogador se mover, falso se não se mover
-        Entidade* escolherDoInventario(Entidade* owner);//Desenha a janela do inventario e permite o jogador escolher o item
+        bool moverOuAtacar(Entidade* self, int xalvo, int yalvo);//Retorna true se o jogador se mover, falso se não se mover
+        Entidade* escolherDoInventario(Entidade* self);//Desenha a janela do inventario e permite o jogador escolher o item
 };
 
 class aiMonstro : public AI
 {
     public:
         aiMonstro(float velocidade);//ctor
-        void atualizar(Entidade *owner);
+        void atualizar(Entidade *self);
         
     protected:
-        bool moverOuAtacar(Entidade *owner,Entidade *alvo);//retorna true se a entidade se mover, falso se não
+        bool moverOuAtacar(Entidade *self,Entidade *alvo);//retorna true se a entidade se mover, falso se não
 
 };
 #endif // AI_H

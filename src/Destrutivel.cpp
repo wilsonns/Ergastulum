@@ -1,10 +1,11 @@
 #include "Destrutivel.h"
 
-Destrutivel::Destrutivel(float hpMax, float defesa, const char *nomeCadaver)
+Destrutivel::Destrutivel(int vigor, int resistencia,int agilidade,const char *nomeCadaver)
 {
-    this->hpMax = hpMax;
+    this->hpMax = vigor * 5;
     this->hp = hpMax;
-    this-> defesa = defesa;
+    this->resistencia = resistencia;
+    this->agilidade = agilidade;
     this->nomeCadaver = nomeCadaver;
 
     //ctor
@@ -15,17 +16,17 @@ Destrutivel::~Destrutivel()
     //dtor
 }
 
-float Destrutivel::tomarDano(Entidade *owner, float dano)
+int Destrutivel::tomarDano(Entidade *self, int dano)
 {
     hp -= dano;
     if(hp <= 0)
     {
-        morrer(owner);
+        morrer(self);
     }
     return dano;
 }
 
-float Destrutivel::curar(float valor)
+int Destrutivel::curar(int valor)
 {
     hp += valor;
     if (hp > hpMax)
@@ -36,41 +37,43 @@ float Destrutivel::curar(float valor)
     return valor;
 }
 
-void Destrutivel::morrer(Entidade *owner)
+void Destrutivel::morrer(Entidade *self)
 {
-    owner->simbolo = '%';
-    owner->nome = nomeCadaver;
-    owner->denso = false;
+    self->simbolo = '%';
+    self->nome = nomeCadaver;
+    self->denso = false;
     for(unsigned int i = 0; i < engine.entidades.size();i++)
     {
-        if(engine.entidades[i] == owner)
+        if(engine.entidades[i] == self)
         {
 
             engine.entidades.erase(engine.entidades.begin()+i);
-            engine.entidades.insert(engine.entidades.begin(),owner);
+            engine.entidades.insert(engine.entidades.begin(),self);
         }
     }
 }
 
-destrutivelMonstro::destrutivelMonstro(float hpMax, float defesa, const char* nomeCadaver) : Destrutivel(hpMax,defesa,nomeCadaver)
+destrutivelMonstro::destrutivelMonstro(int vigor, int resistencia,int agilidade, const char* nomeCadaver) : 
+    Destrutivel(vigor,resistencia,agilidade,nomeCadaver)
 {
 }
 
-destrutivelJogador::destrutivelJogador(float hpMax, float defesa, const char* nomeCadaver) : Destrutivel(hpMax,defesa,nomeCadaver)
+destrutivelJogador::destrutivelJogador(int vigor, int resistencia, int agilidade, const char* nomeCadaver) : 
+    Destrutivel(vigor, resistencia, agilidade, nomeCadaver)
 {
 }
 
-void destrutivelMonstro::morrer(Entidade *owner)
+void destrutivelMonstro::morrer(Entidade *self)
 {
-    std::cout << owner->nome << " morreu!" << std::endl;
-    Destrutivel::morrer(owner);
+    std::cout << self->nome << " morreu!" << std::endl;
+    Destrutivel::morrer(self);
 
 }
 
 
-void destrutivelJogador::morrer(Entidade *owner)
+void destrutivelJogador::morrer(Entidade *self)
 {
     std::cout << "Você Morreu!!!!!"<<std::endl;
-    Destrutivel::morrer(owner);
+    Destrutivel::morrer(self);
     engine.rodando = false;
 }

@@ -17,11 +17,11 @@ aiJogador::aiJogador(float velocidade)
     barraTurno = 0;
 }
 
-void aiJogador::atualizar(Entidade* owner)
+void aiJogador::atualizar(Entidade* self)
 {
-    if (owner->ai->barraTurno >= 1)
+    if (self->ai->barraTurno >= 1)
     {
-        if (owner->destrutivel && owner->destrutivel->morreu())
+        if (self->destrutivel && self->destrutivel->morreu())
         {
             return;
         }
@@ -69,9 +69,9 @@ void aiJogador::atualizar(Entidade* owner)
             bool achado = false;
             for (unsigned short int i = 0; i < engine.entidades.size();i++)
             {
-                if (engine.entidades[i]->pegavel && engine.entidades[i]->x == owner->x && engine.entidades[i]->y == owner->y)
+                if (engine.entidades[i]->pegavel && engine.entidades[i]->x == self->x && engine.entidades[i]->y == self->y)
                 {
-                    if (engine.entidades[i]->pegavel->pegar(engine.entidades[i], owner))
+                    if (engine.entidades[i]->pegavel->pegar(engine.entidades[i], self))
                     {
                         achado = true;
                         // MENSAGEM - VOCÊ PEGOU O ITEM
@@ -93,10 +93,10 @@ void aiJogador::atualizar(Entidade* owner)
         case 'i':
         case 'I':
         {
-            Entidade* entidade = escolherDoInventario(owner);
+            Entidade* entidade = escolherDoInventario(self);
             if (entidade)
             {
-                entidade->pegavel->usar(entidade, owner);
+                entidade->pegavel->usar(entidade, self);
 
             }
         }
@@ -113,18 +113,18 @@ void aiJogador::atualizar(Entidade* owner)
         }
         if (dx != 0 || dy != 0)
         {
-            moverOuAtacar(owner, owner->x + dx, owner->y + dy);
+            moverOuAtacar(self, self->x + dx, self->y + dy);
         }
         engine.log->inserirmsg("Turno do jogador finalizado");
-        owner->ai->barraTurno -= 1;
+        self->ai->barraTurno -= 1;
     }
     else
     {
-        owner->ai->barraTurno += owner->ai->velocidade;
+        self->ai->barraTurno += self->ai->velocidade;
     }
 }
 
-bool aiJogador::moverOuAtacar(Entidade *owner, int xalvo, int yalvo)
+bool aiJogador::moverOuAtacar(Entidade *self, int xalvo, int yalvo)
 {
     if(engine.mapa->eParede(xalvo,yalvo))
     {
@@ -135,19 +135,19 @@ bool aiJogador::moverOuAtacar(Entidade *owner, int xalvo, int yalvo)
     {
         Entidade* entidade = engine.entidades[i];
         if (entidade->x == xalvo && entidade->y == yalvo
-            && entidade->destrutivel && !entidade->destrutivel->morreu() && entidade != owner)
+            && entidade->destrutivel && !entidade->destrutivel->morreu() && entidade != self)
         {
-            owner->atacador->atacar(owner, entidade);
+            self->atacador->atacar(self, entidade);
             return false;
         }
     }
-    owner->x = xalvo;
-    owner->y = yalvo;
+    self->x = xalvo;
+    self->y = yalvo;
     return true;
 }
 
 
-Entidade* aiJogador::escolherDoInventario(Entidade* owner)
+Entidade* aiJogador::escolherDoInventario(Entidade* self)
 {
     static const int LARGURA_INVENTARIO = 40;
     static const int ALTURA_INVENTARIO = 12;
@@ -162,9 +162,9 @@ Entidade* aiJogador::escolherDoInventario(Entidade* owner)
     int i = 1;
     int x = (engine.mapa->largura - LARGURA_INVENTARIO) / 2;
     int y = (engine.mapa->altura - ALTURA_INVENTARIO) / 2;
-    for (int j = 0; j < owner->container->inventario.size();j++)
+    for (int j = 0; j < self->container->inventario.size();j++)
     {
-        mvprintw(y + j + 1, x + 1, "(%c)- %c", atalho, owner->container->inventario[j]->nome);
+        mvprintw(y + j + 1, x + 1, "(%c)- %c", atalho, self->container->inventario[j]->nome);
         atalho++;
     }
     refresh();/*
@@ -174,9 +174,9 @@ Entidade* aiJogador::escolherDoInventario(Entidade* owner)
         if (key > 96 || key < 123)
         {
             int entidadeIndex = key - 'a';
-            if (entidadeIndex >= 0 && entidadeIndex < owner->container->inventario.size())
+            if (entidadeIndex >= 0 && entidadeIndex < self->container->inventario.size())
             {
-                return owner->container->inventario[entidadeIndex];
+                return self->container->inventario[entidadeIndex];
             }
         }*/
         return NULL;
@@ -190,41 +190,41 @@ aiMonstro::aiMonstro(float velocidade)
     barraTurno = 0;
 }
 
-void aiMonstro::atualizar(Entidade* owner)
+void aiMonstro::atualizar(Entidade* self)
 {
-    if (owner->ai->barraTurno >= 1)
+    if (self->ai->barraTurno >= 1)
     {
-        if (owner->destrutivel && owner->destrutivel->morreu())
+        if (self->destrutivel && self->destrutivel->morreu())
         {
             return;
         }
-        moverOuAtacar(owner, engine.jogador);
+        moverOuAtacar(self, engine.jogador);
         engine.log->inserirmsg("Turno do monstro finalizado");
-        owner->ai->barraTurno -= 1;
+        self->ai->barraTurno -= 1;
     }
     else
     {
-        owner->ai->barraTurno += velocidade;
+        self->ai->barraTurno += velocidade;
     }
 }
 
-bool aiMonstro::moverOuAtacar(Entidade *owner,Entidade *alvo)
+bool aiMonstro::moverOuAtacar(Entidade *self,Entidade *alvo)
 {
     
-    owner->caminho = engine.pathMapa->acharCaminho(owner, alvo);
-    for (int i = 0; i < owner->caminho.size(); i++)
+    self->caminho = engine.pathMapa->acharCaminho(self, alvo);
+    for (int i = 0; i < self->caminho.size(); i++)
     {
-        engine.log->inserirmsg("Caminho[" + std::to_string(i) + "] X:" + std::to_string(owner->caminho[i]->x) + "Y:" + std::to_string(owner->caminho[i]->y));
+        engine.log->inserirmsg("Caminho[" + std::to_string(i) + "] X:" + std::to_string(self->caminho[i]->x) + "Y:" + std::to_string(self->caminho[i]->y));
     }
-    if (owner->caminho.size() > 1 && engine.mapa->podeAndar(owner->caminho[0]->x, owner->caminho[0]->y) 
-        &&  owner->caminho[0]->x != alvo->x && owner->caminho[0]->y != alvo->y)
+    if (self->caminho.size() > 1 && engine.mapa->podeAndar(self->caminho[0]->x, self->caminho[0]->y) 
+        &&  self->caminho[0]->x != alvo->x && self->caminho[0]->y != alvo->y)
     {
-        owner->x = owner->caminho[0]->x;
-        owner->y = owner->caminho[0]->y;
+        self->x = self->caminho[0]->x;
+        self->y = self->caminho[0]->y;
     }
-    else if (owner->caminho[0]->x == alvo->x && owner->caminho[0]->y == alvo->y)
+    else if (self->caminho[0]->x == alvo->x && self->caminho[0]->y == alvo->y)
     {
-        owner->atacador->atacar(owner, alvo);
+        self->atacador->atacar(self, alvo);
     }
     return true;
 }
