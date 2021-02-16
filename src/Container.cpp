@@ -17,17 +17,11 @@ bool Container::adcionar(Entidade* entidade)
 		//inventário cheio
 		return false;
 	}
-	inventario.push_back(entidade);
+	inventario.push(entidade);
 	return true;
 }
 
 void Container::remover(Entidade* entidade)
 {
-	for (unsigned short int i = 0; i < inventario.size(); i++)
-	{
-		if (inventario[i] == entidade)
-		{
-			inventario.erase(inventario.begin() + i);
-		}
-	}
+	inventario.remove(entidade);
 }

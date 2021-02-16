@@ -1,12 +1,12 @@
 #include "Entidade.h"
 
-Entidade::Entidade(int x, int y, const char *nome, char simbolo)
+Entidade::Entidade(int x, int y, int simbolo, const TCODColor cor)
 {
     this->x = x;
     this->y = y;
-    this->nome = nome;
     this->simbolo = simbolo;
     visao = 6;
+    denso = true;
     atacador = NULL;
     destrutivel = NULL;
     ai = NULL;
@@ -27,20 +27,16 @@ Entidade::~Entidade()
 
 void Entidade::render()
 {
-    if (engine.mapa->eVisivel(x,y))
-    {
-        attron(COLOR_PAIR(1));
-        mvprintw(y, x, "%c", simbolo);
-        attroff(COLOR_PAIR(1));
-    }
+    TCODConsole::root->setChar(x, y, simbolo);
+    TCODConsole::root->setCharForeground(x, y, cor);
 }
 
 void Entidade::atualizar()
 {
-    if(ai) ai->atualizar(this);
-    FOV();
+    if (ai) { ai->atualizar(this); }
 }
 
+/*
 float Entidade::maximo(float a, float b)
 {
     return a > b ? a : b;
@@ -58,43 +54,41 @@ float Entidade::lerp(float inicio, float fim, float t)
 
 void Entidade::FOV()
 {
-    if (ai == engine.jogador->ai)
+    for (int i = 0; i < engine.mapa->largura; i++)
     {
-        for (int i = 0; i < engine.mapa->largura; i++)
+        for (int j = 0; j < engine.mapa->altura; j++)
         {
-            for (int j = 0; j < engine.mapa->altura; j++)
-            {
-                engine.mapa->tornarNaoVisivel(i, j);
-            }
+            engine.mapa->tornarNaoVisivel(i, j);
         }
-        for (int i = 0; i < 360; i++)
+    }
+    for (int i = 0; i < 360; i++)
+    {
+        int nx = 0;
+        int ny = 0;
+        float grau = i * GRAUPRAD;
+        nx = round(cos(grau) * visao) + x;
+        ny = round(sin(grau) * visao) + y;
+
+        int d = distanciaDiag(x, y, nx, ny);
+        for (int j = 0; j < d; j++)
         {
-            int nx = 0;
-            int ny = 0;
-            float grau = i * GRAUPRAD;
-            nx = round(cos(grau) * visao) + x;
-            ny = round(sin(grau) * visao) + y;
+            int tx = lerp(x, nx, j / ((float)d));
+            int ty = lerp(y, ny, j / ((float)d));
 
-            int d = distanciaDiag(x, y, nx, ny);
-            for (int j = 0; j < d; j++)
+            if (tx < 0 || tx > engine.mapa->largura) continue;
+            if (ty < 0 || ty > engine.mapa->altura) continue;
+
+            if (engine.mapa->eParede(tx, ty))
             {
-                int tx = lerp(x, nx, j / ((float)d));
-                int ty = lerp(y, ny, j / ((float)d));
-
-                if (tx < 0 || tx > engine.mapa->largura) continue;
-                if (ty < 0 || ty > engine.mapa->altura) continue;
-
-                if (engine.mapa->eParede(tx, ty))
-                {
-                    engine.mapa->tornarExplorado(tx, ty);
-                    engine.mapa->tornarVisivel(tx, ty);
-                    break;
-                }
                 engine.mapa->tornarExplorado(tx, ty);
                 engine.mapa->tornarVisivel(tx, ty);
-
-
+                break;
             }
+            engine.mapa->tornarExplorado(tx, ty);
+            engine.mapa->tornarVisivel(tx, ty);
+
+
         }
     }
 }
+*/

@@ -31,13 +31,12 @@ void Atacador::atacar(Entidade *self, Entidade *alvo)
 
             if (dano > 0)
             {
-                /// MENSAGEM DE CAUSAR DANO
-                std::cout << self->nome << " atacou " << alvo->nome << " causando " << int(dano) << " dano!" << std::endl;
+                /// MENSAGEM
+                //engine.gui->mensagens.push_back(new Mensagem(_strdup("%c ataca %c causando %i dano!"),1,self->nome,alvo->nome,dano));
             }
             else
             {
                 ///MENSAGEM DE FALHAR EM CAUSAR DANO
-                std::cout << self->nome << " atacou " << alvo->nome << " sem efeito!" << std::endl;
             }
             alvo->destrutivel->tomarDano(alvo, dano);
         }
@@ -45,7 +44,6 @@ void Atacador::atacar(Entidade *self, Entidade *alvo)
     else
     {
         ///MENSAGEM DE NÃO ATACAR NADA
-        std::cout << self->nome << " ataca em vao!" << std::endl;
     }
 }
 

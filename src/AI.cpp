@@ -26,26 +26,23 @@ void aiJogador::atualizar(Entidade* self)
             return;
         }
         int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 1
-        int key = getch();
-        switch (key)
+        TCOD_key_t key;
+        TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL,false);
+        switch (key.vk)
         {
-        case KEY_UP:
-        case 56://cima
+        case TCODK_UP:
             dy = -1;
             break;
-        case KEY_DOWN:
-        case 50://baixo
+        case TCODK_DOWN:
             dy = 1;
             break;
-        case KEY_LEFT:
-        case 52://esquerda
+        case TCODK_LEFT:
             dx = -1;
             break;
-        case KEY_RIGHT:
-        case 54://direita
+        case TCODK_RIGHT:
             dx = 1;
             break;
-        case 49://baixoesquerda
+        /*case 49://baixoesquerda
             dy = 1;
             dx = -1;
             break;
@@ -109,14 +106,15 @@ void aiJogador::atualizar(Entidade* self)
             break;
         case KEY_F(3):
             engine.mostrarPath = !engine.mostrarPath;
-            break;
+            break;*/
         }
         if (dx != 0 || dy != 0)
         {
             moverOuAtacar(self, self->x + dx, self->y + dy);
         }
-        engine.log->inserirmsg("Turno do jogador finalizado");
-        self->ai->barraTurno -= 1;
+        //engine.log->inserirmsg("Turno do jogador finalizado");
+        //self->ai->barraTurno -= 1;
+        //engine.gui->adcMensagem(1, "X");
     }
     else
     {
@@ -130,12 +128,10 @@ bool aiJogador::moverOuAtacar(Entidade *self, int xalvo, int yalvo)
     {
         return false;
     }
-
-    for (unsigned int i = 0; i < engine.entidades.size(); i++)
+    for (Entidade** iterator = engine.entidades.begin(); iterator != engine.entidades.end(); iterator++)
     {
-        Entidade* entidade = engine.entidades[i];
-        if (entidade->x == xalvo && entidade->y == yalvo
-            && entidade->destrutivel && !entidade->destrutivel->morreu() && entidade != self)
+        Entidade* entidade = *iterator;
+        if(entidade->x == xalvo && entidade->y == yalvo && entidade->destrutivel && !entidade->destrutivel->morreu() && entidade != self)
         {
             self->atacador->atacar(self, entidade);
             return false;
@@ -155,7 +151,7 @@ Entidade* aiJogador::escolherDoInventario(Entidade* self)
     {
         for (int y = (engine.mapa->altura - ALTURA_INVENTARIO) / 2; y < LARGURA_INVENTARIO; y++)
         {
-            mvprintw(y, x, "#");
+            //mvprintw(y, x, "#");
         }
     }//DESENHAR A MOLDURA DO INVENTARIO
     int atalho = 'a';
@@ -164,10 +160,11 @@ Entidade* aiJogador::escolherDoInventario(Entidade* self)
     int y = (engine.mapa->altura - ALTURA_INVENTARIO) / 2;
     for (int j = 0; j < self->container->inventario.size();j++)
     {
-        mvprintw(y + j + 1, x + 1, "(%c)- %c", atalho, self->container->inventario[j]->nome);
+       // mvprintw(y + j + 1, x + 1, "(%c)- %c", atalho, self->container->inventario[j]->nome);
         atalho++;
     }
-    refresh();/*
+    //refresh();
+    /*
     int key = getch();
     while (key < 97 || key > 122)
     {
@@ -199,8 +196,7 @@ void aiMonstro::atualizar(Entidade* self)
             return;
         }
         moverOuAtacar(self, engine.jogador);
-        engine.log->inserirmsg("Turno do monstro finalizado");
-        self->ai->barraTurno -= 1;
+        self->ai->barraTurno += 1;
     }
     else
     {
@@ -212,10 +208,6 @@ bool aiMonstro::moverOuAtacar(Entidade *self,Entidade *alvo)
 {
     
     self->caminho = engine.pathMapa->acharCaminho(self, alvo);
-    for (int i = 0; i < self->caminho.size(); i++)
-    {
-        engine.log->inserirmsg("Caminho[" + std::to_string(i) + "] X:" + std::to_string(self->caminho[i]->x) + "Y:" + std::to_string(self->caminho[i]->y));
-    }
     if (self->caminho.size() > 1 && engine.mapa->podeAndar(self->caminho[0]->x, self->caminho[0]->y) 
         &&  self->caminho[0]->x != alvo->x && self->caminho[0]->y != alvo->y)
     {

@@ -1,22 +1,8 @@
-Turno do jogador finalizado
-Caminho[0] X:15Y:2
-Caminho[1] X:15Y:3
-Caminho[2] X:15Y:4
-Caminho[3] X:15Y:5
-Caminho[4] X:15Y:6
-Caminho[5] X:15Y:7
-Caminho[6] X:14Y:8
-Caminho[7] X:13Y:8
-Caminho[8] X:12Y:8
-Caminho[9] X:11Y:8
-Caminho[10] X:10Y:8
-Caminho[11] X:9Y:8
-Caminho[12] X:8Y:8
-Caminho[13] X:7Y:8
-Caminho[14] X:6Y:8
-Caminho[15] X:5Y:8
-Caminho[16] X:4Y:8
-Caminho[17] X:3Y:8
-Caminho[18] X:2Y:8
-Caminho[19] X:1Y:9
+Caminho[0] X:3Y:4
+Caminho[1] X:2Y:3
+Caminho[2] X:1Y:2
 Turno do monstro finalizado
+Caminho[0] X:2Y:4
+Caminho[1] X:1Y:4
+Turno do monstro finalizado
+Caminho[0] X:2Y:4

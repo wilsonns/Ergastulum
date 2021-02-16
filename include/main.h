@@ -1,23 +1,16 @@
 #ifndef MAIN_H_INCLUDED
 #define MAIN_H_INCLUDED
 
+
+extern int LARGURA_TERM;
+extern int ALTURA_TERM;
+
 #include<iostream>
-#include<curses.h>
-#include<panel.h>
+#include "libtcod.hpp"
 #include<time.h>
 #include<vector>
-#include<fstream>
-#include<string>
-#include<stdlib.h>
 #include<cmath>
 #include<list>
-#include<random>
-#include<queue>
-#include<tuple>
-#include<algorithm>
-#include<unordered_map>
-#include<array>
-#include<Windows.h>
 
 class Destrutivel;
 class Atacador;

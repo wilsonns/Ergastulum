@@ -20,8 +20,7 @@ public:
 
     Mapa *mapa;//cria o mapa
     Pathfinding* pathMapa;//cria o mapa de pathfinding compartilhado por todas as entidades que se movem
-    std::vector<Entidade*> entidades;//cria o vetor de entidades livres no mapa(inimigos, itens)
-    std::vector<Entidade*> mortos;//cria o vetor de entidades mortas
+    TCODList<Entidade*> entidades;//cria uma TCODList de entidades livres no mapa(inimigos, itens)
     Entidade *jogador;//cria um pointer para o jogador
     LOG *log;//cria o log externo para debug
     GUI *gui;//Cria a interface do jogo
@@ -30,8 +29,6 @@ public:
     bool mostrarPath; //mostrar caminhos de cada entidade
     Engine(); //ctor
     virtual ~Engine();//dtor/
-
-    void adcmonstro(int x, int y);//adciona um monstro ao mapa
 
     int random(int minimo, int maximo, int bonus); // retorna um valor inteiro entre minimo e maximo + o bonus
 

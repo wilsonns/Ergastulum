@@ -8,12 +8,6 @@ class LOG
         LOG();
         virtual ~LOG();
 
-        std::ofstream myfile;
-
-        void abrir();
-
-        void inserirmsg(std::string txt,...);
-
     protected:
 
     private:

@@ -9,12 +9,14 @@ class Entidade
     public:
         //POSIÇÃO
         int x, y;//posição x e y da entdidade
-        char simbolo; //simnbolo desenhado
+        int simbolo; //simnbolo desenhado
         int visao; //raio da visão da entidade
        
+        TCODColor cor;
+
         const float GRAUPRAD = 3.14159f / 180; //Graus para radianos
 
-        const char *nome; //Nome da entidade
+        char *nome; //Nome da entidade
         bool denso;//pode-se passar por essa entidade?
 
         Atacador *atacador; //é uma entidade capaz de atacar?
@@ -25,8 +27,8 @@ class Entidade
 
         std::vector<Nodo*> caminho;//O caminho retornado pelas funções de pathfinding
 
-        Entidade(int x, int y,const char *nome, char simbolo);//CTOR
-
+        Entidade(int x, int y,int simbolo, const TCODColor cor);//CTOR
+       
         virtual ~Entidade(); //DTOR
 
         void render(); //Desenha a entidade na tela
@@ -43,7 +45,7 @@ class Entidade
         float lerp(float inicio, float fim, float t);//retorna a interpolação linear
 
         void FOV();//realiza todos os calculos de FOV()
-
+        
     protected:
 
     private:

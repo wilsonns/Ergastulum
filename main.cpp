@@ -1,70 +1,53 @@
 #include <main.h>
+#include <time.h>
 
 
 Engine engine;
 
+/// <summary>
+/// TELA X = 79
+/// TELA Y = 24
+/// </summary>
+/// <returns></returns>
 
+int LARGURA_TERM = 90;
+int ALTURA_TERM = 30;
 int main()
 {
-    initscr();
-    noecho();
-    cbreak();
-    raw();
-//    nodelay(stdscr, true);
+    int px, py;
+    px = py = 10;
+    engine.mapa->cavar(1, 10, 1, 10);
 
-    start_color();
-
-    init_pair(1, 15, 0); //CINZA ESCURO
-    init_pair(2, 8, 0); // BRANCO
-    init_pair(3, 10, 0);//VERDE
-    init_pair(4, 12, 0);//vermelho
-
-
-    keypad(stdscr, true);
-
-    for (int x = 1; x < 10; x++)
-    {
-        for (int y = 1; y < 10; y++)
-        {
-            engine.mapa->cavar(x, y);
-        }
-    }
-
-    for (int x = 15; x < 22; x++)
-    {
-        for (int y = 1; y < 10; y++)
-        {
-            engine.mapa->cavar(x, y);
-        }
-    }
-
-    for (int x = 1; x < 16; x++)
-    {
-        engine.mapa->cavar(x, 8);
-    }
-    for (int x = 19; x < 31; x++)
-    {
-        for (int y = 21; y < 23;y++)
-        {
-            engine.mapa->cavar(x, y);
-        }
-    }
-
-    engine.adcmonstro(15, 1);
-    engine.adcmonstro(29, 20);
-    engine.mapa->adcionarItem(3, 3);
-
-    while (engine.rodando == true)
+    TCODConsole::initRoot(80, 50, "Joguim sem Nome do Will",false);
+    srand(time(NULL));
+    while (engine.rodando == true || !TCOD_console_is_window_closed())
     {
         engine.atualizar();
         engine.render();
+        auto root = TCODConsole::root;
+        /*
+        TCOD_key_t key;
+        TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL);
+        switch (key.vk)
+        {
+        case TCODK_UP:
+            py--;
+            break;
+        case TCODK_DOWN:
+            py++;
+            break;
+        case TCODK_LEFT:
+            px--;
+            break;
+        case TCODK_RIGHT:
+            px++;
+            break;
+        }
+        root->putChar(px, py, '@', TCOD_BKGND_NONE);
+        */
+        root->flush();
     }
 
-    clear();
-
-
-    endwin();
-
+    
     return 0;
 }
-

@@ -141,18 +141,17 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* self, Entidade* alvo)
             {
                 for (auto& it : fechada)
                 {
-                    Sleep(50);
-                    mvprintw(it->y, it->x, "x");
+                    //mvprintw(it->y, it->x, "x");
                 }
-                refresh();
+                //refresh();
             }
             if (aberta.size() != 0)
             {
                 for (auto& it : aberta)
                 {
-                    mvprintw(it->y, it->x, "o");
+                    //mvprintw(it->y, it->x, "o");
                 }
-                refresh();
+                //refresh();
             }
         }
             if(atual == objetivo)
@@ -171,11 +170,11 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* self, Entidade* alvo)
             caminho.push_back(atual);
             atual = atual->pai;
             if (engine.debug == true)
-            {
+            {/*
                 attron(COLOR_PAIR(3));
                 mvprintw(caminho[i]->y, caminho[i]->x, "x");
                 attroff(COLOR_PAIR(3));
-                refresh();
+                refresh();*/
             }
         }
         std::reverse(caminho.begin(), caminho.end());

@@ -6,21 +6,14 @@ Mapa::Mapa(int largura, int altura)
     this->altura = altura;
     this->largura = largura;
     tiles = new Tile[altura*largura];
-    for(int x = 0; x < largura;x++)
-    {
-        for (int y = 0; y < altura;y++)
-        {
-            tiles[x + y * largura].explorado = false;
-            tiles[x + y * largura].passavel = false;
-            tiles[x + y * largura].visivel = false;
-        }
-    }
+    mapa = new TCODMap(largura, altura);
     //ctor
 }
 
 Mapa::~Mapa()
 {
     delete [] tiles;
+    delete mapa;
     //dtor
 }
 
@@ -29,14 +22,28 @@ void Mapa::fazerParede(int x, int y)
     tiles[x+y*largura].passavel = false;
 }
 
-void Mapa::cavar(int x, int y)
+void Mapa::cavar(int x1,int x2, int y1, int y2)
 {
-    tiles[x+y*largura].passavel = true;
+    if (x2 < x1) {
+        int tmp = x2;
+        x2 = x1;
+        x1 = tmp;
+    }
+    if (y2 < y1) {
+        int tmp = y2;
+        y2 = y1;
+        y1 = tmp;
+    }
+    for (int tilex = x1; tilex <= x2; tilex++) {
+        for (int tiley = y1; tiley <= y2; tiley++) {
+            mapa->setProperties(tilex, tiley, true,true);
+        }
+    }
 }
 
 bool Mapa::eParede(int x, int y)
 {
-    return !tiles[x+y*largura].passavel;
+    return !mapa->isWalkable(x,y);
 }
 
 bool Mapa::podeAndar(int x, int y)
@@ -45,9 +52,10 @@ bool Mapa::podeAndar(int x, int y)
     {
         return false;
     }
-    for(unsigned int it = 0; it < engine.entidades.size();it++)
+    for(Entidade **iterator=engine.entidades.begin();iterator!=engine.entidades.end();iterator++)
     {
-        if(engine.entidades[it]->denso && engine.entidades[it]->x == x && engine.entidades[it]->y == y)
+        Entidade* entidade = *iterator;
+        if(entidade->denso && entidade->x == x && entidade->y == y)
         {
             return false;
         }
@@ -55,89 +63,65 @@ bool Mapa::podeAndar(int x, int y)
     return true;
 }
 
-bool Mapa::eVisivel(int x, int y)
+bool Mapa::estaNoFOV(int x, int y) const
 {
-    return tiles[x + y * largura].visivel;
+    if (mapa->isInFov(x, y))
+    {
+        tiles[x + y * largura].explorado = true;
+        return true;
+    }
+    return false;
+    
 }
 
-void Mapa::tornarVisivel(int x, int y)
-{
-    tiles[x + y * largura].visivel = true;
-}
-
-
-void Mapa::tornarNaoVisivel(int x, int y)
-{
-    tiles[x + y * largura].visivel = false;
-}
-
-bool Mapa::eExplorado(int x, int y)
+bool Mapa::foiExplorado(int x, int y) const
 {
     return tiles[x + y * largura].explorado;
 }
-void Mapa::tornarExplorado(int x, int y)
+
+void Mapa::computarFOV()
 {
-    tiles[x + y * largura].explorado = true;
+    mapa->computeFov(engine.jogador->x, engine.jogador->y);
+}
+
+void Mapa::adcmonstro(int x, int y)
+{
+    Entidade* monstro = new Entidade(x, y, 'O', TCOD_darker_green);
+    monstro->destrutivel = new destrutivelMonstro(4, 2, 2, "Cadavi");
+    monstro->atacador = new Atacador(2, 3);
+    monstro->ai = new aiMonstro(1);
+    engine.entidades.push(monstro);
 }
 
 void Mapa::adcionarItem(int x, int y)
 {
-    Entidade* pocaoDeCura = new Entidade(x, y, "Pocao de Cura", '!');
+    Entidade* pocaoDeCura = new Entidade(x, y,'!',TCOD_pink);
     pocaoDeCura->denso = false;
     pocaoDeCura->pegavel = new Curador(10);
-    engine.entidades.insert(engine.entidades.begin(),pocaoDeCura);
+    engine.entidades.push(pocaoDeCura);
 }
 
 void Mapa::render()
 {
+    static const TCODColor paredeEscura(0, 0, 100);
+    static const TCODColor chaoEscuro(50, 50, 150);
+    static const TCODColor paredeClara(130, 110, 50);
+    static const TCODColor chaoClaro(200, 180, 50);
+
     for(int x = 0; x < largura;x++)
     {
-        for(int y = 0; y < altura;y+=1)
+        for (int y = 0; y < altura;y += 1)
         {
-            if (engine.debug == false)
-            {
-                if (eParede(x, y) && eVisivel(x, y) && eExplorado(x, y))
-                {
-                    attron(COLOR_PAIR(1));
-                    mvprintw(y, x, "#");
-                    attroff(COLOR_PAIR(1));
-                }
-                else if (!eParede(x, y) && eVisivel(x, y) && eExplorado(x, y))
-                {
-                    attron(COLOR_PAIR(1));
-                    mvprintw(y, x, ".");
-                    attron(COLOR_PAIR(1));
-                }
-                else if (eParede(x, y) && !eVisivel(x, y) && eExplorado(x, y))
-                {
-                    attron(COLOR_PAIR(2));
-                    mvprintw(y, x, "#");
-                    attroff(COLOR_PAIR(2));
-                }
-                else if (!eParede(x, y) && !eVisivel(x, y) && eExplorado(x, y))
-                {
-                    attron(COLOR_PAIR(2));
-                    mvprintw(y, x, ".");
-                    attron(COLOR_PAIR(2));
-                }
-            }
-            else
-            {
-                if (eParede(x, y))
-                {
-                    attron(COLOR_PAIR(1));
-                    mvprintw(y, x, "#");
-                    attroff(COLOR_PAIR(1));
-                }
-                else
-                {
-                    attron(COLOR_PAIR(1));
-                    mvprintw(y, x, ".");
-                    attroff(COLOR_PAIR(1));
+           if(estaNoFOV(x,y))
+           {
 
-                }
+            TCODConsole::root->setCharBackground(x, y, eParede(x,y)?paredeClara:chaoClaro);
             }
-            
+           else
+           {
+               TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? paredeEscura : chaoEscuro);
+           }
+       
         }
     }
 }

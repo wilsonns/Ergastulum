@@ -8,8 +8,7 @@ class GUI
     public:
         GUI();//ctor
         virtual ~GUI();//dtor
-        WINDOW* msgs;//cria a janela de mensagens da interface
- 
+      
         void render();//desenhar a interface na tela
 
     protected:

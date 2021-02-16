@@ -1,6 +1,6 @@
 #include "Destrutivel.h"
 
-Destrutivel::Destrutivel(int vigor, int resistencia,int agilidade,const char *nomeCadaver)
+Destrutivel::Destrutivel(int vigor, int resistencia,int agilidade, const char *nomeCadaver)
 {
     this->hpMax = vigor * 5;
     this->hp = hpMax;
@@ -40,17 +40,8 @@ int Destrutivel::curar(int valor)
 void Destrutivel::morrer(Entidade *self)
 {
     self->simbolo = '%';
-    self->nome = nomeCadaver;
+    //self->nome = nomeCadaver;
     self->denso = false;
-    for(unsigned int i = 0; i < engine.entidades.size();i++)
-    {
-        if(engine.entidades[i] == self)
-        {
-
-            engine.entidades.erase(engine.entidades.begin()+i);
-            engine.entidades.insert(engine.entidades.begin(),self);
-        }
-    }
 }
 
 destrutivelMonstro::destrutivelMonstro(int vigor, int resistencia,int agilidade, const char* nomeCadaver) : 
@@ -65,15 +56,12 @@ destrutivelJogador::destrutivelJogador(int vigor, int resistencia, int agilidade
 
 void destrutivelMonstro::morrer(Entidade *self)
 {
-    std::cout << self->nome << " morreu!" << std::endl;
     Destrutivel::morrer(self);
-
 }
 
 
 void destrutivelJogador::morrer(Entidade *self)
 {
-    std::cout << "Você Morreu!!!!!"<<std::endl;
     Destrutivel::morrer(self);
     engine.rodando = false;
 }
