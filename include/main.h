@@ -12,6 +12,7 @@ extern int ALTURA_TERM;
 #include<cmath>
 #include<list>
 #include<stdarg.h>
+#include<algorithm>
 
 class Destrutivel;
 class Atacador;

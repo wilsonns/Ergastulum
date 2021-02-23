@@ -88,17 +88,16 @@ void Entidade::FOV(Entidade* self)
                 engine.mapa->tornarVisivel(tx, ty);*/
                 break;
             }
-            for (Entidade** it = engine.entidades.begin(); it != engine.entidades.end();it++)
+            for (Entidade* entidade: engine.entidades)
             {
-
-                Entidade* entidade = *it;
                 if (entidade != self)
                 {
                     if (entidade->x == tx && entidade->y == ty)
                     {
-                        if (!self->ai->entidadesProximas.contains(entidade))
+                        bool achado = (std::find(self->ai->entidadesProximas.begin(), self->ai->entidadesProximas.end(), entidade) != self->ai->entidadesProximas.end());
+                        if (!achado)
                         {
-                            self->ai->entidadesProximas.push(entidade);
+                            self->ai->entidadesProximas.push_back(entidade);
                         }
                     }
                 }

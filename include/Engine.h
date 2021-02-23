@@ -20,7 +20,7 @@ public:
 
     Mapa *mapa;//cria o mapa
     Pathfinding* pathMapa;//cria o mapa de pathfinding compartilhado por todas as entidades que se movem
-    TCODList<Entidade*> entidades;//cria uma TCODList de entidades livres no mapa(inimigos, itens)
+    std::vector<Entidade*> entidades;//cria um vector de entidades livres no mapa(inimigos, itens)
     Entidade *jogador;//cria um pointer para o jogador
     LOG *log;//cria o log externo para debug
     GUI *gui;//Cria a interface do jogo
@@ -37,6 +37,8 @@ public:
     int random(int minimo, int maximo, int bonus); // retorna um valor inteiro entre minimo e maximo + o bonus
 
     void mandarParaOInicio(Entidade* entidade);
+
+    bool vetorContem(std::vector<Entidade> localvec, Entidade entidade);
 
     void atualizar(); //chama todas as funções de atualizar
     void render(); //chama todas as funções de render

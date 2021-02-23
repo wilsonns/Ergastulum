@@ -29,7 +29,7 @@ class AI
         float forcaPercebida(Entidade* self);
         float perigoPercebido(Entidade* self);
         
-        TCODList<Entidade*> entidadesProximas;
+        std::vector<Entidade*> entidadesProximas;
         
         int inteligencia = 1;
 

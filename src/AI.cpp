@@ -73,9 +73,8 @@ bool aiJogador::moverOuAtacar(Entidade *self, int xalvo, int yalvo)
     {
         return false;
     }
-    for (Entidade** iterator = engine.entidades.begin(); iterator != engine.entidades.end(); iterator++)
+    for (auto* entidade:engine.entidades)
     {
-        Entidade* entidade = *iterator;
         if(entidade->x == xalvo && entidade->y == yalvo && entidade->destrutivel && !entidade->destrutivel->morreu() && entidade != self)
         {
             self->atacador->atacar(self, entidade);
@@ -132,9 +131,8 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
     case 'G'://Pegar um item no chão abaixo de vc
     {
         bool achado = false;
-        for (Entidade** iterator = engine.entidades.begin();iterator != engine.entidades.end();iterator++)
+        for (Entidade* entidade:engine.entidades)
         {
-            Entidade* entidade = *iterator;
             {
                 if (entidade->pegavel && entidade->x == self->x && entidade->y == self->y)
                 {
@@ -262,9 +260,8 @@ void aiMonstro::acharAlvo(Entidade* self)
         if (self->arma == NULL && !self->container->contemArma(self))
         {
             int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
-            for (Entidade** it = self->ai->entidadesProximas.begin(); it != self->ai->entidadesProximas.end();it++)
+            for (Entidade* entidade:engine.entidades)
             {
-                Entidade* entidade = *it;
                 if (entidade->pegavel && entidade->pegavel->tipo == 2)
                 {
                     int dx = entidade->x - self->x;
@@ -282,9 +279,8 @@ void aiMonstro::acharAlvo(Entidade* self)
         else if (self->arma)
         {
             int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
-            for (Entidade** it = self->ai->entidadesProximas.begin(); it != self->ai->entidadesProximas.end();it++)
+            for (Entidade* entidade:engine.entidades)
             {
-                Entidade* entidade = *it;
                 if (entidade->destrutivel && !entidade->destrutivel->morreu())
                 {
                     int dx = entidade->x - self->x;

@@ -17,7 +17,7 @@ Engine::Engine(int largura, int altura)
     jogador->ai = new aiJogador(1);
     jogador->container = new Container(10);
     jogador->nome = "Will";
-    entidades.push(jogador);
+    entidades.push_back(jogador);
     rodando = true;
     debug = false;
     mostrarPath = false;
@@ -27,7 +27,7 @@ Engine::Engine(int largura, int altura)
 
 Engine::~Engine()
 {
-    entidades.clearAndDelete();
+    entidades.clear();
     delete mapa;
     delete gui;
     //dtor
@@ -38,9 +38,8 @@ void Engine::render()
     auto root = TCODConsole::root;
     root->clear();
     mapa->render();
-    for (Entidade** iterator = entidades.begin();iterator != entidades.end();iterator++)
+    for (Entidade*entidade:engine.entidades)
     {
-        Entidade* entidade = *iterator;
         if (mapa->estaNoFOV(entidade->x, entidade->y))
         {
             entidade->render();
@@ -58,9 +57,8 @@ void Engine::atualizar()
     }
     else if(statusJogo == TURNO_INIMIGO)
     {
-        for (Entidade** it = entidades.begin(); it != entidades.end();it++)
+        for (Entidade*entidade:engine.entidades)
         {
-            Entidade* entidade = *it;
             if (entidade != jogador)
             {
                 entidade->atualizar();
@@ -75,8 +73,22 @@ int Engine::random(int minimo, int maximo, int bonus)
     return minimo + rand()%(maximo-minimo)+bonus;
 }
 
+
+bool Engine::vetorContem(std::vector<Entidade> localvec, Entidade entidade)
+{
+    return false;
+}
+
 void Engine::mandarParaOInicio(Entidade* entidade)
 {
-    entidades.remove(entidade);
-    entidades.insertBefore(entidade,0);
+    int i = 0;
+    for (Entidade* it : entidades)
+    {
+        if (it == entidade)
+        {
+            entidades.erase(entidades.begin()+i);
+            entidades.insert(entidades.begin(), entidade);
+        }
+        i++;
+    }
 }

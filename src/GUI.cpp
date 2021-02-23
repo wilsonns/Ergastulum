@@ -10,7 +10,7 @@ GUI::GUI()
 GUI::~GUI()
 {
     delete con;
-    log.clearAndDelete();
+    log.clear();
     //dtor
 }
 
@@ -26,19 +26,17 @@ void GUI::render()
 
     int y = 1;
     if (log.size() <= 5) {
-        for (Mensagem** it = log.begin();it != log.end();it++)
+        for (Mensagem mensagem:log)
         {
-            Mensagem* mensagem = *it;
-            con->setDefaultForeground(mensagem->cor);
-            con->printf(X_MENSAGEM, y, mensagem->texto);
+            con.setDefaultForeground(mensagem.cor);
+            con.printf(X_MENSAGEM, y, mensagem.texto);
             y++;
         }
     }
     else if (log.size() > 5)
     {
-        for (Mensagem** it = log.end()-5;it != log.end();it++)
+        for (Mensagem* mensagem = log.end()-5;mensagem != log.end();mensagem++)
         {
-            Mensagem* mensagem = *it;
             con->setDefaultForeground(mensagem->cor);
             con->printf(X_MENSAGEM, y, mensagem->texto);
             y++;
@@ -90,7 +88,7 @@ void GUI::mensagem(const TCODColor& cor, const char* texto, ...)
 
         // add a new message to the log
         Mensagem* msg = new Mensagem(lineBegin, cor);
-        log.push(msg);
+        log.push_back(msg);
 
         // go to next line
         lineBegin = lineEnd + 1;
