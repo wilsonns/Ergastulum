@@ -7,8 +7,10 @@ class Atacador
     public:
         //Atributos
         int forca;//A quantidade de dano que a entidade é capaz de causar em um destrutivel
+        int forcaBase;
         int destreza;//A capacidade do atacador de acertar uym alvo
-                  //Habilidades
+        int destrezaBase;
+                     //Habilidades
         //int manoamano;//habilidade com as mãos para bnrigar
 
         Atacador(int forca,int destreza);//ctor

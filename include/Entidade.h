@@ -16,7 +16,7 @@ class Entidade
 
         const float GRAUPRAD = 3.14159f / 180; //Graus para radianos
 
-        char *nome; //Nome da entidade
+        const char *nome; //Nome da entidade
         bool denso;//pode-se passar por essa entidade?
 
         Atacador *atacador; //é uma entidade capaz de atacar?
@@ -24,6 +24,12 @@ class Entidade
         AI *ai;//é uma entidade que se auto-atualiza?
         Pegavel* pegavel;//é uma entidade que pode ser pega e guardada em um contaienr?
         Container* container;//é uma entidade que pode guardar outras entidades?
+
+        //Slots de Equipamento
+        Entidade* armadura;
+        Entidade* arma;
+        Entidade* escudo;
+
 
         std::vector<Nodo*> caminho;//O caminho retornado pelas funções de pathfinding
 
@@ -44,7 +50,7 @@ class Entidade
 
         float lerp(float inicio, float fim, float t);//retorna a interpolação linear
 
-        void FOV();//realiza todos os calculos de FOV()
+        void FOV(Entidade* self);//realiza todos os calculos de FOV()
         
     protected:
 

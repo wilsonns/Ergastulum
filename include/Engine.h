@@ -16,7 +16,7 @@ public:
         DERROTA
     }statusJogo;//O status do jogo
 
-
+    int largura, altura; //Largura e altura da tela
 
     Mapa *mapa;//cria o mapa
     Pathfinding* pathMapa;//cria o mapa de pathfinding compartilhado por todas as entidades que se movem
@@ -24,13 +24,19 @@ public:
     Entidade *jogador;//cria um pointer para o jogador
     LOG *log;//cria o log externo para debug
     GUI *gui;//Cria a interface do jogo
+    TCOD_key_t ultimoBotao;
+   
     bool rodando; //o jogo está rodando?
     bool debug; // o jogo esta no modo debug?
     bool mostrarPath; //mostrar caminhos de cada entidade
-    Engine(); //ctor
+    
+    
+    Engine(int largura, int altura); //ctor
     virtual ~Engine();//dtor/
 
     int random(int minimo, int maximo, int bonus); // retorna um valor inteiro entre minimo e maximo + o bonus
+
+    void mandarParaOInicio(Entidade* entidade);
 
     void atualizar(); //chama todas as funções de atualizar
     void render(); //chama todas as funções de render

@@ -1,6 +1,8 @@
 #include "AI.h"
 #include <main.h>
 
+
+
 AI::AI()
 {
     //ctor
@@ -11,114 +13,57 @@ AI::~AI()
     //dtor
 }
 
+float AI::condicaoFisica(Entidade* self)
+{
+    return self->destrutivel->hp / self->destrutivel->hpMax;
+}//retorna um numero de 0 a 1 baseado na condição fisica da entidade
+
+float AI::forcaPercebida(Entidade* self)
+{
+    return self->atacador->forcaBase * condicaoFisica(self);
+}
+
+float AI::perigoPercebido(Entidade* self)
+{
+    return (self->destrutivel->resistencia * self->atacador->forca) * condicaoFisica(self);
+}
+
 aiJogador::aiJogador(float velocidade)
 {
-    this->velocidade = velocidade;
-    barraTurno = 0;
-}
+    alvo = NULL;
+ }
 
 void aiJogador::atualizar(Entidade* self)
 {
-    if (self->ai->barraTurno >= 1)
+    if (self->destrutivel && self->destrutivel->morreu())
     {
-        if (self->destrutivel && self->destrutivel->morreu())
-        {
-            return;
-        }
-        int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 1
-        TCOD_key_t key;
-        TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL,false);
-        switch (key.vk)
-        {
-        case TCODK_UP:
-            dy = -1;
-            break;
-        case TCODK_DOWN:
-            dy = 1;
-            break;
-        case TCODK_LEFT:
-            dx = -1;
-            break;
-        case TCODK_RIGHT:
-            dx = 1;
-            break;
-        /*case 49://baixoesquerda
-            dy = 1;
-            dx = -1;
-            break;
-        case 51://baixodireita
-            dy = 1;
-            dx = 1;
-            break;
-        case 55://cimaesqyuerda
-            dy = -1;
-            dx = -1;
-            break;
-        case 57: //cimadireita
-            dy = -1;
-            dx = 1;
-            break;
-        case 53://fazer nada tecla 5
-            break;
-        case 'g':
-        case 'G'://tecla g/G - Pegar item;
-        {
-            bool achado = false;
-            for (unsigned short int i = 0; i < engine.entidades.size();i++)
-            {
-                if (engine.entidades[i]->pegavel && engine.entidades[i]->x == self->x && engine.entidades[i]->y == self->y)
-                {
-                    if (engine.entidades[i]->pegavel->pegar(engine.entidades[i], self))
-                    {
-                        achado = true;
-                        // MENSAGEM - VOCÊ PEGOU O ITEM
-                        break;
-                    }
-                    else if (!achado)
-                    {
-                        achado = true;
-                        //MENSAGEM - INVENTARIO CHEIO
-                    }
-                }
-                if (!achado)
-                {
-                    ///MENSAGEM - NÃO TEM NADA PRA PEGAR AQUI
-                }
-            }
-        }
-        break;
-        case 'i':
-        case 'I':
-        {
-            Entidade* entidade = escolherDoInventario(self);
-            if (entidade)
-            {
-                entidade->pegavel->usar(entidade, self);
-
-            }
-        }
-        break;
-        case KEY_F(1):
-            engine.rodando = false;
-            break;
-        case KEY_F(2):
-            engine.debug = !engine.debug;
-            break;
-        case KEY_F(3):
-            engine.mostrarPath = !engine.mostrarPath;
-            break;*/
-        }
-        if (dx != 0 || dy != 0)
-        {
-            moverOuAtacar(self, self->x + dx, self->y + dy);
-        }
-        //engine.log->inserirmsg("Turno do jogador finalizado");
-        //self->ai->barraTurno -= 1;
-        //engine.gui->adcMensagem(1, "X");
+        return;
     }
-    else
+    int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 1
+    switch (engine.ultimoBotao.vk)
     {
-        self->ai->barraTurno += self->ai->velocidade;
+    case TCODK_UP:
+        dy = -1;
+        break;
+    case TCODK_DOWN:
+        dy = 1;
+        break;
+    case TCODK_LEFT:
+        dx = -1;
+        break;
+    case TCODK_RIGHT:
+        dx = 1;
+        break;
+    case TCODK_CHAR:
+        botaoAcao(self, engine.ultimoBotao.c);
+        break;
+    default:
+        break;
+    }
+    if (dx != 0 || dy != 0)
+    {
+        moverOuAtacar(self, self->x + dx, self->y + dy);
+        engine.mapa->computarFOV();
     }
 }
 
@@ -139,84 +84,229 @@ bool aiJogador::moverOuAtacar(Entidade *self, int xalvo, int yalvo)
     }
     self->x = xalvo;
     self->y = yalvo;
+    engine.statusJogo = Engine::TURNO_INIMIGO;
     return true;
 }
 
-
 Entidade* aiJogador::escolherDoInventario(Entidade* self)
 {
-    static const int LARGURA_INVENTARIO = 40;
-    static const int ALTURA_INVENTARIO = 12;
-    for (int x = (engine.mapa->largura - LARGURA_INVENTARIO) / 2; x < LARGURA_INVENTARIO; x++)
-    {
-        for (int y = (engine.mapa->altura - ALTURA_INVENTARIO) / 2; y < LARGURA_INVENTARIO; y++)
-        {
-            //mvprintw(y, x, "#");
-        }
-    }//DESENHAR A MOLDURA DO INVENTARIO
+    static const int LARGURA_INVENTARIO = 50;
+    static const int ALTURA_INVENTARIO = 14;
+    static TCODConsole con(LARGURA_INVENTARIO, ALTURA_INVENTARIO);
+
+    con.setDefaultForeground(TCODColor(200,180,50));
+    con.printFrame(0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, true, TCOD_BKGND_DEFAULT, "inventario");
+    
+
+   
     int atalho = 'a';
-    int i = 1;
-    int x = (engine.mapa->largura - LARGURA_INVENTARIO) / 2;
-    int y = (engine.mapa->altura - ALTURA_INVENTARIO) / 2;
-    for (int j = 0; j < self->container->inventario.size();j++)
+    int y = 1;
+    for (Entidade** it=self->container->inventario.begin();it!=self->container->inventario.end();it++)
     {
-       // mvprintw(y + j + 1, x + 1, "(%c)- %c", atalho, self->container->inventario[j]->nome);
+        Entidade* entidade = *it;
+        con.setDefaultForeground(entidade->cor);
+        con.printf(2, y, "(%c) %s",atalho,entidade->nome);
         atalho++;
+        y++;
     }
-    //refresh();
-    /*
-    int key = getch();
-    while (key < 97 || key > 122)
+    TCODConsole::blit(&con, 0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, TCODConsole::root, 10, engine.altura / 2-ALTURA_INVENTARIO);
+    TCODConsole::flush();
+
+    TCOD_key_t key;
+    TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, true);
+    if (key.vk == TCODK_CHAR)
     {
-        if (key > 96 || key < 123)
+        int entidadeIndex = key.c - 'a';
+        if (entidadeIndex >= 0 && entidadeIndex < self->container->inventario.size())
         {
-            int entidadeIndex = key - 'a';
-            if (entidadeIndex >= 0 && entidadeIndex < self->container->inventario.size())
-            {
-                return self->container->inventario[entidadeIndex];
-            }
-        }*/
-        return NULL;
-    
-    
+            return self->container->inventario.get(entidadeIndex);
+        }
+    }
+    return NULL;
 }
+void aiJogador::botaoAcao(Entidade* self, int ascii)
+{
+    switch (ascii)
+    {
+    case 'g':
+    case 'G'://Pegar um item no chão abaixo de vc
+    {
+        bool achado = false;
+        for (Entidade** iterator = engine.entidades.begin();iterator != engine.entidades.end();iterator++)
+        {
+            Entidade* entidade = *iterator;
+            {
+                if (entidade->pegavel && entidade->x == self->x && entidade->y == self->y)
+                {
+                    if (entidade->pegavel->pegar(entidade, self))
+                    {
+                        achado = true;
+                        engine.gui->mensagem(TCOD_white, "%s pega o %s!", self->nome, entidade->nome);
+                        break;
+                    }
+                    else if (!achado)
+                    {
+                        achado = true;
+                        engine.gui->mensagem(TCOD_white, "Seu inventario esta cheio!");
+                    }
+                }
+                if (!achado)
+                {
+                    engine.gui->mensagem(TCOD_white, "Nao tem nada para pegar aqui!");
+                }
+            }
+        }
+    }
+    break;
+    case 'i':
+    case 'I'://Abrir o inventario
+    {
+        Entidade* entidade = escolherDoInventario(self);
+        if (entidade)
+        {
+            if (entidade->pegavel->usar(entidade, self))
+            {
+                engine.statusJogo = Engine::TURNO_INIMIGO;
+            }
+
+        }
+        break;
+    }
+    case 'c':
+    case 'C'://Não lembro o que isso era pra fazer :p
+    {
+
+    }break;
+    case 'd':
+    case 'D'://Derrubar um item no local onde a entidade está
+    {
+        Entidade* entidade = escolherDoInventario(self);
+        if (entidade)
+        {
+            if (entidade->pegavel->soltar(entidade, self))
+            {
+                engine.statusJogo = Engine::TURNO_INIMIGO;
+            }
+        }
+    }break;
+    }
+}
+
 
 aiMonstro::aiMonstro(float velocidade)
 {
-    this->velocidade = velocidade;
-    barraTurno = 0;
+    alvo = NULL;
 }
 
 void aiMonstro::atualizar(Entidade* self)
 {
-    if (self->ai->barraTurno >= 1)
-    {
         if (self->destrutivel && self->destrutivel->morreu())
         {
             return;
         }
-        moverOuAtacar(self, engine.jogador);
-        self->ai->barraTurno += 1;
-    }
-    else
+        self->FOV(self);
+        moverOuAtacar(self, self->ai->alvo);
+}
+
+void aiMonstro::moverOuAtacar(Entidade *self,Entidade *alvo)
+{
+    if (self->arma == NULL && self->container->contemArma(self))
     {
-        self->ai->barraTurno += velocidade;
+        for (Entidade** it = self->container->inventario.begin(); it != self->container->inventario.end();it++)
+        {
+            Entidade* entidade = *it;
+            if (entidade->pegavel->tipo == 2)
+            {
+                entidade->pegavel->usar(entidade, self);
+            }
+        }
+    }
+    acharAlvo(self);
+    
+    if (alvo)
+    {
+        self->caminho = engine.pathMapa->acharCaminho(self, alvo);
+        if (self->caminho.size() > 1 && engine.mapa->podeAndar(self->caminho[0]->x, self->caminho[0]->y)
+            && self->caminho[0]->x != alvo->x && self->caminho[0]->y != alvo->y)
+        {
+            self->x = self->caminho[0]->x;
+            self->y = self->caminho[0]->y;
+        }
+        else if (self->caminho.size() <= 1)
+        {
+            if (self->x == alvo->x && self->y == alvo->y && alvo->pegavel)
+            {
+                alvo->pegavel->pegar(alvo, self);
+                return;
+            }
+            if (alvo->pegavel && !alvo->denso)
+            {
+                self->x = self->caminho[0]->x;
+                self->y = self->caminho[0]->y;
+                return;
+            }
+            self->atacador->atacar(self, alvo);
+        }
+        else if (self->caminho.size() == 0)
+        {
+            return;
+        }
+    }
+    return ;
+}
+
+void aiMonstro::acharAlvo(Entidade* self)
+{
+    if (self->ai->inteligencia >= 1)
+    {
+        if (self->arma == NULL && !self->container->contemArma(self))
+        {
+            int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
+            for (Entidade** it = self->ai->entidadesProximas.begin(); it != self->ai->entidadesProximas.end();it++)
+            {
+                Entidade* entidade = *it;
+                if (entidade->pegavel && entidade->pegavel->tipo == 2)
+                {
+                    int dx = entidade->x - self->x;
+                    int dy = entidade->y - self->y;
+                    int distancia = sqrt((dx * dx) + (dy * dy));
+                    if (distancia < menorD)
+                    {
+                        menorD = distancia;
+                        self->ai->alvo = entidade;
+                    }
+                }
+            }
+
+        }
+        else if (self->arma)
+        {
+            int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
+            for (Entidade** it = self->ai->entidadesProximas.begin(); it != self->ai->entidadesProximas.end();it++)
+            {
+                Entidade* entidade = *it;
+                if (entidade->destrutivel && !entidade->destrutivel->morreu())
+                {
+                    int dx = entidade->x - self->x;
+                    int dy = entidade->y - self->y;
+                    int distancia = sqrt((dx * dx) + (dy * dy));
+                    if (distancia < menorD)
+                    {
+                        menorD = distancia;
+                        self->ai->alvo = entidade;
+                    }
+                }
+            }
+        }
     }
 }
 
-bool aiMonstro::moverOuAtacar(Entidade *self,Entidade *alvo)
-{
-    
-    self->caminho = engine.pathMapa->acharCaminho(self, alvo);
-    if (self->caminho.size() > 1 && engine.mapa->podeAndar(self->caminho[0]->x, self->caminho[0]->y) 
-        &&  self->caminho[0]->x != alvo->x && self->caminho[0]->y != alvo->y)
-    {
-        self->x = self->caminho[0]->x;
-        self->y = self->caminho[0]->y;
-    }
-    else if (self->caminho[0]->x == alvo->x && self->caminho[0]->y == alvo->y)
-    {
-        self->atacador->atacar(self, alvo);
-    }
-    return true;
+/*
+Fluxograma da AI
+
+se o bicho não tiver arma && houver armas nas vizinhanças
+{ ir até a arma
+pegar a arma
+equipar a arma
 }
+*/

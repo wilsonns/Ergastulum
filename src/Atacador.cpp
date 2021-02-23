@@ -4,7 +4,9 @@
 Atacador::Atacador(int forca, int destreza)
 {
     this->forca = forca;
+    forcaBase = forca;
     this->destreza = destreza;
+    destrezaBase = destreza;
     //ctor
 }
 
@@ -23,19 +25,24 @@ void Atacador::atacar(Entidade *self, Entidade *alvo)
 
         if (acerto - esquiva <= 0)
         {
+            engine.gui->mensagem(TCOD_white, "%s ataca %s, mas %s se esquiva!", self->nome, alvo->nome, alvo->nome);
             ///MENSAGEM DE FALHA
         }
         else
         {
             int dano = (engine.random(1, 6, forca) - alvo->destrutivel->resistencia);
+       
 
             if (dano > 0)
             {
+                engine.gui->mensagem(TCOD_white, "%s ataca %s causando %i dano!", self->nome, alvo->nome, dano);
                 /// MENSAGEM
                 //engine.gui->mensagens.push_back(new Mensagem(_strdup("%c ataca %c causando %i dano!"),1,self->nome,alvo->nome,dano));
             }
             else
             {
+
+                engine.gui->mensagem(TCOD_white, "%s ataca %s mas não causa dano nenhum!", self->nome, alvo->nome);
                 ///MENSAGEM DE FALHAR EM CAUSAR DANO
             }
             alvo->destrutivel->tomarDano(alvo, dano);

@@ -11,6 +11,7 @@ public:
 
 	Container(int tamanho);//ctor
 	~Container();//dtor
+	bool contemArma(Entidade* portador);
 
 	bool adcionar(Entidade* entidade);//adcionar um item ao inventário, retorna true se conseguir, false se não
 	void remover(Entidade* entidade);//remover um item do inventário

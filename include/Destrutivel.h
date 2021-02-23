@@ -11,8 +11,9 @@ class Destrutivel
         /// Atributos
         int vigor; //A resistencia a doenças e a saúde geral do personagem
         int resistencia;//A quantidade de dano que o personagem subtrai do dano final
+        int resistenciaBase; //
         int agilidade; //A capacidade de esquivar de um golpe
-        
+        int agilidadeBase;//
         
         const char *nomeCadaver;//o nome que a entidade terá quando morrer
 

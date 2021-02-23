@@ -5,7 +5,9 @@ Destrutivel::Destrutivel(int vigor, int resistencia,int agilidade, const char *n
     this->hpMax = vigor * 5;
     this->hp = hpMax;
     this->resistencia = resistencia;
+    resistenciaBase = resistencia;
     this->agilidade = agilidade;
+    agilidadeBase = agilidade;
     this->nomeCadaver = nomeCadaver;
 
     //ctor
@@ -40,8 +42,9 @@ int Destrutivel::curar(int valor)
 void Destrutivel::morrer(Entidade *self)
 {
     self->simbolo = '%';
-    //self->nome = nomeCadaver;
+    self->nome = nomeCadaver;
     self->denso = false;
+    engine.mandarParaOInicio(self);
 }
 
 destrutivelMonstro::destrutivelMonstro(int vigor, int resistencia,int agilidade, const char* nomeCadaver) : 

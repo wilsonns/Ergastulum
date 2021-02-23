@@ -66,6 +66,11 @@ Pathfinding::~Pathfinding()
 
 std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* self, Entidade* alvo)
 {
+    if (alvo == NULL)
+    {
+        std::vector<Nodo*>caminho;
+        return caminho;
+    }
     /// Loop do Pathfinding:
     /// 1. reseta todos os nodos, limpa as listas aberta e fechada
     /// 2. insere o nodo inicial na lista aberta e define ele como atual

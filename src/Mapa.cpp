@@ -1,6 +1,9 @@
 #include "Mapa.h"
 #include "main.h"
 
+static const int TAMANHO_MAX_SALA = 12;
+static const int TAMANHO_MIN_SALA = 6;
+
 Mapa::Mapa(int largura, int altura)
 {
     this->altura = altura;
@@ -81,24 +84,38 @@ bool Mapa::foiExplorado(int x, int y) const
 
 void Mapa::computarFOV()
 {
-    mapa->computeFov(engine.jogador->x, engine.jogador->y);
+    mapa->computeFov(engine.jogador->x, engine.jogador->y, engine.jogador->visao);
 }
 
 void Mapa::adcmonstro(int x, int y)
 {
     Entidade* monstro = new Entidade(x, y, 'O', TCOD_darker_green);
+    monstro->visao = 5;
+    monstro->nome = "Orc";
     monstro->destrutivel = new destrutivelMonstro(4, 2, 2, "Cadavi");
     monstro->atacador = new Atacador(2, 3);
+    monstro->container = new Container(5);
     monstro->ai = new aiMonstro(1);
     engine.entidades.push(monstro);
 }
 
-void Mapa::adcionarItem(int x, int y)
+void Mapa::adcionarItem(int x, int y, int simbolo, int tipo, const char* nome, int valor, const TCODColor &cor)
 {
-    Entidade* pocaoDeCura = new Entidade(x, y,'!',TCOD_pink);
-    pocaoDeCura->denso = false;
-    pocaoDeCura->pegavel = new Curador(10);
-    engine.entidades.push(pocaoDeCura);
+    Entidade* item = new Entidade(x, y,simbolo,cor);
+    item->denso = false;
+    item->nome = nome;
+    item->simbolo = simbolo;
+    item->cor = cor;
+    if (tipo == 1)//Curador
+    {
+        item->pegavel = new Curador(valor);
+    }
+    else if (tipo == 2)
+    {
+        item->pegavel = new Arma(valor);
+    }
+    item->pegavel->tipo = tipo;
+    engine.entidades.insertBefore(item,0);
 }
 
 void Mapa::render()
@@ -114,14 +131,18 @@ void Mapa::render()
         {
            if(estaNoFOV(x,y))
            {
-
             TCODConsole::root->setCharBackground(x, y, eParede(x,y)?paredeClara:chaoClaro);
             }
-           else
+           else if(!estaNoFOV(x,y) && foiExplorado(x,y))
            {
                TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? paredeEscura : chaoEscuro);
+           }
+           else
+           {
+
            }
        
         }
     }
 }
+

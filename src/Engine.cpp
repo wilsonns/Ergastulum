@@ -1,10 +1,14 @@
 #include "Engine.h"
 #include "main.h"
 
-Engine::Engine()
+Engine::Engine(int largura, int altura)
 {
+    this->largura = largura;
+    this->altura = altura;
+
+    TCODConsole::initRoot(largura, altura, "Joguim sem Nome do Will", false);
     log = new LOG();
-    mapa = new Mapa(70,43);
+    mapa = new Mapa(largura,43);
     pathMapa = new Pathfinding();
     gui = new GUI();
     jogador = new Entidade(1,1,'@',TCOD_white);
@@ -12,15 +16,20 @@ Engine::Engine()
     jogador->atacador = new Atacador(2,3);
     jogador->ai = new aiJogador(1);
     jogador->container = new Container(10);
+    jogador->nome = "Will";
     entidades.push(jogador);
     rodando = true;
     debug = false;
     mostrarPath = false;
+    statusJogo = Engine::INICIO;
     //ctor
 }
 
 Engine::~Engine()
 {
+    entidades.clearAndDelete();
+    delete mapa;
+    delete gui;
     //dtor
 }
 
@@ -37,18 +46,27 @@ void Engine::render()
             entidade->render();
         }
     }
+    gui->render();
 }
 
 void Engine::atualizar()
 {
-    jogador->atualizar();
-    for (Entidade** iterator = entidades.begin(); iterator != entidades.end();iterator++)
+    TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS | TCOD_EVENT_MOUSE, &ultimoBotao, NULL);
+    if (statusJogo == INICIO || statusJogo == TURNO_NOVO)
     {
-        Entidade* entidade = *iterator;
-        if (entidade != jogador)
+        jogador->atualizar();
+    }
+    else if(statusJogo == TURNO_INIMIGO)
+    {
+        for (Entidade** it = entidades.begin(); it != entidades.end();it++)
         {
-            entidade->atualizar();
+            Entidade* entidade = *it;
+            if (entidade != jogador)
+            {
+                entidade->atualizar();
+            }
         }
+        statusJogo = Engine::TURNO_NOVO;
     }
 }
 
@@ -57,3 +75,8 @@ int Engine::random(int minimo, int maximo, int bonus)
     return minimo + rand()%(maximo-minimo)+bonus;
 }
 
+void Engine::mandarParaOInicio(Entidade* entidade)
+{
+    entidades.remove(entidade);
+    entidades.insertBefore(entidade,0);
+}
