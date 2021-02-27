@@ -42,8 +42,14 @@ int Destrutivel::curar(int valor)
 void Destrutivel::morrer(Entidade *self)
 {
     self->simbolo = '%';
+    engine.gui->mensagem(TCOD_darker_red, "%s morreu!", self->nome);
     self->nome = nomeCadaver;
     self->denso = false;
+    for (Entidade**it = self->container->inventario.begin(); it !=self->container->inventario.end();it++)
+    {
+        Entidade* entidade = *it;
+        entidade->pegavel->soltar(entidade,self);
+    }
     engine.mandarParaOInicio(self);
 }
 

@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BSP.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\AI.cpp" />
     <ClCompile Include="src\Atacador.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="src\Pegavel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BSP.h" />
     <ClInclude Include="include\AI.h" />
     <ClInclude Include="include\Atacador.h" />
     <ClInclude Include="include\Container.h" />

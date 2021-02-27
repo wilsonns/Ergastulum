@@ -39,7 +39,8 @@ class GUI
 
     protected:
         TCODConsole* con;
-        std::vector<Mensagem*> log;
+        TCODList<Mensagem*> log;
+        void renderMouse();
 
 
         void renderBarra(int x, int y, int largura, int valor, int valormax, const TCODColor& corBarra, const TCODColor& corFundo);

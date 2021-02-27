@@ -10,7 +10,41 @@ Mapa::Mapa(int largura, int altura)
     this->largura = largura;
     tiles = new Tile[altura*largura];
     mapa = new TCODMap(largura, altura);
+    TCODBsp bsp(0, 0, largura, altura);
+    bsp.splitRecursive(NULL, 8, TAMANHO_MAX_SALA, TAMANHO_MAX_SALA, 1.5f, 1.5f);
+    BSPListener listener(*this);
+    bsp.traverseInvertedLevelOrder(&listener, NULL);
     //ctor
+}
+
+
+BSPListener::BSPListener(Mapa& mapa):mapa(mapa),nSala(0)
+{
+}
+
+
+bool BSPListener::visitNode(TCODBsp* node, void* userData)
+{
+    if (node->isLeaf())
+    {
+        int x, y, l, a;
+     
+        TCODRandom* rng = TCODRandom::getInstance();
+        l = rng->getInt(TAMANHO_MIN_SALA, node->w - 2);
+        a = rng->getInt(TAMANHO_MIN_SALA, node->h - 2);
+        x = rng->getInt(node->x + 1, node->x + node->w - l - 1);
+        y = rng->getInt(node->y + 1, node->y + node->h - a - 1);
+        mapa.criarSala(nSala == 0, x, x+l-1, y, y+a-1);
+        if (nSala != 0)
+        {
+            mapa.cavar(ultx, x + l / 2, ulty, ulty);
+            mapa.cavar(x + l / 2, x + l / 2, ulty, y + a / 2);
+        }
+        ultx = x + l / 2;
+        ulty = y + a / 2;
+        nSala++;
+    }
+    return true;
 }
 
 Mapa::~Mapa()
@@ -68,6 +102,10 @@ bool Mapa::podeAndar(int x, int y)
 
 bool Mapa::estaNoFOV(int x, int y) const
 {
+    if (x < 0 || x >= largura || y < 0 || y >= altura)
+    {
+        return false;
+    }
     if (mapa->isInFov(x, y))
     {
         tiles[x + y * largura].explorado = true;
@@ -96,7 +134,8 @@ void Mapa::adcmonstro(int x, int y)
     monstro->atacador = new Atacador(2, 3);
     monstro->container = new Container(5);
     monstro->ai = new aiMonstro(1);
-    engine.entidades.push(monstro);
+    monstro->ai->faccao = ORCS;
+    engine.entidades.insertBefore(monstro,engine.entidades.size()-3);
 }
 
 void Mapa::adcionarItem(int x, int y, int simbolo, int tipo, const char* nome, int valor, const TCODColor &cor)
@@ -118,6 +157,17 @@ void Mapa::adcionarItem(int x, int y, int simbolo, int tipo, const char* nome, i
     engine.entidades.insertBefore(item,0);
 }
 
+void Mapa::criarSala(bool primeiro, int x1, int x2, int y1, int y2)
+{
+    cavar(x1, x2, y1, y2);
+    dungeon.push_back(new Sala(x1, y1, x2, y2));
+    if (primeiro)
+    {
+        engine.jogador->x = ((x2-x1)/2) + x1;
+        engine.jogador->y = ((y2-y1)/2 )+ y1;
+    }
+}
+
 void Mapa::render()
 {
     static const TCODColor paredeEscura(0, 0, 100);
@@ -129,17 +179,21 @@ void Mapa::render()
     {
         for (int y = 0; y < altura;y += 1)
         {
-           if(estaNoFOV(x,y))
-           {
-            TCODConsole::root->setCharBackground(x, y, eParede(x,y)?paredeClara:chaoClaro);
+            if (!engine.debug)
+            {
+                if (estaNoFOV(x, y))
+                {
+                    TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? TCOD_lighter_grey : TCOD_lightest_gray);
+                }
+
+                else if (!estaNoFOV(x, y) && foiExplorado(x, y))
+                {
+                    TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? TCOD_darkest_grey : TCOD_darker_gray);
+                }
             }
-           else if(!estaNoFOV(x,y) && foiExplorado(x,y))
+           if(engine.debug)
            {
                TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? paredeEscura : chaoEscuro);
-           }
-           else
-           {
-
            }
        
         }

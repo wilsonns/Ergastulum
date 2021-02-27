@@ -10,7 +10,7 @@ GUI::GUI()
 GUI::~GUI()
 {
     delete con;
-    log.clear();
+    log.clearAndDelete();
     //dtor
 }
 
@@ -26,22 +26,25 @@ void GUI::render()
 
     int y = 1;
     if (log.size() <= 5) {
-        for (Mensagem mensagem:log)
+        for (Mensagem** it = log.begin();it != log.end();it++)
         {
-            con.setDefaultForeground(mensagem.cor);
-            con.printf(X_MENSAGEM, y, mensagem.texto);
-            y++;
-        }
-    }
-    else if (log.size() > 5)
-    {
-        for (Mensagem* mensagem = log.end()-5;mensagem != log.end();mensagem++)
-        {
+            Mensagem* mensagem = *it;
             con->setDefaultForeground(mensagem->cor);
             con->printf(X_MENSAGEM, y, mensagem->texto);
             y++;
         }
     }
+    else if (log.size() > 5)
+    {
+        for (Mensagem** it = log.end()-5;it != log.end();it++)
+        {
+            Mensagem* mensagem = *it;
+            con->setDefaultForeground(mensagem->cor);
+            con->printf(X_MENSAGEM, y, mensagem->texto);
+            y++;
+        }
+    }
+    renderMouse();
     TCODConsole::blit(con, 0, 0, engine.largura, ALTURA_PAINEL, 
         TCODConsole::root, 0, engine.altura - ALTURA_PAINEL);
 }///Desenha a moldura da UI
@@ -88,9 +91,46 @@ void GUI::mensagem(const TCODColor& cor, const char* texto, ...)
 
         // add a new message to the log
         Mensagem* msg = new Mensagem(lineBegin, cor);
-        log.push_back(msg);
+        log.push(msg);
 
         // go to next line
         lineBegin = lineEnd + 1;
     } while (lineEnd);
+}
+
+void GUI::renderMouse()
+{
+    if (!engine.mapa->estaNoFOV(engine.mouse.cx, engine.mouse.cy))
+    {
+        return;
+    }
+    char buf[128]="";
+    bool primeiro = true;
+
+    if (TCOD_console_has_mouse_focus())
+    {
+        for (Entidade** it = engine.entidades.begin();it != engine.entidades.end();it++)
+        {
+            Entidade* entidade = *it;
+            {
+                int x = engine.mouse.cx;
+                int y = engine.mouse.cy;
+
+                if (entidade->x == x && entidade->y == y)
+                {
+                    if (!primeiro)
+                    {
+                        strcat(buf, ",");
+                    }
+                    else
+                    {
+                        primeiro = false;
+                    }
+                    strcat(buf, entidade->nome);
+                }
+            }
+        }
+    }
+    con->setDefaultForeground(TCOD_white);
+    con->printf(1, 0, buf);
 }

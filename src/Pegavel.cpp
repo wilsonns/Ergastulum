@@ -14,7 +14,7 @@ bool Pegavel::pegar(Entidade* self, Entidade* portador)
 {
 	if (portador->container && portador->container->adcionar(self))
 	{
-		//engine.entidades.remove(self);
+		engine.entidades.remove(self);
 		return true;
 	}
 	return false;

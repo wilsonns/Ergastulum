@@ -12,7 +12,6 @@ extern int ALTURA_TERM;
 #include<cmath>
 #include<list>
 #include<stdarg.h>
-#include<algorithm>
 
 class Destrutivel;
 class Atacador;
@@ -21,6 +20,7 @@ class Pegavel;
 class Container;
 class Pathfinding;
 class Entidade;
+class BSP;
 class Mapa;
 class Engine;
 class LOG;
@@ -33,6 +33,7 @@ class GUI;
 #include<Container.h>
 #include<Pathfinding.h>
 #include<Entidade.h>
+#include<BSP.h>
 #include<Mapa.h>
 #include<Engine.h>
 #include<LOG.h>

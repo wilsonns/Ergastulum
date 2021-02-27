@@ -11,6 +11,13 @@ enum Prioridade
     PRIORIDADE_MAXIMA = 400
 };
 
+enum Faccao
+{
+    SOZINHO = 0,
+    JOGADOR = 1,
+    ORCS = 2
+};
+
 class Entidade;
 class Engine;
 
@@ -20,6 +27,7 @@ class AI
 
         float velocidade;//A proporção em que a barraTurno dessa entidade se preenche
         float barraTurno;//Se for 1 ou mais, a entidade pode agir, se não, pula o turno
+        int faccao;
         Entidade* alvo;
         AI();//CTOR
         virtual ~AI();//DTOR
@@ -29,7 +37,7 @@ class AI
         float forcaPercebida(Entidade* self);
         float perigoPercebido(Entidade* self);
         
-        std::vector<Entidade*> entidadesProximas;
+        TCODList<Entidade*> entidadesProximas;
         
         int inteligencia = 1;
 

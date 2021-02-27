@@ -30,8 +30,9 @@ float AI::perigoPercebido(Entidade* self)
 
 aiJogador::aiJogador(float velocidade)
 {
+    faccao = JOGADOR;
     alvo = NULL;
- }
+}
 
 void aiJogador::atualizar(Entidade* self)
 {
@@ -39,7 +40,16 @@ void aiJogador::atualizar(Entidade* self)
     {
         return;
     }
-    int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 1
+    int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 
+    if(engine.mouse.lbutton)
+    {
+        self->caminho = engine.pathMapa->acharCaminho(self, alvo = new Entidade(engine.mouse.cx, engine.mouse.cy, NULL, TCOD_white));    
+    }
+    if (self->caminho.size() > 0)
+    {
+        moverOuAtacar(self, self->caminho[0]->x, self->caminho[0]->y);
+        return;
+    }
     switch (engine.ultimoBotao.vk)
     {
     case TCODK_UP:
@@ -63,7 +73,6 @@ void aiJogador::atualizar(Entidade* self)
     if (dx != 0 || dy != 0)
     {
         moverOuAtacar(self, self->x + dx, self->y + dy);
-        engine.mapa->computarFOV();
     }
 }
 
@@ -73,8 +82,9 @@ bool aiJogador::moverOuAtacar(Entidade *self, int xalvo, int yalvo)
     {
         return false;
     }
-    for (auto* entidade:engine.entidades)
+    for (Entidade** iterator = engine.entidades.begin(); iterator != engine.entidades.end(); iterator++)
     {
+        Entidade* entidade = *iterator;
         if(entidade->x == xalvo && entidade->y == yalvo && entidade->destrutivel && !entidade->destrutivel->morreu() && entidade != self)
         {
             self->atacador->atacar(self, entidade);
@@ -131,8 +141,9 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
     case 'G'://Pegar um item no chão abaixo de vc
     {
         bool achado = false;
-        for (Entidade* entidade:engine.entidades)
+        for (Entidade** iterator = engine.entidades.begin();iterator != engine.entidades.end();iterator++)
         {
+            Entidade* entidade = *iterator;
             {
                 if (entidade->pegavel && entidade->x == self->x && entidade->y == self->y)
                 {
@@ -171,9 +182,15 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
         break;
     }
     case 'c':
-    case 'C'://Não lembro o que isso era pra fazer :p
+    case 'C'://Não lembro o que isso era pra fazer :p vai ser teste invocar minion
     {
-
+        Entidade* minion = new Entidade(engine.jogador->x - 1, engine.jogador->y - 1, 'm', TCOD_dark_purple);
+        minion->ai = new aiJogador(1);
+        minion->atacador = new Atacador(1, 1);
+        minion->destrutivel = new destrutivelMonstro(1, 1, 1, "Cadaver de Minion");
+        minion->ai->faccao = JOGADOR;
+        minion->nome = "Minion";
+        engine.entidades.insertBefore(minion, 1);
     }break;
     case 'd':
     case 'D'://Derrubar um item no local onde a entidade está
@@ -187,9 +204,13 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
             }
         }
     }break;
+
+    case 'x':
+        engine.debug = !engine.debug;
+        break;
+
     }
 }
-
 
 aiMonstro::aiMonstro(float velocidade)
 {
@@ -216,6 +237,7 @@ void aiMonstro::moverOuAtacar(Entidade *self,Entidade *alvo)
             if (entidade->pegavel->tipo == 2)
             {
                 entidade->pegavel->usar(entidade, self);
+                return;
             }
         }
     }
@@ -260,8 +282,9 @@ void aiMonstro::acharAlvo(Entidade* self)
         if (self->arma == NULL && !self->container->contemArma(self))
         {
             int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
-            for (Entidade* entidade:engine.entidades)
+            for (Entidade** it = self->ai->entidadesProximas.begin(); it != self->ai->entidadesProximas.end();it++)
             {
+                Entidade* entidade = *it;
                 if (entidade->pegavel && entidade->pegavel->tipo == 2)
                 {
                     int dx = entidade->x - self->x;
@@ -279,18 +302,22 @@ void aiMonstro::acharAlvo(Entidade* self)
         else if (self->arma)
         {
             int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
-            for (Entidade* entidade:engine.entidades)
+            for (Entidade** it = self->ai->entidadesProximas.begin(); it != self->ai->entidadesProximas.end();it++)
             {
-                if (entidade->destrutivel && !entidade->destrutivel->morreu())
+                Entidade* entidade = *it;
+                if (entidade->destrutivel && !entidade->destrutivel->morreu() && entidade->ai->faccao != self->ai->faccao)
                 {
                     int dx = entidade->x - self->x;
                     int dy = entidade->y - self->y;
                     int distancia = sqrt((dx * dx) + (dy * dy));
                     if (distancia < menorD)
                     {
-                        menorD = distancia;
-                        self->ai->alvo = entidade;
-                    }
+                        if (entidade->ai->perigoPercebido(entidade) < self->ai->perigoPercebido(self))
+                        {
+                            menorD = distancia;
+                            self->ai->alvo = entidade;
+                        }
+                     }
                 }
             }
         }

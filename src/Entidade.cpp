@@ -36,7 +36,7 @@ void Entidade::render()
 
 void Entidade::atualizar()
 {
-    if (ai) { ai->atualizar(this); }
+     if (ai) { ai->atualizar(this); }
 }
 
 float Entidade::maximo(float a, float b)
@@ -88,16 +88,17 @@ void Entidade::FOV(Entidade* self)
                 engine.mapa->tornarVisivel(tx, ty);*/
                 break;
             }
-            for (Entidade* entidade: engine.entidades)
+            for (Entidade** it = engine.entidades.begin(); it != engine.entidades.end();it++)
             {
+
+                Entidade* entidade = *it;
                 if (entidade != self)
                 {
                     if (entidade->x == tx && entidade->y == ty)
                     {
-                        bool achado = (std::find(self->ai->entidadesProximas.begin(), self->ai->entidadesProximas.end(), entidade) != self->ai->entidadesProximas.end());
-                        if (!achado)
+                        if (!self->ai->entidadesProximas.contains(entidade))
                         {
-                            self->ai->entidadesProximas.push_back(entidade);
+                            self->ai->entidadesProximas.push(entidade);
                         }
                     }
                 }
