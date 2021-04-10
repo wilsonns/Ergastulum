@@ -4,17 +4,23 @@
 
 class Atacador
 {
-    public:
+    
+    public:        
         //Atributos
-        int forca;//A quantidade de dano que a entidade é capaz de causar em um destrutivel
-        int forcaBase;
-        int destreza;//A capacidade do atacador de acertar uym alvo
-        int destrezaBase;
-                     //Habilidades
-        //int manoamano;//habilidade com as mãos para bnrigar
+        std::unordered_map<std::string, float> atributos;        
+        void adcionarAtributo(std::string atributo, float valorInicial);
+        void modificarAtributo(std::string atributo, float valor);
 
-        Atacador(int forca,int destreza);//ctor
+        //Habilidades
+
+        std::unordered_map<std::string, float> habilidades;
+        void adcionarHabilidade(std::string habilidade, float valorInicial);
+        void modificarHabilidade(std::string habilidade, float valor);
+
+        Atacador(float forca = 1, float destreza = 1, float ataque = 0);//ctor
         virtual ~Atacador();//dtor
+
+        
 
         void atacar(Entidade *self, Entidade *alvo);//self ataca o alvo destrutivel e causa dano
 

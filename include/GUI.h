@@ -5,17 +5,15 @@
 
 struct Mensagem
 {
-    char* texto;
+    std::string texto;
     TCODColor cor;
-    Mensagem(const char* texto, const TCODColor& cor)
+    Mensagem(std::string texto, const TCODColor& cor)
     {
         this->cor = cor;
-        this->texto = new char[strlen(texto)];
-        strcpy(this->texto, texto);
+        this->texto = texto;
     }
     ~Mensagem() 
     {
-        delete[] texto;
     }
 };
 
@@ -34,12 +32,12 @@ class GUI
         void render();//desenhar a interface na tela
 
         //MENSAGENS
-        void mensagem(const TCODColor& cor, const char* texto, ...);
+        void mensagem(const TCODColor& cor, std::string texto, ...);
 
 
     protected:
         TCODConsole* con;
-        TCODList<Mensagem*> log;
+        std::vector<Mensagem*> log;
         void renderMouse();
 
 

@@ -48,4 +48,17 @@ private:
 
 };
 
+class Armadura : public Pegavel
+{
+public:
+	int bResistencia;
+	Armadura(int bResistencia);
+	bool usar(Entidade* self, Entidade* portador);
+	void equipar(Entidade* self, Entidade* portador);
+	void desequipar(Entidade* self, Entidade* portador);
+
+private:
+
+};
+
 #endif // PEGAVEL_H

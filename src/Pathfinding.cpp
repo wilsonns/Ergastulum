@@ -101,15 +101,11 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* self, Entidade* alvo)
 
     atual = inicio;
     aberta.push_back(atual);//insere o nodo atual na lista aberta
-/*
-    for (int i = 0; i < atual->vizinhos.size();i++)
-    {
-        atual->vizinhos[i]->g = 0;
-    }
-    */
+
     while (!aberta.empty())
     {
-        aberta = organizarPorF(aberta);
+        aberta.sort([](const Nodo* lhs, const Nodo* rhs) {return lhs->f < rhs->f; });
+        //aberta = organizarPorF(aberta);
         atual = aberta.front();
         aberta.pop_front();
         fechada.push_back(atual);
@@ -144,20 +140,28 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* self, Entidade* alvo)
         {
             if (fechada.size() != 0)
             {
-                for (auto& it : fechada)
+                for (auto& it: fechada)
                 {
-                    //mvprintw(it->y, it->x, "x");
+
+                    TCODConsole::root->setChar(it->x, it->y, 'x');
+                    TCODConsole::root->setCharForeground(it->x, it->y,TCOD_light_red);
+                    
                 }
-                //refresh();
+                
             }
             if (aberta.size() != 0)
             {
                 for (auto& it : aberta)
                 {
-                    //mvprintw(it->y, it->x, "o");
+                    TCODConsole::root->setChar(it->x, it->y, 'o');
+                    TCODConsole::root->setCharForeground(it->x, it->y,TCOD_light_green);
+                    
                 }
-                //refresh();
+                
+                
             }
+
+            TCODConsole::root->flush();
         }
             if(atual == objetivo)
         {
@@ -219,6 +223,7 @@ bool Pathfinding::compararF(Nodo l, Nodo r)
     }
     return true;
 }
+/*
 std::list<Nodo*> Pathfinding::organizarPorF(std::list<Nodo*> lista)
 {
     std::list<Nodo*> copialista;
@@ -283,4 +288,4 @@ std::list<Nodo*> Pathfinding::organizarPorF(std::list<Nodo*> lista)
     
     }
     return copialista;
-}
+}*/

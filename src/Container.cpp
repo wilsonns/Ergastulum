@@ -3,6 +3,9 @@
 Container::Container(int tamanho)
 {
 	this->tamanho = tamanho;
+	//Equips
+	armadura = arma = escudo = NULL;
+
 }
 
 Container::~Container()
@@ -15,7 +18,7 @@ bool Container::contemArma(Entidade* portador)
 {
 	if (portador->container->inventario.size() > 0)
 	{
-		for (Entidade** it = portador->container->inventario.begin(); it != portador->container->inventario.end();it++)
+		for (std::vector<Entidade*>::iterator it = inventario.begin(); it != inventario.end();it++)
 		{
 			Entidade* entidade = *it;
 			if (entidade->pegavel->tipo == 2)
@@ -37,11 +40,19 @@ bool Container::adcionar(Entidade* entidade)
 		//inventário cheio
 		return false;
 	}
-	inventario.push(entidade);
+	inventario.push_back(entidade);
 	return true;
 }
 
 void Container::remover(Entidade* entidade)
 {
-	inventario.remove(entidade);
+	for (std::vector<Entidade*>::iterator it = inventario.begin();it != inventario.end();it++)
+	{
+		Entidade* comparavel = *it;
+
+		if(comparavel == entidade)
+		{
+			inventario.erase(it);
+		}
+	}
 }

@@ -1,0 +1,13 @@
+{
+  "Espada": {
+    "nome": "Espada",
+    "simbolo": "/",
+    "ataque": 2,
+  },
+  "Pocao": {
+    "nome": "Pocao",
+    "simbolo": "!",
+    "cura": 5
+   }
+}
+  

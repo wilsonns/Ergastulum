@@ -14,8 +14,12 @@ bool Pegavel::pegar(Entidade* self, Entidade* portador)
 {
 	if (portador->container && portador->container->adcionar(self))
 	{
-		engine.entidades.remove(self);
-		return true;
+		std::vector<Entidade*>::iterator it = std::find(engine.entidades.begin(), engine.entidades.end(), self);
+		if (*it == self)
+		{
+			engine.entidades.erase(it);
+			return true;
+		}
 	}
 	return false;
 }
@@ -35,7 +39,7 @@ bool Pegavel::soltar(Entidade* self, Entidade* portador)
 {
 	if (portador->container)
 	{
-		engine.mapa->adcionarItem(portador->x, portador->y, self->simbolo, self->pegavel->tipo, self->nome, 5, self->cor);
+		//engine.mapa->adcionarItem(portador->x, portador->y, self->simbolo, self->pegavel->tipo, self->nome, 5, self->cor);
 		portador->container->remover(self);
 		delete self;
 		return true;
@@ -60,7 +64,7 @@ bool Curador::usar(Entidade* self, Entidade* portador)
 	}
 	return false;
 }
-
+//ARMA
 Arma::Arma(int dano)
 {
 	this->dano = dano;
@@ -68,12 +72,12 @@ Arma::Arma(int dano)
 
 bool Arma::usar(Entidade* self, Entidade* portador)
 {
-	if (portador->arma == NULL)
+	if (portador->container->arma == NULL)
 	{
 		equipar(self, portador);
 		return true;
 	}
-	else if (portador->arma == self)
+	else if (portador->container->arma == self)
 	{
 		desequipar(self, portador);
 		return true;
@@ -83,30 +87,83 @@ bool Arma::usar(Entidade* self, Entidade* portador)
 
 void Arma::equipar(Entidade* self, Entidade* portador)
 {
-	if (portador->arma == NULL)
+	if (portador->container->arma == NULL)
 	{
-		portador->arma = self;
-		portador->atacador->forca += dano;
-		engine.gui->mensagem(TCOD_white, "%s equipa %s!", portador->nome, self->nome);
+		portador->container->arma = self;
+
+		engine.gui->mensagem(TCOD_white, "{} equipa {}!", portador->nome, self->nome);
 	}
-	else if (portador->arma != NULL)
+	else if (portador->container->arma != NULL)
 	{
-		engine.gui->mensagem(TCOD_white, "%s ja esta empunhando uma arma!", portador->nome);
+		engine.gui->mensagem(TCOD_white, "{} ja esta empunhando uma arma!", portador->nome);
 		return;
 	}
 }
 
 void Arma::desequipar(Entidade* self, Entidade* portador)
 {
-	if (portador->arma != NULL)
+	if (portador->container->arma != NULL)
 	{
-		portador->atacador->forca -= dano;
-		portador->arma = NULL;
-		engine.gui->mensagem(TCOD_white, "%s desequipa %s!", portador->nome, self->nome);
+//		portador->atacador->forca -= dano;
+		portador->container->arma = NULL;
+		engine.gui->mensagem(TCOD_white, "{} desequipa {}!", portador->nome, self->nome);
 	}
-	else if (portador->arma == NULL)
+	else if (portador->container->arma == NULL)
 	{
-		engine.gui->mensagem(TCOD_white, "%s ja nao tem nenhuma uma arma!", portador->nome);
+		engine.gui->mensagem(TCOD_white, "{} ja nao tem nenhuma uma arma!", portador->nome);
 		return;
 	}
 }
+///ARMADURA
+
+Armadura::Armadura(int bResistencia)
+{
+	this->bResistencia = bResistencia;
+}
+
+bool Armadura::usar(Entidade* self, Entidade* portador)
+{
+	if (portador->container->armadura == NULL)
+	{
+		equipar(self, portador);
+		return true;
+	}
+	else if (portador->container->armadura == self)
+	{
+		desequipar(self, portador);
+		return true;
+	}
+	return false;
+}
+
+void Armadura::equipar(Entidade* self, Entidade* portador)
+{
+	if (portador->container->armadura == NULL)
+	{
+		portador->container->armadura = self;
+		portador->destrutivel->resistencia += bResistencia;
+		engine.gui->mensagem(TCOD_white, "{} veste {}!", portador->nome, self->nome);
+	}
+	else if (portador->container->armadura != NULL)
+	{
+		engine.gui->mensagem(TCOD_white, "{} ja esta trajando uma armadura!", portador->nome);
+		return;
+	}
+}
+
+void Armadura::desequipar(Entidade* self, Entidade* portador)
+{
+	if (portador->container->armadura != NULL)
+	{
+		portador->destrutivel->resistencia -= bResistencia;
+		portador->container->armadura = NULL;
+		engine.gui->mensagem(TCOD_white, "{} tira {}!", portador->nome, self->nome);
+	}
+	else if (portador->container->armadura == NULL)
+	{
+		engine.gui->mensagem(TCOD_white, "{} ja nao tem nenhuma uma armadura!", portador->nome);
+		return;
+	}
+}
+
+

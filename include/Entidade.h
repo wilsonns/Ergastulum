@@ -16,7 +16,7 @@ class Entidade
 
         const float GRAUPRAD = 3.14159f / 180; //Graus para radianos
 
-        const char *nome; //Nome da entidade
+        std::string nome; //Nome da entidade
         bool denso;//pode-se passar por essa entidade?
 
         Atacador *atacador; //é uma entidade capaz de atacar?
@@ -25,15 +25,10 @@ class Entidade
         Pegavel* pegavel;//é uma entidade que pode ser pega e guardada em um contaienr?
         Container* container;//é uma entidade que pode guardar outras entidades?
 
-        //Slots de Equipamento
-        Entidade* armadura;
-        Entidade* arma;
-        Entidade* escudo;
-
 
         std::vector<Nodo*> caminho;//O caminho retornado pelas funções de pathfinding
 
-        Entidade(int x, int y,int simbolo, const TCODColor cor);//CTOR
+        Entidade(int x, int y,int simbolo,std::string nome, const TCODColor cor);//CTOR
        
         virtual ~Entidade(); //DTOR
 

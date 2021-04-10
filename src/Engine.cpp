@@ -7,11 +7,13 @@ Engine::Engine(int largura, int altura)
     this->altura = altura;
 
     TCODConsole::initRoot(largura, altura, "Joguim sem Nome do Will", false);
-    log = new LOG();
-    gui = new GUI();;
-    jogador = new Entidade(1,1,'@',TCOD_white);
-    jogador->destrutivel = new destrutivelJogador(5,2,3,"Seu Cadavi");
-    jogador->atacador = new Atacador(2,3);
+    logger = new LOGGER();
+    gui = new GUI();
+    jogador = new Entidade(1, 1, '@',"Will", TCOD_white);
+    jogador->destrutivel = new destrutivelJogador(5, 2, 3, "Seu Cadavi");
+    jogador->atacador = new Atacador();
+    jogador->atacador->adcionarHabilidade("Ataque", 5);
+    jogador->atacador->modificarHabilidade("Ataque", -1);
     jogador->ai = new aiJogador(1);
     jogador->ai->faccao = JOGADOR;
     jogador->container = new Container(10);
@@ -21,15 +23,10 @@ Engine::Engine(int largura, int altura)
     mapa = new Mapa(largura, 43);
     pathMapa = new Pathfinding();
 
-    fim = new Entidade(NULL, NULL, NULL, TCOD_white);
-    
-    entidades.push(jogador);
-    entidades.push(fim);   
-    entidades.push(fim);   
-    entidades.push(fim);
-    
+    entidades.push_back(jogador);
+  
     rodando = true;
-    debug = false;
+    debug = true;
     mostrarPath = false;
     statusJogo = Engine::INICIO;
     //ctor
@@ -37,7 +34,7 @@ Engine::Engine(int largura, int altura)
 
 Engine::~Engine()
 {
-    entidades.clearAndDelete();
+    entidades.clear();
     delete mapa;
     delete gui;
     //dtor
@@ -48,9 +45,9 @@ void Engine::render()
     auto root = TCODConsole::root;
     root->clear();
     mapa->render();
-    for (Entidade** iterator = entidades.begin();iterator != entidades.end();iterator++)
+    for (std::vector<Entidade*>::iterator it = entidades.begin(); it != entidades.end(); it++)
     {
-        Entidade* entidade = *iterator;
+        Entidade* entidade = *it;
         if (mapa->estaNoFOV(entidade->x, entidade->y))
         {
             entidade->render();
@@ -67,9 +64,9 @@ void Engine::atualizar()
     {
         jogador->atualizar();
     }
-    else if(statusJogo == TURNO_INIMIGO)
+    else if (statusJogo == TURNO_INIMIGO)
     {
-        for (Entidade** it = entidades.begin(); it != entidades.end();it++)
+        for (std::vector<Entidade*>::iterator it = entidades.begin(); it != entidades.end(); it++)
         {
             Entidade* entidade = *it;
             if (entidade->ai && entidade != jogador)
@@ -83,16 +80,11 @@ void Engine::atualizar()
 
 int Engine::random(int minimo, int maximo, int bonus)
 {
-    return minimo + rand()%(maximo-minimo)+bonus;
-}
-/*
-int Engine::randomf(float minimo, float maximo, float bonus)
-{
     return minimo + rand() % (maximo - minimo) + bonus;
 }
-*/
+
 void Engine::mandarParaOInicio(Entidade* entidade)
 {
-    entidades.remove(entidade);
-    entidades.insertBefore(entidade,0);
+    //entidades.erase(entidade);
+    //entidades.insertBefore(entidade, 0);
 }

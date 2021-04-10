@@ -39,7 +39,7 @@
     <ClCompile Include="src\GUI.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\LOG.cpp">
+    <ClCompile Include="src\LOGGER.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\Mapa.cpp">
@@ -51,7 +51,7 @@
     <ClCompile Include="src\Pegavel.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\BSP.cpp">
+    <ClCompile Include="Material.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClInclude Include="include\GUI.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="include\LOG.h">
+    <ClInclude Include="include\LOGGER.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="include\main.h">
@@ -92,7 +92,7 @@
     <ClInclude Include="include\Pegavel.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="include\BSP.h">
+    <ClInclude Include="Material.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

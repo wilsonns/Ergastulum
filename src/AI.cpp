@@ -20,12 +20,12 @@ float AI::condicaoFisica(Entidade* self)
 
 float AI::forcaPercebida(Entidade* self)
 {
-    return self->atacador->forcaBase * condicaoFisica(self);
+    return self->atacador->atributos["Forca"] * condicaoFisica(self);
 }
 
 float AI::perigoPercebido(Entidade* self)
 {
-    return (self->destrutivel->resistencia * self->atacador->forca) * condicaoFisica(self);
+    return (self->destrutivel->resistencia /* * self->container->arma->pegavel*/) * condicaoFisica(self);
 }
 
 aiJogador::aiJogador(float velocidade)
@@ -43,7 +43,8 @@ void aiJogador::atualizar(Entidade* self)
     int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 
     if(engine.mouse.lbutton)
     {
-        self->caminho = engine.pathMapa->acharCaminho(self, alvo = new Entidade(engine.mouse.cx, engine.mouse.cy, NULL, TCOD_white));    
+        self->caminho = engine.pathMapa->acharCaminho(self, alvo = new Entidade(engine.mouse.cx, engine.mouse.cy, NULL,NULL, TCOD_white));
+        delete[] alvo;
     }
     if (self->caminho.size() > 0)
     {
@@ -67,6 +68,9 @@ void aiJogador::atualizar(Entidade* self)
     case TCODK_CHAR:
         botaoAcao(self, engine.ultimoBotao.c);
         break;
+    case TCODK_F1:
+        engine.rodando = false;
+        break;
     default:
         break;
     }
@@ -82,9 +86,9 @@ bool aiJogador::moverOuAtacar(Entidade *self, int xalvo, int yalvo)
     {
         return false;
     }
-    for (Entidade** iterator = engine.entidades.begin(); iterator != engine.entidades.end(); iterator++)
+    for (std::vector<Entidade*>::iterator it = engine.entidades.begin(); it != engine.entidades.end(); it++)
     {
-        Entidade* entidade = *iterator;
+        Entidade* entidade = *it;
         if(entidade->x == xalvo && entidade->y == yalvo && entidade->destrutivel && !entidade->destrutivel->morreu() && entidade != self)
         {
             self->atacador->atacar(self, entidade);
@@ -110,9 +114,9 @@ Entidade* aiJogador::escolherDoInventario(Entidade* self)
    
     int atalho = 'a';
     int y = 1;
-    for (Entidade** it=self->container->inventario.begin();it!=self->container->inventario.end();it++)
+    for (int it=0;it< self->container->inventario.size();it++)
     {
-        Entidade* entidade = *it;
+        Entidade* entidade = self->container->inventario[it];
         con.setDefaultForeground(entidade->cor);
         con.printf(2, y, "(%c) %s",atalho,entidade->nome);
         atalho++;
@@ -128,7 +132,7 @@ Entidade* aiJogador::escolherDoInventario(Entidade* self)
         int entidadeIndex = key.c - 'a';
         if (entidadeIndex >= 0 && entidadeIndex < self->container->inventario.size())
         {
-            return self->container->inventario.get(entidadeIndex);
+            return self->container->inventario[entidadeIndex];
         }
     }
     return NULL;
@@ -141,16 +145,16 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
     case 'G'://Pegar um item no chão abaixo de vc
     {
         bool achado = false;
-        for (Entidade** iterator = engine.entidades.begin();iterator != engine.entidades.end();iterator++)
+        for (std::vector<Entidade*>::iterator it = engine.entidades.begin();it != engine.entidades.end();it++)
         {
-            Entidade* entidade = *iterator;
+            Entidade* entidade = *it;
             {
                 if (entidade->pegavel && entidade->x == self->x && entidade->y == self->y)
                 {
                     if (entidade->pegavel->pegar(entidade, self))
                     {
                         achado = true;
-                        engine.gui->mensagem(TCOD_white, "%s pega o %s!", self->nome, entidade->nome);
+                        engine.gui->mensagem(TCOD_white, "{} pega o {}!", self->nome, entidade->nome);
                         break;
                     }
                     else if (!achado)
@@ -184,13 +188,13 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
     case 'c':
     case 'C'://Não lembro o que isso era pra fazer :p vai ser teste invocar minion
     {
-        Entidade* minion = new Entidade(engine.jogador->x - 1, engine.jogador->y - 1, 'm', TCOD_dark_purple);
+        Entidade* minion = new Entidade(engine.jogador->x - 1, engine.jogador->y - 1, 'm',"minion", TCOD_dark_purple);
         minion->ai = new aiJogador(1);
-        minion->atacador = new Atacador(1, 1);
+        minion->atacador = new Atacador();
         minion->destrutivel = new destrutivelMonstro(1, 1, 1, "Cadaver de Minion");
         minion->ai->faccao = JOGADOR;
         minion->nome = "Minion";
-        engine.entidades.insertBefore(minion, 1);
+        engine.entidades.push_back(minion);
     }break;
     case 'd':
     case 'D'://Derrubar um item no local onde a entidade está
@@ -229,9 +233,10 @@ void aiMonstro::atualizar(Entidade* self)
 
 void aiMonstro::moverOuAtacar(Entidade *self,Entidade *alvo)
 {
-    if (self->arma == NULL && self->container->contemArma(self))
+    if (self->container->arma == NULL && self->container->contemArma(self))
     {
-        for (Entidade** it = self->container->inventario.begin(); it != self->container->inventario.end();it++)
+        for (std::vector<Entidade*>::iterator it = self->container->inventario.begin();
+            it < self->container->inventario.end();it++)
         {
             Entidade* entidade = *it;
             if (entidade->pegavel->tipo == 2)
@@ -279,10 +284,10 @@ void aiMonstro::acharAlvo(Entidade* self)
 {
     if (self->ai->inteligencia >= 1)
     {
-        if (self->arma == NULL && !self->container->contemArma(self))
+        if (self->container->arma == NULL && !self->container->contemArma(self))
         {
             int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
-            for (Entidade** it = self->ai->entidadesProximas.begin(); it != self->ai->entidadesProximas.end();it++)
+            for (std::vector<Entidade*>::iterator it = entidadesProximas.begin(); it != entidadesProximas.end();it++)
             {
                 Entidade* entidade = *it;
                 if (entidade->pegavel && entidade->pegavel->tipo == 2)
@@ -299,10 +304,10 @@ void aiMonstro::acharAlvo(Entidade* self)
             }
 
         }
-        else if (self->arma)
+        else if (self->container->arma)
         {
             int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
-            for (Entidade** it = self->ai->entidadesProximas.begin(); it != self->ai->entidadesProximas.end();it++)
+            for (std::vector<Entidade*>::iterator it = entidadesProximas.begin(); it != entidadesProximas.end(); it++)
             {
                 Entidade* entidade = *it;
                 if (entidade->destrutivel && !entidade->destrutivel->morreu() && entidade->ai->faccao != self->ai->faccao)

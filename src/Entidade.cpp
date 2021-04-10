@@ -1,10 +1,11 @@
 #include "Entidade.h"
 
-Entidade::Entidade(int x, int y, int simbolo, const TCODColor cor)
+Entidade::Entidade(int x, int y, int simbolo,std::string nome, const TCODColor cor)
 {
     this->x = x;
     this->y = y;
     this->simbolo = simbolo;
+    this->nome = nome;
     visao = 6;
     denso = true;
     atacador = NULL;
@@ -12,10 +13,8 @@ Entidade::Entidade(int x, int y, int simbolo, const TCODColor cor)
     ai = NULL;
     pegavel = NULL;
     container = NULL;
-
-    //Equips
-    armadura = arma = escudo = NULL;
-    //ctor
+    //engine.logger->logar( "{} criado", nome);
+//ctor
 }
 
 Entidade::~Entidade()
@@ -56,13 +55,6 @@ float Entidade::lerp(float inicio, float fim, float t)
 
 void Entidade::FOV(Entidade* self)
 {
-    /*for (int i = 0; i < engine.mapa->largura; i++)
-    {
-        for (int j = 0; j < engine.mapa->altura; j++)
-        {
-            engine.mapa->tornarNaoVisivel(i, j);
-        }
-    }*/
     self->ai->entidadesProximas.clear();
 
     for (int i = 0; i < 360; i++)
@@ -88,7 +80,7 @@ void Entidade::FOV(Entidade* self)
                 engine.mapa->tornarVisivel(tx, ty);*/
                 break;
             }
-            for (Entidade** it = engine.entidades.begin(); it != engine.entidades.end();it++)
+            for (std::vector<Entidade*>::iterator it = engine.entidades.begin(); it != engine.entidades.end();it++)
             {
 
                 Entidade* entidade = *it;
@@ -96,10 +88,6 @@ void Entidade::FOV(Entidade* self)
                 {
                     if (entidade->x == tx && entidade->y == ty)
                     {
-                        if (!self->ai->entidadesProximas.contains(entidade))
-                        {
-                            self->ai->entidadesProximas.push(entidade);
-                        }
                     }
                 }
 

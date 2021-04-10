@@ -15,9 +15,9 @@ class Destrutivel
         int agilidade; //A capacidade de esquivar de um golpe
         int agilidadeBase;//
         
-        const char *nomeCadaver;//o nome que a entidade terá quando morrer
+        std::string nomeCadaver;//o nome que a entidade terá quando morrer
 
-        Destrutivel(int vigor, int resistencia, int agilidade, const char* nomeCadaver);//ctor
+        Destrutivel(int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
         inline bool morreu()
         {
             if(hp<=0)
@@ -43,15 +43,21 @@ class Destrutivel
 class destrutivelMonstro : public Destrutivel
 {
     public:
-        destrutivelMonstro(int vigor, int resistencia, int agilidade, const char* nomeCadaver);//ctor
+        destrutivelMonstro(int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
         void morrer(Entidade *self);
 };
 
 class destrutivelJogador : public Destrutivel
 {
     public:
-        destrutivelJogador(int vigor, int resistencia, int agilidade, const char* nomeCadaver);//ctor
+        destrutivelJogador(int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
         void morrer(Entidade *self);
 };
 
+class destrutivelTerreno : public Destrutivel
+{
+public:
+    destrutivelTerreno(int resistencia);//ctor
+    void destruir(Tile* self);
+};
 #endif // DESTRUTIVEL_H

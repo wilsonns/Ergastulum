@@ -1,6 +1,6 @@
 #include "Destrutivel.h"
 
-Destrutivel::Destrutivel(int vigor, int resistencia,int agilidade, const char *nomeCadaver)
+Destrutivel::Destrutivel(int vigor, int resistencia,int agilidade, std::string nomeCadaver)
 {
     this->hpMax = vigor * 5;
     this->hp = hpMax;
@@ -42,10 +42,10 @@ int Destrutivel::curar(int valor)
 void Destrutivel::morrer(Entidade *self)
 {
     self->simbolo = '%';
-    engine.gui->mensagem(TCOD_darker_red, "%s morreu!", self->nome);
+    engine.gui->mensagem(TCOD_darker_red, "{} morreu!", self->nome);
     self->nome = nomeCadaver;
     self->denso = false;
-    for (Entidade**it = self->container->inventario.begin(); it !=self->container->inventario.end();it++)
+    for (std::vector<Entidade*>::iterator it = self->container->inventario.begin(); it !=self->container->inventario.end();it++)
     {
         Entidade* entidade = *it;
         entidade->pegavel->soltar(entidade,self);
@@ -53,12 +53,12 @@ void Destrutivel::morrer(Entidade *self)
     engine.mandarParaOInicio(self);
 }
 
-destrutivelMonstro::destrutivelMonstro(int vigor, int resistencia,int agilidade, const char* nomeCadaver) : 
+destrutivelMonstro::destrutivelMonstro(int vigor, int resistencia,int agilidade, std::string nomeCadaver) : 
     Destrutivel(vigor,resistencia,agilidade,nomeCadaver)
 {
 }
 
-destrutivelJogador::destrutivelJogador(int vigor, int resistencia, int agilidade, const char* nomeCadaver) : 
+destrutivelJogador::destrutivelJogador(int vigor, int resistencia, int agilidade, std::string nomeCadaver) : 
     Destrutivel(vigor, resistencia, agilidade, nomeCadaver)
 {
 }
@@ -73,4 +73,9 @@ void destrutivelJogador::morrer(Entidade *self)
 {
     Destrutivel::morrer(self);
     engine.rodando = false;
+}
+
+void destrutivelTerreno::destruir(Tile* self)
+{
+    self->passavel = true;
 }

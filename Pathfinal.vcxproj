@@ -79,7 +79,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\WILSON\Documents\Prog\C++\Pathfinal\lib\include;C:\Users\WILSON\Documents\Prog\C++\Pathfinal\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Will\Desktop\Programação\Rogue\lib\include;C:\Users\Will\Desktop\Programação\Rogue\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -144,7 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\BSP.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\AI.cpp" />
     <ClCompile Include="src\Atacador.cpp" />
@@ -153,13 +153,12 @@
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Entidade.cpp" />
     <ClCompile Include="src\GUI.cpp" />
-    <ClCompile Include="src\LOG.cpp" />
+    <ClCompile Include="src\LOGGER.cpp" />
     <ClCompile Include="src\Mapa.cpp" />
     <ClCompile Include="src\Pathfinding.cpp" />
     <ClCompile Include="src\Pegavel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\BSP.h" />
     <ClInclude Include="include\AI.h" />
     <ClInclude Include="include\Atacador.h" />
     <ClInclude Include="include\Container.h" />
@@ -167,11 +166,12 @@
     <ClInclude Include="include\Engine.h" />
     <ClInclude Include="include\Entidade.h" />
     <ClInclude Include="include\GUI.h" />
-    <ClInclude Include="include\LOG.h" />
+    <ClInclude Include="include\LOGGER.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\Mapa.h" />
     <ClInclude Include="include\Pathfinding.h" />
     <ClInclude Include="include\Pegavel.h" />
+    <ClInclude Include="Material.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

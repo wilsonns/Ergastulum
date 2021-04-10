@@ -20,10 +20,10 @@ public:
 
     Mapa *mapa;//cria o mapa
     Pathfinding* pathMapa;//cria o mapa de pathfinding compartilhado por todas as entidades que se movem
-    TCODList<Entidade*> entidades;//cria uma TCODList de entidades livres no mapa(inimigos, itens)
+    std::vector<Entidade*> entidades;//cria uma std::vector de entidades livres no mapa(inimigos, itens)
     Entidade *jogador;//cria um pointer para o jogador
     Entidade* fim;//cria um pointer para 
-    LOG *log;//cria o log externo para debug
+    LOGGER *logger;//cria o log externo para debug
     GUI *gui;//Cria a interface do jogo
     TCOD_key_t ultimoBotao;
     TCOD_mouse_t mouse;

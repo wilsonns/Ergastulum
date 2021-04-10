@@ -7,7 +7,12 @@ class Container
 	
 public:
 	int tamanho;//tamano maximo do vetor inventario
-	TCODList<Entidade*> inventario;//o vetor inventario
+	std::vector<Entidade*> inventario;//o vetor inventario
+
+	//Os slots de Equipamento
+	Entidade* armadura;
+	Entidade* arma;
+	Entidade* escudo;
 
 	Container(int tamanho);//ctor
 	~Container();//dtor

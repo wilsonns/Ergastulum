@@ -10,7 +10,7 @@ GUI::GUI()
 GUI::~GUI()
 {
     delete con;
-    log.clearAndDelete();
+    log.clear();
     //dtor
 }
 
@@ -20,30 +20,23 @@ void GUI::render()
     con->clear();
 
     renderBarra(1, 1, LARGURA_BARRA, engine.jogador->destrutivel->hp, engine.jogador->destrutivel->hpMax, TCOD_light_red, TCOD_darker_red);
-    con->printf(1, 2, "Forca:%i", engine.jogador->atacador->forca);
+    con->printf(1, 2, "Forca:%i", engine.jogador->atacador->atributos["Forca"]);
 
    
 
     int y = 1;
-    if (log.size() <= 5) {
-        for (Mensagem** it = log.begin();it != log.end();it++)
-        {
-            Mensagem* mensagem = *it;
-            con->setDefaultForeground(mensagem->cor);
-            con->printf(X_MENSAGEM, y, mensagem->texto);
-            y++;
-        }
-    }
-    else if (log.size() > 5)
+    if (log.size() > 5)
     {
-        for (Mensagem** it = log.end()-5;it != log.end();it++)
+        log.erase(log.begin());
+    }
+    
+        for (std::vector<Mensagem*>::iterator it = log.begin();it != log.end();it++)
         {
             Mensagem* mensagem = *it;
             con->setDefaultForeground(mensagem->cor);
-            con->printf(X_MENSAGEM, y, mensagem->texto);
+            con->printf(X_MENSAGEM, y, mensagem->texto.c_str());
             y++;
         }
-    }
     renderMouse();
     TCODConsole::blit(con, 0, 0, engine.largura, ALTURA_PAINEL, 
         TCODConsole::root, 0, engine.altura - ALTURA_PAINEL);
@@ -65,37 +58,21 @@ void GUI::renderBarra(int x, int y, int largura, int valor, int valormax, const 
 }
 
 
-void GUI::mensagem(const TCODColor& cor, const char* texto, ...)
+void GUI::mensagem(const TCODColor& cor, std::string texto, ...)
 {
-    va_list ap;
-    char buf[128];
-    va_start(ap, texto);
-    vsprintf(buf, texto, ap);
-    va_end(ap);
+    va_list ap;//declara a lista de variáveis variádicas(os "...")
+    va_start(ap, texto);//define a lista de variáveis variádicas(ap) e após qual variável se iniciam as variáveis variádicas(texto)
+    std::string busca = "{}";//A variável que vai ser substituída pelo texto no loop while abaixo
+    while (texto.find(busca)!=std::string::npos)
+    {
+        std::size_t ini = texto.find(busca);
+        texto.erase(ini, busca.length());
+        texto.insert(ini, va_arg(ap, std::string));
+    }
 
-    char* lineBegin = buf;
-    char* lineEnd;
-    do {
-        // make room for the new message
-        /*if (log.size() == ALTURA_PAINEL_MSG) {
-            Mensagem* toRemove = log.get(0);
-            log.remove(toRemove);
-            delete toRemove;
-        }*/
-
-        // detect end of the line
-        lineEnd = strchr(lineBegin, '\n');
-        if (lineEnd) {
-            *lineEnd = '\0';
-        }
-
-        // add a new message to the log
-        Mensagem* msg = new Mensagem(lineBegin, cor);
-        log.push(msg);
-
-        // go to next line
-        lineBegin = lineEnd + 1;
-    } while (lineEnd);
+    va_end(ap);//encerra a lista de variáveis variádicas
+    Mensagem* msg = new Mensagem(texto, cor);
+    log.push_back(msg);
 }
 
 void GUI::renderMouse()
@@ -104,12 +81,12 @@ void GUI::renderMouse()
     {
         return;
     }
-    char buf[128]="";
+    std::string buf;
     bool primeiro = true;
 
     if (TCOD_console_has_mouse_focus())
     {
-        for (Entidade** it = engine.entidades.begin();it != engine.entidades.end();it++)
+        for (std::vector<Entidade*>::iterator it = engine.entidades.begin();it != engine.entidades.end();it++)
         {
             Entidade* entidade = *it;
             {
@@ -120,17 +97,17 @@ void GUI::renderMouse()
                 {
                     if (!primeiro)
                     {
-                        strcat(buf, ",");
+                        buf += ",";
                     }
                     else
                     {
                         primeiro = false;
                     }
-                    strcat(buf, entidade->nome);
+                    buf += entidade->nome.c_str();
                 }
             }
         }
     }
     con->setDefaultForeground(TCOD_white);
-    con->printf(1, 0, buf);
+    con->printf(1, 0, buf.c_str());
 }

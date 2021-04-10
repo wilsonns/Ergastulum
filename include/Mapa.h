@@ -5,9 +5,9 @@
 
 struct Tile
 {
+    Destrutivel *destrutivel;
     bool passavel;//as entidades podem passar por aqui?
     bool explorado = false;//o jogador ja explorou aqui?
-    
 };
 
 struct Sala
@@ -39,43 +39,43 @@ public:
     BSPListener(Mapa& mapa);
 
     bool visitNode(TCODBsp* node, void* userData);
- };
+};
 class Mapa
 {
-    public:
+public:
+    json j;
+    int altura, largura;//altura e altura do mapa de jogo
+    Mapa(int largura, int altura);//ctor
+    virtual ~Mapa();//dtor
 
-        int altura, largura;//altura e altura do mapa de jogo
-        Mapa(int largura, int altura);//ctor
-        virtual ~Mapa();//dtor
+    ///FUNÇÕES
+    void render();//Desenha o mapa na tela;;;;
 
-        ///FUNÇÕES
-        void render();//Desenha o mapa na tela;;;;
-        
-        //PAREDE
-        bool eParede(int x, int y); //Detecta paredes na posição x/y
-        void fazerParede(int x, int y); //Torna x/y numa parede
-        void cavar(int x1, int x2, int y1, int y2); // Tira a parede de x/y
-        bool podeAndar(int x, int y); //Verifica se x/y é caminhável
-        //FOV
-        bool estaNoFOV(int x, int y)const; // verifica se x/y está visivel
-        void computarFOV();
+    //PAREDE
+    bool eParede(int x, int y); //Detecta paredes na posição x/y
+    void fazerParede(int x, int y); //Torna x/y numa parede
+    void cavar(int x1, int x2, int y1, int y2); // Tira a parede de x/y
+    bool podeAndar(int x, int y); //Verifica se x/y é caminhável
+    //FOV
+    bool estaNoFOV(int x, int y)const; // verifica se x/y está visivel
+    void computarFOV();
 
-        //EXPLORAÇÃO
-        bool foiExplorado(int x, int y)const;//x/y já foi explorado? se sim, retorna verdadeiro, se não, falso
+    //EXPLORAÇÃO
+    bool foiExplorado(int x, int y)const;//x/y já foi explorado? se sim, retorna verdadeiro, se não, falso
 
-        //CRIAÇÃO DE DUNGEON
-        std::vector<Sala*> dungeon;
-        void criarSala(bool primeira, int x1, int x2, int y1, int y2);//Cria uma sala
+    //CRIAÇÃO DE DUNGEON
+    std::vector<Sala*> dungeon;
+    void criarSala(bool primeira, int x1, int x2, int y1, int y2);//Cria uma sala
 
-        //ADCIONAR ENTIDADES
-        void adcmonstro(int x, int y);//adciona um monstro ao mapa
-        void adcionarItem(int x, int y, int simbolo, int tipo, const char* nome, int valor, const TCODColor& cor);//adciona um item(atualmente, uma poção de cura, o único item nessa porra) na posição x/y
+    //ADCIONAR ENTIDADES
+    void adcmonstro(int x, int y);//adciona um monstro ao mapa
+    void adcionarItem(int x, int y, int simbolo, int tipo, std::string nome, int valor, const TCODColor& cor);//adciona um item(atualmente, uma poção de cura, o único item nessa porra) na posição x/y
 
-    protected:
-        Tile* tiles;//array de Tiles que contém as informações do mapa de jogo
-        TCODMap* mapa;
-        friend class BspListener;
-    private:
+protected:
+    Tile* tiles;//array de Tiles que contém as informações do mapa de jogo
+    TCODMap* mapa;
+    friend class BspListener;
+private:
 };
 
 #endif // MAPA_H
