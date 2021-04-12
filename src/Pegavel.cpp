@@ -17,9 +17,8 @@ bool Pegavel::pegar(Entidade* self, Entidade* portador)
 		std::vector<Entidade*>::iterator it = std::find(engine.entidades.begin(), engine.entidades.end(), self);
 		if (*it == self)
 		{
-			self->x = 999;
-			self->y = 999;
-			//engine.entidades.erase(it);
+			
+		        engine.aRemover.push_back(*it);
 			return true;
 		}
 	}
