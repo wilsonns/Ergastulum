@@ -20,12 +20,12 @@ float AI::condicaoFisica(Entidade* self)
 
 float AI::forcaPercebida(Entidade* self)
 {
-    return self->atacador->atributos["Forca"] * condicaoFisica(self);
+    return self->atributos["Forca"]->nivelBase * condicaoFisica(self);
 }
 
 float AI::perigoPercebido(Entidade* self)
 {
-    return (self->destrutivel->resistencia /* * self->container->arma->pegavel*/) * condicaoFisica(self);
+    return (self->atributos["Resistencia"]->nivelAjustado * condicaoFisica(self));
 }
 
 aiJogador::aiJogador(float velocidade)
@@ -40,7 +40,7 @@ void aiJogador::atualizar(Entidade* self)
     {
         return;
     }
-    int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 
+    int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 1
     if(engine.mouse.lbutton)
     {
         self->caminho = engine.pathMapa->acharCaminho(self, alvo = new Entidade(engine.mouse.cx, engine.mouse.cy, NULL,NULL, TCOD_white));
@@ -91,7 +91,7 @@ bool aiJogador::moverOuAtacar(Entidade *self, int xalvo, int yalvo)
         Entidade* entidade = *it;
         if(entidade->x == xalvo && entidade->y == yalvo && entidade->destrutivel && !entidade->destrutivel->morreu() && entidade != self)
         {
-            self->atacador->atacar(self, entidade);
+            self->atacador->atacar(entidade);
             return false;
         }
     }
@@ -114,15 +114,15 @@ Entidade* aiJogador::escolherDoInventario(Entidade* self)
    
     int atalho = 'a';
     int y = 1;
-    for (int it=0;it< self->container->inventario.size();it++)
+    for (std::vector<Entidade*>::iterator it=self->container->inventario.begin();it != self->container->inventario.end();it++)
     {
-        Entidade* entidade = self->container->inventario[it];
-        con.setDefaultForeground(entidade->cor);
-        con.printf(2, y, "(%c) %s",atalho,entidade->nome);
+        Entidade* entidade = *it;
+        con.setDefaultForeground(TCOD_white);
+        con.printf(2, y, "(%c) - %s",atalho,entidade->nome.c_str());
         atalho++;
         y++;
     }
-    TCODConsole::blit(&con, 0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, TCODConsole::root, 10, engine.altura / 2-ALTURA_INVENTARIO);
+    TCODConsole::blit(&con, 0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, TCODConsole::root, 10, engine.altura / 2 - ALTURA_INVENTARIO);
     TCODConsole::flush();
 
     TCOD_key_t key;
@@ -190,8 +190,8 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
     {
         Entidade* minion = new Entidade(engine.jogador->x - 1, engine.jogador->y - 1, 'm',"minion", TCOD_dark_purple);
         minion->ai = new aiJogador(1);
-        minion->atacador = new Atacador();
-        minion->destrutivel = new destrutivelMonstro(1, 1, 1, "Cadaver de Minion");
+        minion->atacador = new Atacador(minion);
+        minion->destrutivel = new destrutivelMonstro(minion,1, 1, 1, "Cadaver de Minion");
         minion->ai->faccao = JOGADOR;
         minion->nome = "Minion";
         engine.entidades.push_back(minion);
@@ -213,6 +213,10 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
         engine.debug = !engine.debug;
         break;
 
+
+    case'u':
+        self->uparHabilidade("Ataque", 200);
+        break;
     }
 }
 
@@ -239,13 +243,14 @@ void aiMonstro::moverOuAtacar(Entidade *self,Entidade *alvo)
             it < self->container->inventario.end();it++)
         {
             Entidade* entidade = *it;
-            if (entidade->pegavel->tipo == 2)
+            if (entidade->pegavel->tipo == ARMA)
             {
                 entidade->pegavel->usar(entidade, self);
                 return;
             }
         }
     }
+
     acharAlvo(self);
     
     if (alvo)
@@ -270,7 +275,7 @@ void aiMonstro::moverOuAtacar(Entidade *self,Entidade *alvo)
                 self->y = self->caminho[0]->y;
                 return;
             }
-            self->atacador->atacar(self, alvo);
+            self->atacador->atacar(alvo);
         }
         else if (self->caminho.size() == 0)
         {
@@ -290,7 +295,7 @@ void aiMonstro::acharAlvo(Entidade* self)
             for (std::vector<Entidade*>::iterator it = entidadesProximas.begin(); it != entidadesProximas.end();it++)
             {
                 Entidade* entidade = *it;
-                if (entidade->pegavel && entidade->pegavel->tipo == 2)
+                if (entidade->pegavel && entidade->pegavel->tipo == ARMA)
                 {
                     int dx = entidade->x - self->x;
                     int dy = entidade->y - self->y;

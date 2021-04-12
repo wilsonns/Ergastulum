@@ -25,6 +25,17 @@ class Entidade
         Pegavel* pegavel;//é uma entidade que pode ser pega e guardada em um contaienr?
         Container* container;//é uma entidade que pode guardar outras entidades?
 
+        //Atributos e Habilidades
+        std::unordered_map<std::string, Habilidade*> habilidades;
+        std::unordered_map<std::string, Stats*> atributos;
+
+        //Funções para Habilidades e Atributos
+        void adcionarAtributo(std::string s_atributo);
+        void modificarAtributo(std::string s_atributo, int valor);//preciso verificar se preciso deletar individualmente cada habilidade/atributo
+
+        void adcionarHabilidade(std::string s_habilidade);
+        void modificarHabilidade(std::string s_habilidade, int valor);
+        void uparHabilidade(std::string s_habilidade, int xp);
 
         std::vector<Nodo*> caminho;//O caminho retornado pelas funções de pathfinding
 

@@ -144,8 +144,8 @@ void Mapa::adcmonstro(int x, int y)
     std::string nome = j[bicho]["nome"].get<std::string>();
     Entidade* monstro = new Entidade(x, y, simbolo, nome, TCOD_darker_green);
     monstro->visao = 5;
-    monstro->destrutivel = new destrutivelMonstro(4, 2, 2, "Cadavi");
-    monstro->atacador = new Atacador();
+    monstro->destrutivel = new destrutivelMonstro(monstro,4, 2, 2, "Cadavi");
+    monstro->atacador = new Atacador(monstro);
     monstro->container = new Container(5);
     monstro->ai = new aiMonstro(1);
     monstro->ai->faccao = ORCS;
@@ -154,7 +154,29 @@ void Mapa::adcmonstro(int x, int y)
 
 void Mapa::adcionarItem(int x, int y, int simbolo, int tipo, std::string nome, int valor, const TCODColor& cor)
 {
-
+    Entidade* item = new Entidade(x, y, simbolo, nome, cor);
+    item->denso = false;
+    if (tipo == POCAO)
+    {
+        item->pegavel = new Curador(valor);
+        item->pegavel->tipo = tipo;
+    }
+    else if(tipo == ARMA)
+    {
+        item->pegavel = new Arma(valor);
+        item->pegavel->tipo = tipo;
+    }
+    else if (tipo == ARMADURA)
+    {
+        item->pegavel = new Armadura(valor);
+        item->pegavel->tipo = tipo;
+    }
+    else
+    {
+        delete item;
+        return;
+    }
+    engine.entidades.push_back(item);
 }
 
 void Mapa::criarSala(bool primeiro, int x1, int x2, int y1, int y2)

@@ -76,8 +76,6 @@ void Entidade::FOV(Entidade* self)
 
             if (engine.mapa->eParede(tx, ty))
             {
-                /*engine.mapa->tornarExplorado(tx, ty);
-                engine.mapa->tornarVisivel(tx, ty);*/
                 break;
             }
             for (std::vector<Entidade*>::iterator it = engine.entidades.begin(); it != engine.entidades.end();it++)
@@ -88,15 +86,63 @@ void Entidade::FOV(Entidade* self)
                 {
                     if (entidade->x == tx && entidade->y == ty)
                     {
+                        if (std::find(self->ai->entidadesProximas.begin(), self->ai->entidadesProximas.end(), entidade) == self->ai->entidadesProximas.end())
+                        {
+                            self->ai->entidadesProximas.push_back(entidade);
+                        }
                     }
                 }
 
             }
-            /*
-            engine.mapa->tornarExplorado(tx, ty);
-            engine.mapa->tornarVisivel(tx, ty);
-            */
+        }
+    }
+}
 
+void Entidade::adcionarAtributo(std::string s_atributo)
+{
+    Stats* o_atributo;
+    atributos.emplace(s_atributo,o_atributo = new Stats());
+}
+
+
+void Entidade::modificarAtributo(std::string s_atributo, int valor)
+{
+    if (atributos.find(s_atributo) != atributos.end())
+    {
+        atributos[s_atributo]->nivelAjustado += valor;
+    }
+}
+
+
+void Entidade::adcionarHabilidade(std::string s_habilidade)
+{
+    Habilidade* o_habilidade;
+    habilidades.emplace(s_habilidade,o_habilidade = new Habilidade());
+}
+
+void Entidade::modificarHabilidade(std::string s_habilidade, int valor)
+{
+    if (habilidades.find(s_habilidade) != habilidades.end())
+    {
+        habilidades[s_habilidade]->nivelAjustado += valor;
+    }
+}
+
+void Entidade::uparHabilidade(std::string s_habilidade, int xp)
+{
+    if (habilidades.find(s_habilidade) != habilidades.end())
+    {
+        habilidades[s_habilidade]->xp += xp;
+        if (habilidades[s_habilidade]->xp >= habilidades[s_habilidade]->xpProx)
+        {
+            habilidades[s_habilidade]->nivelBase += 1;
+            habilidades[s_habilidade]->nivelAjustado += 1;
+            habilidades[s_habilidade]->xp -= habilidades[s_habilidade]->xpProx;
+            habilidades[s_habilidade]->xpProx = (int)pow((100 * habilidades[s_habilidade]->nivelBase),1.5);
+            if (this == engine.jogador)
+            {
+                engine.gui->mensagem(TCOD_light_yellow, "{} de {} subiu de nível!", s_habilidade, this->nome);
+            }
         }
     }
 }

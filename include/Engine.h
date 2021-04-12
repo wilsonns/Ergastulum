@@ -28,7 +28,7 @@ public:
     TCOD_key_t ultimoBotao;
     TCOD_mouse_t mouse;
     std::vector<TCODBsp*> folhas;
-
+    std::vector<Entidade*> aRemover;
 
     bool rodando; //o jogo está rodando?
     bool debug; // o jogo esta no modo debug?

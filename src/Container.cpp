@@ -21,7 +21,7 @@ bool Container::contemArma(Entidade* portador)
 		for (std::vector<Entidade*>::iterator it = inventario.begin(); it != inventario.end();it++)
 		{
 			Entidade* entidade = *it;
-			if (entidade->pegavel->tipo == 2)
+			if (entidade->pegavel->tipo == ARMA)
 			{
 				return true;
 			}
@@ -53,6 +53,7 @@ void Container::remover(Entidade* entidade)
 		if(comparavel == entidade)
 		{
 			inventario.erase(it);
+			return;
 		}
 	}
 }

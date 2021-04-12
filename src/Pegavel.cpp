@@ -17,7 +17,9 @@ bool Pegavel::pegar(Entidade* self, Entidade* portador)
 		std::vector<Entidade*>::iterator it = std::find(engine.entidades.begin(), engine.entidades.end(), self);
 		if (*it == self)
 		{
-			engine.entidades.erase(it);
+			self->x = 999;
+			self->y = 999;
+			//engine.entidades.erase(it);
 			return true;
 		}
 	}
@@ -39,7 +41,7 @@ bool Pegavel::soltar(Entidade* self, Entidade* portador)
 {
 	if (portador->container)
 	{
-		//engine.mapa->adcionarItem(portador->x, portador->y, self->simbolo, self->pegavel->tipo, self->nome, 5, self->cor);
+		engine.mapa->adcionarItem(portador->x, portador->y, self->simbolo, self->pegavel->tipo, self->nome,self->pegavel->valor, self->cor);
 		portador->container->remover(self);
 		delete self;
 		return true;
@@ -47,7 +49,12 @@ bool Pegavel::soltar(Entidade* self, Entidade* portador)
 	return false;
 }
 
-Curador::Curador(float valor)
+/// Curador
+/// 
+/// 
+/// 
+
+Curador::Curador(int valor)
 {
 	this->valor = valor;
 }
@@ -64,11 +71,17 @@ bool Curador::usar(Entidade* self, Entidade* portador)
 	}
 	return false;
 }
-//ARMA
+
+/// Arma
+/// 
+/// 
+/// 
+
 Arma::Arma(int dano)
 {
-	this->dano = dano;
+	this->valor = dano;
 }
+
 
 bool Arma::usar(Entidade* self, Entidade* portador)
 {
@@ -90,7 +103,7 @@ void Arma::equipar(Entidade* self, Entidade* portador)
 	if (portador->container->arma == NULL)
 	{
 		portador->container->arma = self;
-
+		portador->modificarAtributo("Forca", valor);
 		engine.gui->mensagem(TCOD_white, "{} equipa {}!", portador->nome, self->nome);
 	}
 	else if (portador->container->arma != NULL)
@@ -104,7 +117,7 @@ void Arma::desequipar(Entidade* self, Entidade* portador)
 {
 	if (portador->container->arma != NULL)
 	{
-//		portador->atacador->forca -= dano;
+		portador->modificarAtributo("Forca", valor*(-1));
 		portador->container->arma = NULL;
 		engine.gui->mensagem(TCOD_white, "{} desequipa {}!", portador->nome, self->nome);
 	}
@@ -114,11 +127,14 @@ void Arma::desequipar(Entidade* self, Entidade* portador)
 		return;
 	}
 }
-///ARMADURA
+/// ARMADURA
+/// 
+/// 
+/// 
 
 Armadura::Armadura(int bResistencia)
 {
-	this->bResistencia = bResistencia;
+	this->valor = bResistencia;
 }
 
 bool Armadura::usar(Entidade* self, Entidade* portador)
@@ -141,7 +157,7 @@ void Armadura::equipar(Entidade* self, Entidade* portador)
 	if (portador->container->armadura == NULL)
 	{
 		portador->container->armadura = self;
-		portador->destrutivel->resistencia += bResistencia;
+		portador->modificarAtributo("Resistencia",valor);
 		engine.gui->mensagem(TCOD_white, "{} veste {}!", portador->nome, self->nome);
 	}
 	else if (portador->container->armadura != NULL)
@@ -155,7 +171,7 @@ void Armadura::desequipar(Entidade* self, Entidade* portador)
 {
 	if (portador->container->armadura != NULL)
 	{
-		portador->destrutivel->resistencia -= bResistencia;
+		portador->modificarAtributo("Resistencia", valor*(-1)); 
 		portador->container->armadura = NULL;
 		engine.gui->mensagem(TCOD_white, "{} tira {}!", portador->nome, self->nome);
 	}

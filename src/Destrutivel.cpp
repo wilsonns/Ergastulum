@@ -1,13 +1,18 @@
 #include "Destrutivel.h"
 
-Destrutivel::Destrutivel(int vigor, int resistencia,int agilidade, std::string nomeCadaver)
+Destrutivel::Destrutivel(Entidade* self, int vigor, int resistencia, int agilidade, std::string nomeCadaver)
 {
-    this->hpMax = vigor * 5;
+    this->self = self;
+    self->adcionarAtributo("Vigor");
+    self->modificarAtributo("Vigor", vigor);
+    self->adcionarAtributo("Resistencia");
+    self->modificarAtributo("Resistencia", resistencia);
+    self->adcionarAtributo("Agilidade");
+    self->modificarAtributo("Agilidade", agilidade);
+
+    this->hpMax = self->atributos["Vigor"]->nivelAjustado * 5;
     this->hp = hpMax;
-    this->resistencia = resistencia;
-    resistenciaBase = resistencia;
-    this->agilidade = agilidade;
-    agilidadeBase = agilidade;
+    
     this->nomeCadaver = nomeCadaver;
 
     //ctor
@@ -18,12 +23,12 @@ Destrutivel::~Destrutivel()
     //dtor
 }
 
-int Destrutivel::tomarDano(Entidade *self, int dano)
+int Destrutivel::tomarDano(int dano)
 {
     hp -= dano;
     if(hp <= 0)
     {
-        morrer(self);
+        morrer();
     }
     return dano;
 }
@@ -39,7 +44,7 @@ int Destrutivel::curar(int valor)
     return valor;
 }
 
-void Destrutivel::morrer(Entidade *self)
+void Destrutivel::morrer()
 {
     self->simbolo = '%';
     engine.gui->mensagem(TCOD_darker_red, "{} morreu!", self->nome);
@@ -53,25 +58,25 @@ void Destrutivel::morrer(Entidade *self)
     engine.mandarParaOInicio(self);
 }
 
-destrutivelMonstro::destrutivelMonstro(int vigor, int resistencia,int agilidade, std::string nomeCadaver) : 
-    Destrutivel(vigor,resistencia,agilidade,nomeCadaver)
+destrutivelMonstro::destrutivelMonstro(Entidade *self, int vigor, int resistencia,int agilidade, std::string nomeCadaver) : 
+    Destrutivel(self, vigor,resistencia,agilidade,nomeCadaver)
 {
 }
 
-destrutivelJogador::destrutivelJogador(int vigor, int resistencia, int agilidade, std::string nomeCadaver) : 
-    Destrutivel(vigor, resistencia, agilidade, nomeCadaver)
+destrutivelJogador::destrutivelJogador(Entidade* self, int vigor, int resistencia, int agilidade, std::string nomeCadaver) :
+    Destrutivel(self, vigor, resistencia, agilidade, nomeCadaver)
 {
 }
 
-void destrutivelMonstro::morrer(Entidade *self)
+void destrutivelMonstro::morrer()
 {
-    Destrutivel::morrer(self);
+    Destrutivel::morrer();
 }
 
 
-void destrutivelJogador::morrer(Entidade *self)
+void destrutivelJogador::morrer()
 {
-    Destrutivel::morrer(self);
+    Destrutivel::morrer();
     engine.rodando = false;
 }
 

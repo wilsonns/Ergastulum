@@ -20,7 +20,7 @@ void GUI::render()
     con->clear();
 
     renderBarra(1, 1, LARGURA_BARRA, engine.jogador->destrutivel->hp, engine.jogador->destrutivel->hpMax, TCOD_light_red, TCOD_darker_red);
-    con->printf(1, 2, "Forca:%i", engine.jogador->atacador->atributos["Forca"]);
+    con->printf(1, 2, "Forca:%i", engine.jogador->atributos["Forca"]->nivelAjustado);
 
    
 
@@ -54,7 +54,7 @@ void GUI::renderBarra(int x, int y, int largura, int valor, int valormax, const 
         con->rect(x, y, largura, 1, false, TCOD_BKGND_SET);
     }
     con->setDefaultBackground(TCOD_white);
-    con->printf(x + largura / 2, y,TCOD_BKGND_NONE, TCOD_CENTER,"%s:%i/%i",engine.jogador->nome,valor,valormax);
+    con->printf(x + largura / 2, y, TCOD_BKGND_NONE, TCOD_CENTER, "%s:%i/%i", engine.jogador->nome.c_str(), valor, valormax);
 }
 
 

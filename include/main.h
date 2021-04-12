@@ -6,7 +6,7 @@ extern int LARGURA_TERM;
 extern int ALTURA_TERM;
 
 #include<iostream>
-#include "libtcod.hpp"
+#include"libtcod.hpp"
 #include<time.h>
 #include<vector>
 #include<cmath>
@@ -30,6 +30,8 @@ class Mapa;
 class Engine;
 class LOGGER;
 class GUI;
+class Stats;
+class Habilidade;
 
 #include<Destrutivel.h>
 #include<Atacador.h>
@@ -42,5 +44,6 @@ class GUI;
 #include<Engine.h>
 #include<LOGGER.h>
 #include<GUI.h>
+#include<Stats.h>
 
 #endif // MAIN_H_INCLUDED

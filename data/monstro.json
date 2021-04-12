@@ -1,7 +1,17 @@
 {
   "Orc": {
     "nome": "Orcs",
-    "simbolo": 79
+    "simbolo": 79,
+    "atributos": {
+      "forcaMin": 1,
+      "forcaMax": 4,
+      "destrezaMin": 3,
+      "destrezaMax": 5,
+      "vigorMin": 2,
+      "vigorMax": 3,
+      "resistenciaMin": 1,
+      "resistenciaMax": 1
+    }
   },
   "Troll": {
     "nome": "Troll",

@@ -5,6 +5,8 @@
 class Destrutivel
 {
     public:
+        Entidade* self;
+
         int hpMax;//maximo de pontos de vida
         int hp;//pontos de vida atual
         
@@ -17,7 +19,7 @@ class Destrutivel
         
         std::string nomeCadaver;//o nome que a entidade terá quando morrer
 
-        Destrutivel(int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
+        Destrutivel(Entidade *self,int vigor=1, int resistencia=1, int agilidade=1, std::string nomeCadaver = "Cadaver");//ctor
         inline bool morreu()
         {
             if(hp<=0)
@@ -27,11 +29,11 @@ class Destrutivel
             return false;
         }//Retorna verdadeiro se tiver morrido, falso se não
 
-        int tomarDano(Entidade *self, int dano);//subtrai o dano sofrido dos pontos de vida atuais e retorna a quantidade de dano que foi causada
+        int tomarDano(int dano);//subtrai o dano sofrido dos pontos de vida atuais e retorna a quantidade de dano que foi causada
 
         int curar(int valor);//recupera pontos de vida da entidade e retorna a quantidade de pvs curados
 
-        virtual void morrer(Entidade *self);//Função virtual que mata a entidade, tirando-a do vetor entidades e enfiando-a no vetor mortos
+        virtual void morrer();//Função virtual que mata a entidade, tirando-a do vetor entidades e enfiando-a no vetor mortos
 
         virtual ~Destrutivel();//dtor
 
@@ -43,15 +45,15 @@ class Destrutivel
 class destrutivelMonstro : public Destrutivel
 {
     public:
-        destrutivelMonstro(int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
-        void morrer(Entidade *self);
+        destrutivelMonstro(Entidade *self, int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
+        void morrer();
 };
 
 class destrutivelJogador : public Destrutivel
 {
     public:
-        destrutivelJogador(int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
-        void morrer(Entidade *self);
+        destrutivelJogador(Entidade* self, int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
+        void morrer();
 };
 
 class destrutivelTerreno : public Destrutivel

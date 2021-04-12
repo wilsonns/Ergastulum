@@ -10,10 +10,8 @@ Engine::Engine(int largura, int altura)
     logger = new LOGGER();
     gui = new GUI();
     jogador = new Entidade(1, 1, '@',"Will", TCOD_white);
-    jogador->destrutivel = new destrutivelJogador(5, 2, 3, "Seu Cadavi");
-    jogador->atacador = new Atacador();
-    jogador->atacador->adcionarHabilidade("Ataque", 5);
-    jogador->atacador->modificarHabilidade("Ataque", -1);
+    jogador->destrutivel = new destrutivelJogador(jogador,5, 2, 3, "Cadaver de" + jogador->nome);
+    jogador->atacador = new Atacador(jogador,2,2,1); 
     jogador->ai = new aiJogador(1);
     jogador->ai->faccao = JOGADOR;
     jogador->container = new Container(10);
@@ -25,6 +23,8 @@ Engine::Engine(int largura, int altura)
 
     entidades.push_back(jogador);
   
+    mapa->adcionarItem(mapa->dungeon[0]->xcentro + 1, mapa->dungeon[0]->ycentro + 1, '/', ARMA, "Espada de Xessus", 5, TCOD_silver);
+
     rodando = true;
     debug = true;
     mostrarPath = false;
@@ -66,12 +66,27 @@ void Engine::atualizar()
     }
     else if (statusJogo == TURNO_INIMIGO)
     {
-        for (std::vector<Entidade*>::iterator it = entidades.begin(); it != entidades.end(); it++)
+        for (std::vector<Entidade*>::iterator it = entidades.begin(); it != entidades.end();)
         {
             Entidade* entidade = *it;
+
             if (entidade->ai && entidade != jogador)
             {
                 entidade->atualizar();
+            }
+            if (aRemover.size() > 0)
+            {
+                for (std::vector<Entidade*>::iterator it2 = aRemover.begin();!aRemover.empty();)
+                {
+                    Entidade* ent = *it2;
+                    entidades.erase(std::find(entidades.begin(),entidades.end(),ent));
+                    aRemover.erase(it2);
+                    it = entidades.end();
+                }
+            }
+            else
+            {
+                ++it;
             }
         }
         statusJogo = Engine::TURNO_NOVO;
@@ -85,6 +100,6 @@ int Engine::random(int minimo, int maximo, int bonus)
 
 void Engine::mandarParaOInicio(Entidade* entidade)
 {
-    //entidades.erase(entidade);
-    //entidades.insertBefore(entidade, 0);
+//    entidades.erase(std::find(entidades.begin(), entidades.end(), entidade));
+//    entidades.insert(entidades.begin(), std::find(entidades.begin(), entidades.end(), entidade));
 }

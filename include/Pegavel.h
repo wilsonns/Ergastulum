@@ -16,7 +16,8 @@ public:
 	Pegavel();//CTOR
 	virtual ~Pegavel();//DTOR
 
-	int tipo = 1;
+	int tipo;//Vide enum tipoItem acima
+	int valor;//O valor principal do item, sendo cura pra poção, dano pra arma, etc
 
 	bool pegar(Entidade* self, Entidade* portador);//se conseguir pegar o item, retorna verdadeiro
 	virtual bool usar(Entidade* self, Entidade* portador);//função virtual para usar o item, veja a referencia de cada classe filha
@@ -29,16 +30,13 @@ public:
 class Curador : public Pegavel
 {
 public:
-	float valor;//o valor de cura que o curador cura
-
-	Curador(float valor);//ctor
+	Curador(int valor);//ctor
 	bool usar(Entidade* self, Entidade* portador);//retorna verdadeiro se conseguir usar o item, que vai curar o valor em pontos de vida do portador
 };
 
 class Arma : public Pegavel
 {
 public:
-	int dano;
 	Arma(int dano);
 	bool usar(Entidade* self, Entidade* portador);
 	void equipar(Entidade* self, Entidade* portador);
@@ -51,8 +49,8 @@ private:
 class Armadura : public Pegavel
 {
 public:
-	int bResistencia;
 	Armadura(int bResistencia);
+	
 	bool usar(Entidade* self, Entidade* portador);
 	void equipar(Entidade* self, Entidade* portador);
 	void desequipar(Entidade* self, Entidade* portador);
