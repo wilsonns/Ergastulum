@@ -8,6 +8,9 @@ struct Tile
     Destrutivel *destrutivel;
     bool passavel;//as entidades podem passar por aqui?
     bool explorado = false;//o jogador ja explorou aqui?
+    Entidade* ocupante = NULL;//se ha uma entidade ocupante aqui atualmente
+    Container* itens = new Container(5);
+
 };
 
 struct Sala
@@ -48,31 +51,31 @@ public:
     Mapa(int largura, int altura);//ctor
     virtual ~Mapa();//dtor
 
-    ///FUN«’ES
+    ///FUN√á√ïES
     void render();//Desenha o mapa na tela;;;;
 
     //PAREDE
-    bool eParede(int x, int y); //Detecta paredes na posiÁ„o x/y
+    bool eParede(int x, int y); //Detecta paredes na posi√ß√£o x/y
     void fazerParede(int x, int y); //Torna x/y numa parede
     void cavar(int x1, int x2, int y1, int y2); // Tira a parede de x/y
-    bool podeAndar(int x, int y); //Verifica se x/y È caminh·vel
+    bool podeAndar(int x, int y); //Verifica se x/y √© caminh√°vel
     //FOV
-    bool estaNoFOV(int x, int y)const; // verifica se x/y est· visivel
+    bool estaNoFOV(int x, int y)const; // verifica se x/y est√° visivel
     void computarFOV();
 
-    //EXPLORA«√O
-    bool foiExplorado(int x, int y)const;//x/y j· foi explorado? se sim, retorna verdadeiro, se n„o, falso
+    //EXPLORA√á√ÉO
+    bool foiExplorado(int x, int y)const;//x/y j√° foi explorado? se sim, retorna verdadeiro, se n√£o, falso
 
-    //CRIA«√O DE DUNGEON
+    //CRIA√á√ÉO DE DUNGEON
     std::vector<Sala*> dungeon;
     void criarSala(bool primeira, int x1, int x2, int y1, int y2);//Cria uma sala
 
     //ADCIONAR ENTIDADES
     void adcmonstro(int x, int y);//adciona um monstro ao mapa
-    void adcionarItem(int x, int y, int simbolo, int tipo, std::string nome, int valor, const TCODColor& cor);//adciona um item(atualmente, uma poÁ„o de cura, o ˙nico item nessa porra) na posiÁ„o x/y
+    void adcionarItem(int x, int y, int simbolo, int tipo, std::string nome, int valor, const TCODColor& cor);//adciona um item(atualmente, uma po√ß√£o de cura, o √∫nico item nessa porra) na posi√ß√£o x/y
 
 protected:
-    Tile* tiles;//array de Tiles que contÈm as informaÁıes do mapa de jogo
+    Tile* tiles;//array de Tiles que cont√©m as informa√ß√µes do mapa de jogo
     TCODMap* mapa;
     friend class BspListener;
 private:
