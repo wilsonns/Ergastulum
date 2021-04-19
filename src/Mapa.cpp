@@ -88,17 +88,9 @@ bool Mapa::eParede(int x, int y)
 
 bool Mapa::podeAndar(int x, int y)
 {
-    if (eParede(x, y))
+    if (eParede(x, y) || tiles[x+y*largura].ocupante != NULL)
     {
         return false;
-    }
-    for (std::vector<Entidade*>::iterator it = engine.entidades.begin();it != engine.entidades.end();it++)
-    {
-        Entidade* entidade = *it;
-        if (entidade->denso && entidade->x == x && entidade->y == y)
-        {
-            return false;
-        }
     }
     return true;
 }
