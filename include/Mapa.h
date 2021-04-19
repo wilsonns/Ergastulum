@@ -6,6 +6,8 @@
 struct Tile
 {
     Destrutivel *destrutivel;
+    int simbolo;
+    TCODColor cor;
     bool passavel;//as entidades podem passar por aqui?
     bool explorado = false;//o jogador ja explorou aqui?
     Entidade* ocupante = NULL;//se ha uma entidade ocupante aqui atualmente
