@@ -9,9 +9,12 @@ int main()
     engine.debug = false;
     auto root = TCODConsole::root;
     engine.mapa->adcmonstro(engine.jogador->x - 1, engine.jogador->y - 1);
-    while (engine.rodando == true || 
-        TCOD_console_is_window_closed())
+    while (engine.rodando == true)
     {
+        if (TCOD_console_is_window_closed())
+        {
+            break;
+        }
         engine.atualizar();
         engine.render();
         root->flush();

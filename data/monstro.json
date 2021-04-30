@@ -1,7 +1,9 @@
 {
   "Orc": {
-    "nome": "Orcs",
+    "nome": "Orc",
     "simbolo": 79,
+    "tamanho": 5,
+    "visao" :  6,
     "atributos": {
       "forcaMin": 1,
       "forcaMax": 4,
@@ -10,12 +12,39 @@
       "vigorMin": 2,
       "vigorMax": 3,
       "resistenciaMin": 1,
-      "resistenciaMax": 1
-    }
+      "resistenciaMax": 1,
+      "agilidadeMin": 2,
+      "agilidadeMax": 2
+    },
+    "habilidades": {
+      "ataqueMin": 0,
+      "ataqueMax": 2
+    },
+    "chefe": false
   },
   "Troll": {
     "nome": "Troll",
-    "simbolo": 84
+    "simbolo": 84,
+    "tamanho": 7,
+    "visao": 4,
+    "atributos": {
+      "forcaMin": 4,
+      "forcaMax": 8,
+      "destrezaMin": 1,
+      "destrezaMax": 3,
+      "vigorMin": 7,
+      "vigorMax": 9,
+      "resistenciaMin": 3,
+      "resistenciaMax": 5,
+      "agilidadeMin": 1,
+      "agilidadeMax": 1
+    },
+    "habilidades": {
+      "ataqueMin": 3,
+      "ataqueMax": 4
+    },
+    "chefe": false
   }
 }
+  
   

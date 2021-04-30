@@ -111,7 +111,7 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* self, Entidade* alvo)
         fechada.push_back(atual);
         for (int i = 0; i < atual->vizinhos.size(); i++)
         {
-            if (!engine.mapa->eParede(atual->vizinhos[i]->x, atual->vizinhos[i]->y)
+            if ((engine.mapa->podeAndar(atual->vizinhos[i]->x, atual->vizinhos[i]->y)|| engine.mapa->temEntidade(atual->vizinhos[i]->x, atual->vizinhos[i]->y,alvo))
                 && !estaNaLista(aberta, atual->vizinhos[i]) && !estaNaLista(fechada, atual->vizinhos[i]))
             {
                 atual->vizinhos[i]->pai = atual;
@@ -119,9 +119,9 @@ std::vector<Nodo*> Pathfinding::acharCaminho(Entidade* self, Entidade* alvo)
                 atual->vizinhos[i]->h = calcularH(atual->vizinhos[i], objetivo);
                 atual->vizinhos[i]->f = calcularF(atual->vizinhos[i]);
                 aberta.push_back(atual->vizinhos[i]);
-            }//Se o vizinho em questão não for uma parede, não estiver na lista aberta nem na fechada, sete o nodo atual como o pai dele,
+            }//Se o vizinho em questão não for uma parede nem tiver uma entidade habitanto(que não seja o alvo), não estiver na lista aberta nem na fechada, sete o nodo atual como o pai dele,
                 //defina as suas variaveis e o insira na lista aberta
-            else if (!engine.mapa->eParede(atual->vizinhos[i]->x, atual->vizinhos[i]->y)
+            else if ((engine.mapa->podeAndar(atual->vizinhos[i]->x, atual->vizinhos[i]->y) || engine.mapa->temEntidade(atual->vizinhos[i]->x, atual->vizinhos[i]->y, alvo))
                 && estaNaLista(aberta, atual->vizinhos[i]) && !estaNaLista(fechada, atual->vizinhos[i]))
             {
                 if (atual->vizinhos[i]->pai->g > calcularG(atual, inicio))

@@ -2,6 +2,8 @@
 #define LOGGER_H
 #include <main.h>
 
+struct Mensagem;
+
 class LOGGER
 {
     public:
@@ -9,7 +11,8 @@ class LOGGER
         virtual ~LOGGER();
         std::ofstream debug;
         std::ofstream log;
-        void logar(std::ofstream arquivo, std::string texto, ...);
+        void debugLog(std::string texto, ...);
+        void msgLog(Mensagem mensagem);
     protected:
 
     private:

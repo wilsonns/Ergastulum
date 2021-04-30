@@ -27,9 +27,9 @@ void Atacador::atacar(Entidade* alvo)
     if (alvo->destrutivel && !alvo->destrutivel->morreu())
     {
         //Primeiro passo: self ataca e o alvo tenta se esquivar
-        int acerto = engine.random(1, 20, int((self->habilidades.find("Ataque")!= self->habilidades.end()?(int)self->habilidades["Ataque"]:-4)
+        int acerto = engine.random(1, 20, int((self->habilidades.find("Ataque")!= self->habilidades.end()?(int)self->habilidades["Ataque"]->nivelAjustado:-4)
         *(self->atributos.find("Destreza")!= self->atributos.end()?self->atributos["Destreza"]->nivelAjustado:0.9)));
-        int esquiva = engine.random(1, 20, alvo->destrutivel->agilidade);
+        int esquiva = alvo->atributos["Agilidade"]->nivelAjustado > 0 ? engine.random(1, 20, alvo->atributos["Agilidade"]->nivelAjustado): 0;
 
         if (acerto - esquiva <= 0)
         {
@@ -48,9 +48,21 @@ void Atacador::atacar(Entidade* alvo)
             else
             {
 
-                engine.gui->mensagem(TCOD_white, "{} ataca {} mas não causa dano nenhum!", self->nome, alvo->nome);
+                engine.gui->mensagem(TCOD_white, "{} ataca {} mas nao causa dano nenhum!", self->nome, alvo->nome);
                 ///MENSAGEM DE FALHAR EM CAUSAR DANO
             }
+            alvo->destrutivel->tomarDano(dano);
+        }
+    }
+}
+
+void Atacador::atacar(Tile* alvo)
+{
+    if (alvo->destrutivel && !alvo->destrutivel->morreu() && !alvo->passavel)
+    {
+        int dano = self->atributos["Forca"]->nivelAjustado - alvo->destrutivel->resistencia;
+        if (dano > 0)
+        {
             alvo->destrutivel->tomarDano(dano);
         }
     }

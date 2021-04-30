@@ -2,12 +2,29 @@
 #define MAPA_H
 
 #include "main.h"
+#include "Container.h"
+#include "Destrutivel.h"
+
+class Container;
+class destrutivelTerreno;
 
 struct Tile
 {
-    Destrutivel *destrutivel;
-    bool passavel;//as entidades podem passar por aqui?
+    Tile();
+    Tile(int simbolo, TCODColor cor);
+    ~Tile();
+
+    Destrutivel* destrutivel;
+    
+    int simbolo;
+    TCODColor cor;
+        
+    bool passavel = false;//as entidades podem passar por aqui?
     bool explorado = false;//o jogador ja explorou aqui?
+    bool visivel = false;//o jogador pode ver aqui?
+    
+    Entidade* ocupante = NULL;//se ha uma entidade ocupante aqui atualmente
+    Container* itens;
 };
 
 struct Sala
@@ -25,10 +42,11 @@ struct Sala
 };
 
 
-#define TAM_MAX 10
-#define TAM_MIN 5
+#define TAM_MAX 5
+#define TAM_MIN 2
 #define ITEM_MAX 2
 #define MON_MAX 4
+
 class BSPListener :public ITCODBspCallback
 {
 private:
@@ -48,6 +66,9 @@ public:
     Mapa(int largura, int altura);//ctor
     virtual ~Mapa();//dtor
 
+
+    std::vector<std::string> monstros;
+
     ///FUNÇÕES
     void render();//Desenha o mapa na tela;;;;
 
@@ -55,13 +76,21 @@ public:
     bool eParede(int x, int y); //Detecta paredes na posição x/y
     void fazerParede(int x, int y); //Torna x/y numa parede
     void cavar(int x1, int x2, int y1, int y2); // Tira a parede de x/y
+    void cavar(Tile* tile);//tira a parede num tile especifico
     bool podeAndar(int x, int y); //Verifica se x/y é caminhável
+    bool temEntidade(int x, int y);//Busca se há entidades em x/y
+    bool temEntidade(int x, int y, Entidade* entidade);//busca se uma entidade especifica está em x/y
+    Tile* getTile(int x, int y);//pega a Tile na posição x/y
     //FOV
     bool estaNoFOV(int x, int y)const; // verifica se x/y está visivel
-    void computarFOV();
+    
+    void tornarVisivel(int x, int y);//torna x/y visivel
+    void tornarNaoVisivel(int x, int y);//torna x/y não visivel
+    void tornarExplorado(int x, int y);//torna x/y explorado
 
     //EXPLORAÇÃO
-    bool foiExplorado(int x, int y)const;//x/y já foi explorado? se sim, retorna verdadeiro, se não, falso
+    bool eExplorado(int x, int y);//x/y já foi explorado? se sim, retorna verdadeiro, se não, falso
+    bool eVisivel(int x, int y);
 
     //CRIAÇÃO DE DUNGEON
     std::vector<Sala*> dungeon;
@@ -69,10 +98,13 @@ public:
 
     //ADCIONAR ENTIDADES
     void adcmonstro(int x, int y);//adciona um monstro ao mapa
-    void adcionarItem(int x, int y, int simbolo, int tipo, std::string nome, int valor, const TCODColor& cor);//adciona um item(atualmente, uma poção de cura, o único item nessa porra) na posição x/y
+    void adcionarItem(int x, int y, int simbolo, std::string nome, int valor, const TCODColor& cor,int peso);//adciona um item(atualmente, uma poção de cura, o único item nessa porra) na posição x/y
+    void adcionarItem(Entidade* portador, int simbolo, std::string nome, int valor, const TCODColor& cor);//adciona um item direto no inventario de uma entidade
+    void mover(int x, int y, Entidade* ocupante);
 
 protected:
-    Tile* tiles;//array de Tiles que contém as informações do mapa de jogo
+    //Tile* tiles;//array de Tiles que contém as informações do mapa de jogo
+    std::vector<Tile*> tiles;
     TCODMap* mapa;
     friend class BspListener;
 private:

@@ -87,6 +87,8 @@ public:
 
     std::vector<Nodo*> acharCaminho(Entidade* self, Entidade* alvo);//retorna o vetor caminho para a entidade proprietaria
 
+
+
 protected:
 
 private:

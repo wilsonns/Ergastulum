@@ -21,21 +21,29 @@ void GUI::render()
 
     renderBarra(1, 1, LARGURA_BARRA, engine.jogador->destrutivel->hp, engine.jogador->destrutivel->hpMax, TCOD_light_red, TCOD_darker_red);
     con->printf(1, 2, "Forca:%i", engine.jogador->atributos["Forca"]->nivelAjustado);
+    con->printf(1, 3, "Acoes:%i", engine.jogador->ai->pa);
 
    
 
     int y = 1;
+    float coefCor = 0.2f;
     if (log.size() > 5)
     {
+        Mensagem* mensagem = *log.begin();
+        engine.logger->msgLog(*mensagem);
         log.erase(log.begin());
     }
     
         for (std::vector<Mensagem*>::iterator it = log.begin();it != log.end();it++)
         {
             Mensagem* mensagem = *it;
-            con->setDefaultForeground(mensagem->cor);
+            con->setDefaultForeground(mensagem->cor*coefCor);
             con->printf(X_MENSAGEM, y, mensagem->texto.c_str());
             y++;
+            if (coefCor < 1.0f)
+            {
+                coefCor += 0.2f;
+            }
         }
     renderMouse();
     TCODConsole::blit(con, 0, 0, engine.largura, ALTURA_PAINEL, 
@@ -47,13 +55,14 @@ void GUI::renderBarra(int x, int y, int largura, int valor, int valormax, const 
     con->setDefaultBackground(corFundo);
     con->rect(x, y, largura, 1, false, TCOD_BKGND_SET);
 
-    int larguraBarra = valor / valormax * largura;
+    float larguraBarra = (float)valor / (float)valormax; 
+    larguraBarra *= largura;
     if (larguraBarra > 0)
     {
         con->setDefaultBackground(corBarra);
-        con->rect(x, y, largura, 1, false, TCOD_BKGND_SET);
+        con->rect(x, y, larguraBarra, 1, false, TCOD_BKGND_SET);
     }
-    con->setDefaultBackground(TCOD_white);
+    con->setDefaultForeground(TCOD_white);
     con->printf(x + largura / 2, y, TCOD_BKGND_NONE, TCOD_CENTER, "%s:%i/%i", engine.jogador->nome.c_str(), valor, valormax);
 }
 

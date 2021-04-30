@@ -3,28 +3,28 @@
 
 Engine::Engine(int largura, int altura)
 {
+    srand(time(NULL));
     this->largura = largura;
     this->altura = altura;
-
     TCODConsole::initRoot(largura, altura, "Joguim sem Nome do Will", false);
+    
     logger = new LOGGER();
     gui = new GUI();
-    jogador = new Entidade(1, 1, '@',"Will", TCOD_white);
+    jogador = new Entidade(1, 1, '@' ,5,3,"Will",TCOD_black);
     jogador->destrutivel = new destrutivelJogador(jogador,5, 2, 3, "Cadaver de" + jogador->nome);
-    jogador->atacador = new Atacador(jogador,2,2,1); 
-    jogador->ai = new aiJogador(1);
-    jogador->ai->faccao = JOGADOR;
-    jogador->container = new Container(10);
-    jogador->nome = "Will";
+    jogador->atacador = new Atacador(jogador,20,2,1); 
+    jogador->ai = new aiJogador(jogador);
+    jogador->container = new Container(5*jogador->atributos["Forca"]->nivelAjustado);
 
 
     mapa = new Mapa(largura, 43);
     pathMapa = new Pathfinding();
 
+    mapa->mover(jogador->x, jogador->y, jogador);
+
     entidades.push_back(jogador);
   
-    mapa->adcionarItem(mapa->dungeon[0]->xcentro + 1, mapa->dungeon[0]->ycentro + 1, '/', ARMA, "Espada de Xessus", 5, TCOD_silver);
-
+    mapa->adcionarItem(mapa->dungeon[0]->xcentro + 1, mapa->dungeon[0]->ycentro + 1, '/',"Espada de Xessus", 5, TCOD_black,5);
     rodando = true;
     debug = true;
     mostrarPath = false;
@@ -48,7 +48,7 @@ void Engine::render()
     for (std::vector<Entidade*>::iterator it = entidades.begin(); it != entidades.end(); it++)
     {
         Entidade* entidade = *it;
-        if (mapa->estaNoFOV(entidade->x, entidade->y))
+        if (mapa->eVisivel(entidade->x, entidade->y))
         {
             entidade->render();
         }
@@ -58,7 +58,14 @@ void Engine::render()
 
 void Engine::atualizar()
 {
-    engine.mapa->computarFOV();
+    for (int x = 0; x < mapa->largura; x++)
+    {
+        for (int y = 0; y < mapa->altura; y++)
+        {
+            mapa->tornarNaoVisivel(x, y);
+        }
+    }
+    engine.jogador->FOV();
     TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS | TCOD_EVENT_MOUSE, &ultimoBotao, &mouse);
     if (statusJogo == INICIO || statusJogo == TURNO_NOVO)
     {
@@ -73,21 +80,17 @@ void Engine::atualizar()
             if (entidade->ai && entidade != jogador)
             {
                 entidade->atualizar();
-            }
-            if (aRemover.size() > 0)
-            {
-                for (std::vector<Entidade*>::iterator it2 = aRemover.begin();!aRemover.empty();)
+                if (entidade->destrutivel->morreu())
                 {
-                    Entidade* ent = *it2;
-                    entidades.erase(std::find(entidades.begin(),entidades.end(),ent));
-                    aRemover.erase(it2);
-                    it = entidades.end();
+                    continue;
+                }
+                else
+                {
+                    it++;
+                    continue;
                 }
             }
-            else
-            {
-                ++it;
-            }
+            it++;
         }
         statusJogo = Engine::TURNO_NOVO;
     }
@@ -95,11 +98,11 @@ void Engine::atualizar()
 
 int Engine::random(int minimo, int maximo, int bonus)
 {
-    return minimo + rand() % (maximo - minimo) + bonus;
+    return rand() % ((maximo - minimo + 1) + minimo)+bonus;
 }
 
 void Engine::mandarParaOInicio(Entidade* entidade)
 {
-//    entidades.erase(std::find(entidades.begin(), entidades.end(), entidade));
-//    entidades.insert(entidades.begin(), std::find(entidades.begin(), entidades.end(), entidade));
+    entidades.erase(std::find(entidades.begin(), entidades.end(), entidade));
+    entidades.insert(entidades.begin(), entidade);
 }

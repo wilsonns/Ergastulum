@@ -13,60 +13,105 @@ AI::~AI()
     //dtor
 }
 
-float AI::condicaoFisica(Entidade* self)
+float AI::condicaoFisica()
 {
     return self->destrutivel->hp / self->destrutivel->hpMax;
-}//retorna um numero de 0 a 1 baseado na condição fisica da entidade
-
-float AI::forcaPercebida(Entidade* self)
-{
-    return self->atributos["Forca"]->nivelBase * condicaoFisica(self);
 }
 
-float AI::perigoPercebido(Entidade* self)
+void AI::atualizar()
 {
-    return (self->atributos["Resistencia"]->nivelAjustado * condicaoFisica(self));
+    this->pa += ((int)(self->atributos["Agilidade"]->nivelAjustado * 100) * condicaoFisica());
 }
 
-aiJogador::aiJogador(float velocidade)
+aiJogador::aiJogador(Entidade* self)
 {
-    faccao = JOGADOR;
+    this->self = self;
     alvo = NULL;
 }
 
-void aiJogador::atualizar(Entidade* self)
+void aiJogador::atualizar()
 {
+    AI::atualizar();
     if (self->destrutivel && self->destrutivel->morreu())
     {
         return;
     }
     int dx = 0, dy = 0;//variaveis que representam para onde o jogador vai se mover,variando de -1 a 1
-    if(engine.mouse.lbutton)
+
+    if (engine.mouse.mbutton)
     {
-        self->caminho = engine.pathMapa->acharCaminho(self, alvo = new Entidade(engine.mouse.cx, engine.mouse.cy, NULL,NULL, TCOD_white));
-        delete[] alvo;
+        Tile *tile = engine.mapa->getTile(engine.mouse.cx, engine.mouse.cy);
+        if (tile->ocupante != NULL)
+        {
+
+            Entidade* entidade = tile->ocupante;
+            
+            static const int LARGURA_INVENTARIO = 50;
+            static const int ALTURA_INVENTARIO = 14;
+
+            static TCODConsole con(LARGURA_INVENTARIO, ALTURA_INVENTARIO);
+
+            con.setDefaultForeground(TCODColor(200, 180, 50));
+            con.printFrame(0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, true, TCOD_BKGND_DEFAULT, entidade->nome.c_str());
+
+            TCODConsole::blit(&con, 0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, TCODConsole::root, 10, engine.altura / 2 - ALTURA_INVENTARIO);
+            TCODConsole::flush();
+
+
+            TCOD_key_t key;
+            TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, true);
+            if (key.vk == TCODK_ESCAPE)
+            {
+
+            }
+        }
+        else if (engine.debug == true && tile->ocupante == NULL)
+        {
+            Entidade* entidade = new Entidade(engine.mouse.cx, engine.mouse.cy, 'D', 5, 5, "Debugão",TCOD_color_add(TCOD_red,TCOD_black));
+            entidade->destrutivel = new Destrutivel(entidade, 1, 1, 1);
+            entidade->atacador = new Atacador(entidade, 1, 1, 1);
+            entidade->ai = new aiMonstro(entidade, 1);
+            engine.mapa->mover(engine.mouse.cx, engine.mouse.cy, entidade);
+            engine.entidades.push_back(entidade);
+        }
     }
-    if (self->caminho.size() > 0)
-    {
-        moverOuAtacar(self, self->caminho[0]->x, self->caminho[0]->y);
-        return;
-    }
+
     switch (engine.ultimoBotao.vk)
     {
     case TCODK_UP:
+    case TCODK_KP8:
         dy = -1;
         break;
     case TCODK_DOWN:
+    case TCODK_KP2:
         dy = 1;
         break;
     case TCODK_LEFT:
+    case TCODK_KP4:
         dx = -1;
         break;
     case TCODK_RIGHT:
+    case TCODK_KP6:
         dx = 1;
         break;
+    case TCODK_KP7:
+        dx = -1;
+        dy = -1;
+        break;
+    case TCODK_KP9:
+        dx = 1;
+        dy = -1;
+        break;
+    case TCODK_KP1:
+        dx = -1;
+        dy = 1;
+        break;
+    case TCODK_KP3:
+        dx = 1;
+        dy = 1;
+        break;
     case TCODK_CHAR:
-        botaoAcao(self, engine.ultimoBotao.c);
+        botaoAcao(engine.ultimoBotao.c);
         break;
     case TCODK_F1:
         engine.rodando = false;
@@ -76,11 +121,11 @@ void aiJogador::atualizar(Entidade* self)
     }
     if (dx != 0 || dy != 0)
     {
-        moverOuAtacar(self, self->x + dx, self->y + dy);
+        moverOuAtacar(self->x + dx, self->y + dy);
     }
 }
 
-bool aiJogador::moverOuAtacar(Entidade *self, int xalvo, int yalvo)
+bool aiJogador::moverOuAtacar(int xalvo, int yalvo)
 {
     if(engine.mapa->eParede(xalvo,yalvo))
     {
@@ -95,13 +140,14 @@ bool aiJogador::moverOuAtacar(Entidade *self, int xalvo, int yalvo)
             return false;
         }
     }
+    engine.mapa->mover(xalvo, yalvo, self);
     self->x = xalvo;
     self->y = yalvo;
     engine.statusJogo = Engine::TURNO_INIMIGO;
     return true;
 }
 
-Entidade* aiJogador::escolherDoInventario(Entidade* self)
+Item* aiJogador::escolherDoInventario(Container* container, bool inventarioDoJogador)
 {
     static const int LARGURA_INVENTARIO = 50;
     static const int ALTURA_INVENTARIO = 14;
@@ -109,14 +155,15 @@ Entidade* aiJogador::escolherDoInventario(Entidade* self)
 
     con.setDefaultForeground(TCODColor(200,180,50));
     con.printFrame(0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, true, TCOD_BKGND_DEFAULT, "inventario");
-    
-
-   
+    if (inventarioDoJogador)
+    {
+        con.printf(35, ALTURA_INVENTARIO - 1, "Peso:%i/%i", engine.jogador->container->pesoAtual, engine.jogador->container->tamanho);
+    }
     int atalho = 'a';
     int y = 1;
-    for (std::vector<Entidade*>::iterator it=self->container->inventario.begin();it != self->container->inventario.end();it++)
+    for (std::vector<Item*>::iterator it=container->inventario.begin();it != container->inventario.end();it++)
     {
-        Entidade* entidade = *it;
+        Item* entidade = *it;
         con.setDefaultForeground(TCOD_white);
         con.printf(2, y, "(%c) - %s",atalho,entidade->nome.c_str());
         atalho++;
@@ -129,55 +176,75 @@ Entidade* aiJogador::escolherDoInventario(Entidade* self)
     TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, true);
     if (key.vk == TCODK_CHAR)
     {
-        int entidadeIndex = key.c - 'a';
-        if (entidadeIndex >= 0 && entidadeIndex < self->container->inventario.size())
+        int itemIndex = key.c - 'a';
+        if (itemIndex >= 0 && itemIndex < container->inventario.size())
         {
-            return self->container->inventario[entidadeIndex];
+            return container->inventario[itemIndex];
         }
     }
     return NULL;
 }
-void aiJogador::botaoAcao(Entidade* self, int ascii)
+
+void aiJogador::mostrarPersonagem()
+{
+    static const int LARGURA_INVENTARIO = 50;
+    static const int ALTURA_INVENTARIO = 14;
+    static TCODConsole per(LARGURA_INVENTARIO, ALTURA_INVENTARIO);
+
+    per.setDefaultForeground(TCODColor(200, 180, 50));
+    per.printFrame(0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, true, TCOD_BKGND_DEFAULT, engine.jogador->nome.c_str());
+    per.printf(1, 1, "Atributos");
+    int i = 3;
+    for (auto x:self->atributos)
+    {
+        per.printf(1, i, "%s: %i/%i", x.first.c_str(), x.second->nivelBase, x.second->nivelAjustado);
+        i++;
+    }
+    per.printf(30, 3, "Hp:%i/%i", self->destrutivel->hp, self->destrutivel->hpMax);
+    i = 5;
+    for (auto x : self->habilidades)
+    {
+        per.printf(1, i, "%s: %i/%i", x.first.c_str(), x.second->nivelBase, x.second->nivelAjustado);
+        i++;
+    }
+
+    TCOD_key_t key;
+    TCODConsole::blit(&per, 0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, TCODConsole::root, 10, engine.altura / 2 - ALTURA_INVENTARIO, 0.9f , 0.9f);
+    TCODConsole::flush();
+    TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, true);
+    if (key.vk == TCODK_ESCAPE)
+    {
+
+    }
+}
+
+void aiJogador::botaoAcao(int ascii)
 {
     switch (ascii)
     {
     case 'g':
     case 'G'://Pegar um item no chão abaixo de vc
     {
-        bool achado = false;
-        for (std::vector<Entidade*>::iterator it = engine.entidades.begin();it != engine.entidades.end();it++)
+        Tile* tile = engine.mapa->getTile(self->x, self->y);
+        if (tile->itens->inventario.empty())
         {
-            Entidade* entidade = *it;
-            {
-                if (entidade->pegavel && entidade->x == self->x && entidade->y == self->y)
-                {
-                    if (entidade->pegavel->pegar(entidade, self))
-                    {
-                        achado = true;
-                        engine.gui->mensagem(TCOD_white, "{} pega o {}!", self->nome, entidade->nome);
-                        break;
-                    }
-                    else if (!achado)
-                    {
-                        achado = true;
-                        engine.gui->mensagem(TCOD_white, "Seu inventario esta cheio!");
-                    }
-                }
-                if (!achado)
-                {
-                    engine.gui->mensagem(TCOD_white, "Nao tem nada para pegar aqui!");
-                }
-            }
+            engine.gui->mensagem(TCOD_white, "Nao tem nada aqui para ser pego.");
+        }
+        else
+        {
+            Item* item = escolherDoInventario(tile->itens);
+            item->pegar(self);
+            tile->itens->remover(item);
         }
     }
     break;
     case 'i':
     case 'I'://Abrir o inventario
     {
-        Entidade* entidade = escolherDoInventario(self);
-        if (entidade)
+        Item* item = escolherDoInventario(self->container,true);
+        if (item)
         {
-            if (entidade->pegavel->usar(entidade, self))
+            if (item->usar())
             {
                 engine.statusJogo = Engine::TURNO_INIMIGO;
             }
@@ -187,22 +254,15 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
     }
     case 'c':
     case 'C'://Não lembro o que isso era pra fazer :p vai ser teste invocar minion
-    {
-        Entidade* minion = new Entidade(engine.jogador->x - 1, engine.jogador->y - 1, 'm',"minion", TCOD_dark_purple);
-        minion->ai = new aiJogador(1);
-        minion->atacador = new Atacador(minion);
-        minion->destrutivel = new destrutivelMonstro(minion,1, 1, 1, "Cadaver de Minion");
-        minion->ai->faccao = JOGADOR;
-        minion->nome = "Minion";
-        engine.entidades.push_back(minion);
-    }break;
+        mostrarPersonagem();
+        break;
     case 'd':
     case 'D'://Derrubar um item no local onde a entidade está
     {
-        Entidade* entidade = escolherDoInventario(self);
-        if (entidade)
+        Item* item = escolherDoInventario(self->container);
+        if (item)
         {
-            if (entidade->pegavel->soltar(entidade, self))
+            if (item->soltar())
             {
                 engine.statusJogo = Engine::TURNO_INIMIGO;
             }
@@ -217,127 +277,106 @@ void aiJogador::botaoAcao(Entidade* self, int ascii)
     case'u':
         self->uparHabilidade("Ataque", 200);
         break;
+        /*
+            case's':
+            {
+                std::string q = "Qual direcao deseja atacar?";
+                int largura = q.length();
+                int altura = 3;
+
+                static TCODConsole mensagem(largura, altura);
+                mensagem.setDefaultForeground(TCODColor(200, 180, 50));
+                mensagem.printFrame(0, 0, largura, altura, true, TCOD_BKGND_DEFAULT);
+                mensagem.printf(1, 1, q.c_str());
+
+                TCOD_key_t key;
+                TCODConsole::blit(&mensagem, 0, 0, largura, altura, TCODConsole::root, 0, 0, 0.9f, 0.9f);
+                TCODConsole::flush();
+                TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, true);
+                switch (key.vk)
+                {
+
+                case TCODK_UP:
+                case TCODK_KP8:
+                    self->atacador->atacar(engine.mapa->getTile(self->x , self->y - 1));
+                    break;
+                case TCODK_DOWN:
+                case TCODK_KP2:
+                    self->atacador->atacar(engine.mapa->getTile(self->x, self->y + 1));
+                    break;
+                case TCODK_LEFT:
+                case TCODK_KP4:
+                    self->atacador->atacar(engine.mapa->getTile(self->x-1, self->y));
+                    break;
+                case TCODK_RIGHT:
+                case TCODK_KP6:
+                    self->atacador->atacar(engine.mapa->getTile(self->x+1, self->y));
+                    break;
+                case TCODK_KP7:
+                    break;
+                case TCODK_KP9:
+                    break;
+                case TCODK_KP1:
+                    break;
+                case TCODK_KP3:
+                    break;
+                default:
+                    break;
+
+                }
+
+                break;
+            }*/
     }
 }
 
-aiMonstro::aiMonstro(float velocidade)
+aiMonstro::aiMonstro(Entidade* self, int inteligencia)
 {
+    this->self = self;
+    self->adcionarAtributo("Inteligencia");
+    self->modificarAtributo("Inteligencia", inteligencia);
     alvo = NULL;
 }
 
-void aiMonstro::atualizar(Entidade* self)
+void aiMonstro::atualizar()
 {
-        if (self->destrutivel && self->destrutivel->morreu())
-        {
-            return;
-        }
-        self->FOV(self);
-        moverOuAtacar(self, self->ai->alvo);
+    AI::atualizar();
+
+    if (self->destrutivel && self->destrutivel->morreu())
+    {
+        return;
+    }
+    if (self->distancia(engine.jogador) <= self->visao)
+    {
+        alvo = engine.jogador;
+        moverOuAtacar();
+    }
+    else
+    {
+        alvo = NULL;
+    }
 }
 
-void aiMonstro::moverOuAtacar(Entidade *self,Entidade *alvo)
+void aiMonstro::moverOuAtacar()
 {
-    if (self->container->arma == NULL && self->container->contemArma(self))
+    self->caminho = engine.pathMapa->acharCaminho(self, alvo);
+    if (self->caminho.size() > 1)
     {
-        for (std::vector<Entidade*>::iterator it = self->container->inventario.begin();
-            it < self->container->inventario.end();it++)
-        {
-            Entidade* entidade = *it;
-            if (entidade->pegavel->tipo == ARMA)
-            {
-                entidade->pegavel->usar(entidade, self);
-                return;
-            }
-        }
+        engine.mapa->mover(self->caminho[0]->x, self->caminho[0]->y, self);
+        self->x = self->caminho[0]->x;
+        self->y = self->caminho[0]->y;
     }
-
-    acharAlvo(self);
-    
-    if (alvo)
+    else if(self->caminho.size() <= 1)
     {
-        self->caminho = engine.pathMapa->acharCaminho(self, alvo);
-        if (self->caminho.size() > 1 && engine.mapa->podeAndar(self->caminho[0]->x, self->caminho[0]->y)
-            && self->caminho[0]->x != alvo->x && self->caminho[0]->y != alvo->y)
-        {
-            self->x = self->caminho[0]->x;
-            self->y = self->caminho[0]->y;
-        }
-        else if (self->caminho.size() <= 1)
-        {
-            if (self->x == alvo->x && self->y == alvo->y && alvo->pegavel)
-            {
-                alvo->pegavel->pegar(alvo, self);
-                return;
-            }
-            if (alvo->pegavel && !alvo->denso)
-            {
-                self->x = self->caminho[0]->x;
-                self->y = self->caminho[0]->y;
-                return;
-            }
-            self->atacador->atacar(alvo);
-        }
-        else if (self->caminho.size() == 0)
-        {
-            return;
-        }
-    }
-    return ;
-}
-
-void aiMonstro::acharAlvo(Entidade* self)
-{
-    if (self->ai->inteligencia >= 1)
-    {
-        if (self->container->arma == NULL && !self->container->contemArma(self))
-        {
-            int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
-            for (std::vector<Entidade*>::iterator it = entidadesProximas.begin(); it != entidadesProximas.end();it++)
-            {
-                Entidade* entidade = *it;
-                if (entidade->pegavel && entidade->pegavel->tipo == ARMA)
-                {
-                    int dx = entidade->x - self->x;
-                    int dy = entidade->y - self->y;
-                    int distancia = sqrt((dx * dx) + (dy * dy));
-                    if (distancia < menorD)
-                    {
-                        menorD = distancia;
-                        self->ai->alvo = entidade;
-                    }
-                }
-            }
-
-        }
-        else if (self->container->arma)
-        {
-            int menorD = 999;//a menor distancia entre a entidade e uma arma na sua lista de entidades proximas
-            for (std::vector<Entidade*>::iterator it = entidadesProximas.begin(); it != entidadesProximas.end(); it++)
-            {
-                Entidade* entidade = *it;
-                if (entidade->destrutivel && !entidade->destrutivel->morreu() && entidade->ai->faccao != self->ai->faccao)
-                {
-                    int dx = entidade->x - self->x;
-                    int dy = entidade->y - self->y;
-                    int distancia = sqrt((dx * dx) + (dy * dy));
-                    if (distancia < menorD)
-                    {
-                        if (entidade->ai->perigoPercebido(entidade) < self->ai->perigoPercebido(self))
-                        {
-                            menorD = distancia;
-                            self->ai->alvo = entidade;
-                        }
-                     }
-                }
-            }
-        }
+        self->atacador->atacar(alvo);
     }
 }
 
 /*
 Fluxograma da AI
 
-se o bicho não tiver arma && houver armas nas vizinhanças
+se o bicho não tiver 
+&& houver armas nas vizinhanças
 { ir até a arma
 pegar a arma
 equipar a arma

@@ -15,13 +15,14 @@ extern int ALTURA_TERM;
 #include<typeinfo>
 #include<nlohmann/json.hpp>
 #include<fstream>
+#include<locale.h>
 
 using json = nlohmann::json;
 
 class Destrutivel;
 class Atacador;
 class AI;
-class Pegavel;
+class Item;
 class Container;
 class Pathfinding;
 class Entidade;
@@ -36,7 +37,7 @@ class Habilidade;
 #include<Destrutivel.h>
 #include<Atacador.h>
 #include<AI.h>
-#include<Pegavel.h>
+#include<Item.h>
 #include<Container.h>
 #include<Pathfinding.h>
 #include<Entidade.h>

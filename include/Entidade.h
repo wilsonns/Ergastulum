@@ -4,6 +4,8 @@
 
 struct Nodo; //FORWARD DO NODO DECLARADO EM PATHFINDING.H
 
+
+
 class Entidade
 {
     public:
@@ -11,10 +13,10 @@ class Entidade
         int x, y;//posição x e y da entdidade
         int simbolo; //simnbolo desenhado
         int visao; //raio da visão da entidade
+        int tamanho; //uma abstração do tamanho de uma entidade; 1 - rato, 5- humano, 10 - carro, assim por diante
+        
        
         TCODColor cor;
-
-        const float GRAUPRAD = 3.14159f / 180; //Graus para radianos
 
         std::string nome; //Nome da entidade
         bool denso;//pode-se passar por essa entidade?
@@ -22,7 +24,7 @@ class Entidade
         Atacador *atacador; //é uma entidade capaz de atacar?
         Destrutivel *destrutivel; //é uma entidade mortal/destrutivel?
         AI *ai;//é uma entidade que se auto-atualiza?
-        Pegavel* pegavel;//é uma entidade que pode ser pega e guardada em um contaienr?
+        Item* item;//é uma entidade que pode ser pega e guardada em um contaienr?
         Container* container;//é uma entidade que pode guardar outras entidades?
 
         //Atributos e Habilidades
@@ -39,28 +41,32 @@ class Entidade
 
         std::vector<Nodo*> caminho;//O caminho retornado pelas funções de pathfinding
 
-        Entidade(int x, int y,int simbolo,std::string nome, const TCODColor cor);//CTOR
-       
+        Entidade(int x, int y,int simbolo, int tamanho, int visao,  std::string nome, const TCODColor cor);//CTOR
         virtual ~Entidade(); //DTOR
 
-        void render(); //Desenha a entidade na tela
+        float distancia(Entidade* alvo);
 
-        void atualizar();//chama a atualização da IA da entidade
-
-        
         /// FOV
-        
         float maximo(float a, float b);//retorna o valor maior
-        
         int distanciaDiag(int x0, int y0, int x1, int y1);//retorna a distancia  entre os pontos
-
         float lerp(float inicio, float fim, float t);//retorna a interpolação linear
 
-        void FOV(Entidade* self);//realiza todos os calculos de FOV()
-        
-    protected:
+        void FOV();//realiza todos os calculos de FOV()
 
-    private:
+        void render(); //Desenha a entidade na tela
+        void atualizar();//chama a atualização da IA da entidade
+};
+
+class Mobilia : public Entidade
+{
+public:
+    Mobilia(int x, int y, int simbolo, int simboloAberto, std::string nome, const TCODColor cor);
+
+    int simboloAberto;
+    bool trancado;
+
+    bool abrir();
+    bool fechar();
 };
 
 #endif // ENTIDADE_H

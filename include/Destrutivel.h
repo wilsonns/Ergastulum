@@ -6,6 +6,7 @@ class Destrutivel
 {
     public:
         Entidade* self;
+        Tile* self2;
 
         int hpMax;//maximo de pontos de vida
         int hp;//pontos de vida atual
@@ -19,6 +20,7 @@ class Destrutivel
         
         std::string nomeCadaver;//o nome que a entidade terá quando morrer
 
+        Destrutivel();
         Destrutivel(Entidade *self,int vigor=1, int resistencia=1, int agilidade=1, std::string nomeCadaver = "Cadaver");//ctor
         inline bool morreu()
         {
@@ -59,7 +61,6 @@ class destrutivelJogador : public Destrutivel
 class destrutivelTerreno : public Destrutivel
 {
 public:
-    destrutivelTerreno(int resistencia);//ctor
-    void destruir(Tile* self);
+    destrutivelTerreno(Tile* self,int resistencia);//ctor
 };
 #endif // DESTRUTIVEL_H

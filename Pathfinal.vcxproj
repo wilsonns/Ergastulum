@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Acoes.cpp" />
     <ClCompile Include="src\AI.cpp" />
     <ClCompile Include="src\Atacador.cpp" />
     <ClCompile Include="src\Container.cpp" />
@@ -156,10 +157,11 @@
     <ClCompile Include="src\Mapa.cpp" />
     <ClCompile Include="src\Material.cpp" />
     <ClCompile Include="src\Pathfinding.cpp" />
-    <ClCompile Include="src\Pegavel.cpp" />
+    <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\Stats.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Acoes.h" />
     <ClInclude Include="include\AI.h" />
     <ClInclude Include="include\Atacador.h" />
     <ClInclude Include="include\Container.h" />
@@ -172,7 +174,7 @@
     <ClInclude Include="include\Mapa.h" />
     <ClInclude Include="include\Material.h" />
     <ClInclude Include="include\Pathfinding.h" />
-    <ClInclude Include="include\Pegavel.h" />
+    <ClInclude Include="include\Item.h" />
     <ClInclude Include="include\Stats.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

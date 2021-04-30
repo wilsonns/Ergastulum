@@ -10,6 +10,7 @@ class Atacador
         virtual ~Atacador();//dtor
 
         void atacar(Entidade* alvo);//self ataca o alvo destrutivel e causa dano
+        void atacar(Tile* alvo);
 };
 
 #endif // ATACADOR_H

@@ -16,7 +16,7 @@ LOGGER::~LOGGER()
     //dtor
 }
 
-void LOGGER::logar(std::ofstream arquivo, std::string texto, ...)
+void LOGGER::debugLog(std::string texto, ...)
 {
     va_list ap;//declara a lista de variáveis variádicas(os "...")
     va_start(ap, texto);//define a lista de variáveis variádicas(ap) e após qual variável se iniciam as variáveis variádicas(texto)
@@ -29,6 +29,12 @@ void LOGGER::logar(std::ofstream arquivo, std::string texto, ...)
     }
 
     va_end(ap);//encerra a lista de variáveis variádicas
-    arquivo << texto;
+    debug << texto;
+    debug << std::endl;
+}
 
+void LOGGER::msgLog(Mensagem mensagem)
+{
+    log << mensagem.texto;
+    log << std::endl;
 }

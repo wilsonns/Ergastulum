@@ -1,23 +1,59 @@
 #include "Mapa.h"
 #include "main.h"
 
-static const int TAMANHO_MAX_SALA = 12;
-static const int TAMANHO_MIN_SALA = 6;
+Tile::Tile()
+{
+    //dummy
+}
+
+Tile::Tile(int simbolo, TCODColor cor)
+{
+    this->simbolo = simbolo;
+    this->cor = cor;
+    destrutivel = new destrutivelTerreno(this, 5);
+    itens = new Container(10);
+    if (itens->inventario.size() > 0)
+    {
+        engine.logger->debugLog("Deu ruim mano");
+    }
+    //ctor
+}
+
+Tile::~Tile()
+{
+    delete itens;
+    //dtor
+}
 
 Mapa::Mapa(int largura, int altura)
 {
     this->altura = altura;
     this->largura = largura;
-    tiles = new Tile[altura * largura];
-    mapa = new TCODMap(largura, altura);
-    TCODBsp bsp(0, 0, largura, altura);
-    bsp.splitRecursive(NULL, 8, TAMANHO_MAX_SALA, TAMANHO_MAX_SALA, 1.5f, 1.5f);
-    BSPListener listener(*this);
-    bsp.traverseInvertedLevelOrder(&listener, NULL);
+
     std::ifstream i("data/monstro.json", std::ifstream::binary);
     i >> j;
+    for (auto& i : j.items())
+    {
+        monstros.push_back(i.key());
+    }
+    //tiles = new Tile[altura * largura];
+
+    for (int i = 0; i < altura * largura; i++)
+    {
+        tiles.push_back(new Tile('#',TCOD_blue));
+    }
+    mapa = new TCODMap(largura, altura);
+    /*TCODBsp bsp(0, 0, largura, altura);
+    bsp.splitRecursive(NULL, 8, TAM_MAX, TAM_MAX, 1.5f, 1.5f);
+    BSPListener listener(*this);
+    bsp.traverseInvertedLevelOrder(&listener, NULL);
+    */
+    criarSala(true, 10, 20, 10, 20);
+
+    engine.logger->debugLog("Mapa criado!");
 
     //ctor
+
 }
 
 
@@ -33,8 +69,8 @@ bool BSPListener::visitNode(TCODBsp* node, void* userData)
         int x, y, l, a;
 
         TCODRandom* rng = TCODRandom::getInstance();
-        l = rng->getInt(TAMANHO_MIN_SALA, node->w - 2);
-        a = rng->getInt(TAMANHO_MIN_SALA, node->h - 2);
+        l = rng->getInt(TAM_MIN, node->w - 2);
+        a = rng->getInt(TAM_MIN, node->h - 2);
         x = rng->getInt(node->x + 1, node->x + node->w - l - 1);
         y = rng->getInt(node->y + 1, node->y + node->h - a - 1);
         mapa.criarSala(nSala == 0, x, x + l - 1, y, y + a - 1);
@@ -52,14 +88,18 @@ bool BSPListener::visitNode(TCODBsp* node, void* userData)
 
 Mapa::~Mapa()
 {
-    delete[] tiles;
+    for (auto i : tiles)
+    {
+        delete i;
+    }
     delete mapa;
     //dtor
 }
 
 void Mapa::fazerParede(int x, int y)
 {
-    tiles[x + y * largura].passavel = false;
+    int index = x + y * largura;
+    tiles[index]->passavel = false;
 }
 
 void Mapa::cavar(int x1, int x2, int y1, int y2)
@@ -76,29 +116,50 @@ void Mapa::cavar(int x1, int x2, int y1, int y2)
     }
     for (int tilex = x1; tilex <= x2; tilex++) {
         for (int tiley = y1; tiley <= y2; tiley++) {
-            mapa->setProperties(tilex, tiley, true, true);
+            int index = tilex + tiley * largura;
+            tiles[index]->passavel = true;
         }
     }
+}
+
+void Mapa::cavar(Tile* tile)
+{
+    tile->passavel = true;
 }
 
 bool Mapa::eParede(int x, int y)
 {
-    return !mapa->isWalkable(x, y);
+    int index = x + y * largura;
+    return !tiles[index]->passavel;
 }
+
+bool Mapa::temEntidade(int x, int y)
+{
+    if (tiles[x + y * largura]->ocupante != NULL)
+    {
+        return true;
+    }
+    return false;
+}
+
+
+bool Mapa::temEntidade(int x, int y, Entidade* entidade)
+{
+
+    int index = x + y * largura;
+    if (tiles[index]->ocupante == entidade)
+    {
+        return true;
+    }
+    return false;
+}
+
 
 bool Mapa::podeAndar(int x, int y)
 {
-    if (eParede(x, y))
+    if (eParede(x, y) || temEntidade(x,y))
     {
         return false;
-    }
-    for (std::vector<Entidade*>::iterator it = engine.entidades.begin();it != engine.entidades.end();it++)
-    {
-        Entidade* entidade = *it;
-        if (entidade->denso && entidade->x == x && entidade->y == y)
-        {
-            return false;
-        }
     }
     return true;
 }
@@ -109,74 +170,106 @@ bool Mapa::estaNoFOV(int x, int y) const
     {
         return false;
     }
-    if (mapa->isInFov(x, y))
+
+    int index = x + y * largura;
+    if (tiles[index]->visivel == true)
     {
-        tiles[x + y * largura].explorado = true;
         return true;
     }
     return false;
-
 }
 
-bool Mapa::foiExplorado(int x, int y) const
+void Mapa::tornarVisivel(int x, int y)
 {
-    return tiles[x + y * largura].explorado;
+    int index = x + y * largura;
+    tiles[index]->visivel = true;
 }
 
-void Mapa::computarFOV()
+void Mapa::tornarNaoVisivel(int x, int y)
 {
-    mapa->computeFov(engine.jogador->x, engine.jogador->y, engine.jogador->visao);
+    int index = x + y * largura;
+    tiles[index]->visivel = false;
+}
+
+void Mapa::tornarExplorado(int x, int y)
+{
+    int index = x + y * largura;
+    tiles[index]->explorado = true;
+}
+
+bool Mapa::eVisivel(int x, int y)
+{
+    int index = x + y * largura;
+    return tiles[index]->visivel;
+}
+
+bool Mapa::eExplorado(int x, int y)
+{
+    int index = x + y * largura;
+    return tiles[index]->explorado;
+}
+
+Tile* Mapa::getTile(int x, int y) 
+{
+
+    int index = x + y * largura;
+    return tiles[index];
 }
 
 void Mapa::adcmonstro(int x, int y)
 {
     std::string bicho;
-    if (engine.random(0, 2, 0) == 0)
-    {
-        bicho = "Orc";
-    }
-    else
-    {
-        bicho = "Troll";
-    }
+    int it = engine.random(0, monstros.size()-1, 0);
+    
+    bicho = monstros[it];
 
     int simbolo = j[bicho]["simbolo"].get<int>();
+    int tamanho = j[bicho]["tamanho"].get<int>();
+    int visao = j[bicho]["visao"].get<int>();
     std::string nome = j[bicho]["nome"].get<std::string>();
-    Entidade* monstro = new Entidade(x, y, simbolo, nome, TCOD_darker_green);
-    monstro->visao = 5;
-    monstro->destrutivel = new destrutivelMonstro(monstro,4, 2, 2, "Cadavi");
-    monstro->atacador = new Atacador(monstro);
+    
+    //Atributos
+    int forca = engine.random(j[bicho]["atributos"]["forcaMin"].get<int>(), j[bicho]["atributos"]["forcaMax"].get<int>(), 1);
+    int destreza = engine.random(j[bicho]["atributos"]["destrezaMin"].get<int>(), j[bicho]["atributos"]["destrezaMax"].get<int>(), 1);
+    int vigor = engine.random(j[bicho]["atributos"]["vigorMin"].get<int>(), j[bicho]["atributos"]["vigorMax"].get<int>(), 1);
+    int resistencia = engine.random(j[bicho]["atributos"]["resistenciaMin"].get<int>(), j[bicho]["atributos"]["resistenciaMax"].get<int>(), 1);
+    int agilidade = engine.random(j[bicho]["atributos"]["agilidadeMin"].get<int>(), j[bicho]["atributos"]["agilidadeMax"].get<int>(), 1);
+
+    //Habilidades
+    //int ataque = engine.random(j[bicho]["habilidades"]["ataqueMin"].get<int>(), j[bicho]["habiliades"]["ataqueMax"].get<int>(),1);
+
+    Entidade* monstro = new Entidade(x, y, simbolo,tamanho,visao, nome, TCOD_darker_green);
+    monstro->visao = visao;
+    monstro->destrutivel = new destrutivelMonstro(monstro,vigor, resistencia, agilidade, "Cadaver de "+nome);
+    monstro->atacador = new Atacador(monstro,forca,destreza);
     monstro->container = new Container(5);
-    monstro->ai = new aiMonstro(1);
-    monstro->ai->faccao = ORCS;
+    monstro->ai = new aiMonstro(monstro,1);
+    mover(monstro->x,monstro->y,monstro);
     engine.entidades.push_back(monstro);
 }
 
-void Mapa::adcionarItem(int x, int y, int simbolo, int tipo, std::string nome, int valor, const TCODColor& cor)
+void Mapa::adcionarItem(int x, int y, int simbolo,std::string nome, int valor, const TCODColor& cor, int peso)
 {
-    Entidade* item = new Entidade(x, y, simbolo, nome, cor);
-    item->denso = false;
-    if (tipo == POCAO)
+    Item* obj = new Item(nome,simbolo,cor,peso);
+    if (getTile(x,y)->itens->adcionar(obj))
     {
-        item->pegavel = new Curador(valor);
-        item->pegavel->tipo = tipo;
-    }
-    else if(tipo == ARMA)
-    {
-        item->pegavel = new Arma(valor);
-        item->pegavel->tipo = tipo;
-    }
-    else if (tipo == ARMADURA)
-    {
-        item->pegavel = new Armadura(valor);
-        item->pegavel->tipo = tipo;
-    }
-    else
-    {
-        delete item;
         return;
     }
-    engine.entidades.push_back(item);
+    delete obj;
+}
+
+void Mapa::adcionarItem(Entidade* portador, int simbolo, std::string nome, int valor, const TCODColor& cor)
+{
+
+}
+
+void Mapa::mover(int x, int y, Entidade* ocupante)
+{
+
+    int index = x + y * largura;
+    int indexocupante = ocupante->x + ocupante->y * largura;
+    tiles[indexocupante]->ocupante = nullptr;
+    tiles[index]->ocupante = ocupante;
 }
 
 void Mapa::criarSala(bool primeiro, int x1, int x2, int y1, int y2)
@@ -187,6 +280,18 @@ void Mapa::criarSala(bool primeiro, int x1, int x2, int y1, int y2)
     {
         engine.jogador->x = ((x2 - x1) / 2) + x1;
         engine.jogador->y = ((y2 - y1) / 2) + y1;
+    }
+    for (int i = 0; i < MON_MAX; i++)
+    {
+        int r = engine.random(0, 10, 0);
+        if (r > 8)
+        {
+            continue;
+        }
+        else
+        {
+            adcmonstro(engine.random(x1+1, x2-1, 1), engine.random(y1+1, y2-1, 1));
+        }
     }
 }
 
@@ -201,24 +306,22 @@ void Mapa::render()
     {
         for (int y = 0; y < altura; y += 1)
         {
-            if (!engine.debug)
+            if (eVisivel(x, y))
             {
-                if (estaNoFOV(x, y))
+                TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? TCOD_lighter_grey : TCOD_lightest_gray);
+                Tile* tile = getTile(x,y);
+                if (!tile->itens->inventario.empty())
                 {
-                    TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? TCOD_lighter_grey : TCOD_lightest_gray);
-                }
-
-                else if (!estaNoFOV(x, y) && foiExplorado(x, y))
-                {
-                    TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? TCOD_darkest_grey : TCOD_darker_gray);
+                    Item* item = tile->itens->inventario.back();
+                    TCODConsole::root->setChar(x, y, item->simbolo);
+                    TCODConsole::root->setCharForeground(x, y, item->cor);
                 }
             }
-            if (engine.debug)
-            {
-                TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? paredeEscura : chaoEscuro);
-            }
 
+            else if (!eVisivel(x, y) && eExplorado(x, y))
+            {
+                TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? TCOD_darkest_grey : TCOD_darker_gray);
+            }
         }
     }
 }
-

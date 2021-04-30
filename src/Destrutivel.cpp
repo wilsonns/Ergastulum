@@ -1,5 +1,10 @@
 #include "Destrutivel.h"
 
+Destrutivel::Destrutivel()
+{
+    //dummy
+}
+
 Destrutivel::Destrutivel(Entidade* self, int vigor, int resistencia, int agilidade, std::string nomeCadaver)
 {
     this->self = self;
@@ -10,7 +15,7 @@ Destrutivel::Destrutivel(Entidade* self, int vigor, int resistencia, int agilida
     self->adcionarAtributo("Agilidade");
     self->modificarAtributo("Agilidade", agilidade);
 
-    this->hpMax = self->atributos["Vigor"]->nivelAjustado * 5;
+    this->hpMax = self->atributos["Vigor"]->nivelAjustado * self->tamanho;
     this->hp = hpMax;
     
     this->nomeCadaver = nomeCadaver;
@@ -28,7 +33,7 @@ int Destrutivel::tomarDano(int dano)
     hp -= dano;
     if(hp <= 0)
     {
-        morrer();
+        this->morrer();
     }
     return dano;
 }
@@ -46,16 +51,19 @@ int Destrutivel::curar(int valor)
 
 void Destrutivel::morrer()
 {
-    self->simbolo = '%';
-    engine.gui->mensagem(TCOD_darker_red, "{} morreu!", self->nome);
-    self->nome = nomeCadaver;
-    self->denso = false;
-    for (std::vector<Entidade*>::iterator it = self->container->inventario.begin(); it !=self->container->inventario.end();it++)
-    {
-        Entidade* entidade = *it;
-        entidade->pegavel->soltar(entidade,self);
-    }
-    engine.mandarParaOInicio(self);
+self->simbolo = '%';
+engine.gui->mensagem(TCOD_darker_red, "{} morreu!", self->nome);
+self->nome = nomeCadaver;
+self->denso = false;
+self->ai = NULL;
+for (std::vector<Item*>::iterator it = self->container->inventario.begin(); it != self->container->inventario.end(); it++)
+{
+    Item* item = *it;
+    item->soltar();
+}
+engine.mandarParaOInicio(self);
+
+
 }
 
 destrutivelMonstro::destrutivelMonstro(Entidade *self, int vigor, int resistencia,int agilidade, std::string nomeCadaver) : 
@@ -77,10 +85,14 @@ void destrutivelMonstro::morrer()
 void destrutivelJogador::morrer()
 {
     Destrutivel::morrer();
-    engine.rodando = false;
-}
 
-void destrutivelTerreno::destruir(Tile* self)
+    engine.rodando = false;
+    }
+
+destrutivelTerreno::destrutivelTerreno(Tile* self, int resistencia)
 {
-    self->passavel = true;
+    this->self2 = self;
+    this->resistencia = resistencia;
+    this->hpMax = 20;
+    this->hp = hpMax;
 }
