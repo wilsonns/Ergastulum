@@ -6,7 +6,6 @@ class Destrutivel
 {
     public:
         Entidade* self;
-        Tile* self2;
 
         int hpMax;//maximo de pontos de vida
         int hp;//pontos de vida atual
@@ -58,9 +57,27 @@ class destrutivelJogador : public Destrutivel
         void morrer();
 };
 
-class destrutivelTerreno : public Destrutivel
+class DestrutivelTerreno
 {
 public:
-    destrutivelTerreno(Tile* self,int resistencia);//ctor
+    Tile* self;
+    int hpMax;//maximo de pontos de vida
+    int hp;//pontos de vida atual
+    int resistencia;
+
+    inline bool destruido()
+    {
+        if (hp <= 0)
+        {
+            return true;
+        }
+        return false;
+    }//Retorna verdadeiro se tiver morrido, falso se não
+
+
+    DestrutivelTerreno(Tile* self,int resistencia);//ctor
+    void destruir();
+    int tomarDano(int dano);//subtrai o dano sofrido dos pontos de vida atuais e retorna a quantidade de dano que foi causada
+
 };
 #endif // DESTRUTIVEL_H

@@ -4,8 +4,6 @@
 
 struct Nodo; //FORWARD DO NODO DECLARADO EM PATHFINDING.H
 
-
-
 class Entidade
 {
     public:
@@ -15,7 +13,6 @@ class Entidade
         int visao; //raio da visão da entidade
         int tamanho; //uma abstração do tamanho de uma entidade; 1 - rato, 5- humano, 10 - carro, assim por diante
         
-       
         TCODColor cor;
 
         std::string nome; //Nome da entidade
@@ -39,6 +36,9 @@ class Entidade
         void modificarHabilidade(std::string s_habilidade, int valor);
         void uparHabilidade(std::string s_habilidade, int xp);
 
+        int getAtributo(std::string atributo);
+        int getHabilidade(std::string habilidade);
+
         std::vector<Nodo*> caminho;//O caminho retornado pelas funções de pathfinding
 
         Entidade(int x, int y,int simbolo, int tamanho, int visao,  std::string nome, const TCODColor cor);//CTOR
@@ -55,9 +55,13 @@ class Entidade
 
         void render(); //Desenha a entidade na tela
         void atualizar();//chama a atualização da IA da entidade
-};
 
-class Mobilia : public Entidade
+        //////FLAGS
+
+};
+/*
+
+class Mobilia : public Entidade//////UM TIPO DE ENTIDADE QUE REPRESENTA PORTAS, BAÚS, E TODOS OS OUTROS TIPOS DE OBJETOS DO MAPA
 {
 public:
     Mobilia(int x, int y, int simbolo, int simboloAberto, std::string nome, const TCODColor cor);
@@ -68,5 +72,5 @@ public:
     bool abrir();
     bool fechar();
 };
-
+*/
 #endif // ENTIDADE_H

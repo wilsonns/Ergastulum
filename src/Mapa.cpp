@@ -10,7 +10,7 @@ Tile::Tile(int simbolo, TCODColor cor)
 {
     this->simbolo = simbolo;
     this->cor = cor;
-    destrutivel = new destrutivelTerreno(this, 5);
+    destrutivel = new DestrutivelTerreno(this, 5);
     itens = new Container(10);
     if (itens->inventario.size() > 0)
     {
@@ -223,34 +223,41 @@ void Mapa::adcmonstro(int x, int y)
     
     bicho = monstros[it];
 
-    int simbolo = j[bicho]["simbolo"].get<int>();
+    std::string simb = j[bicho]["simbolo"].get<std::string>();
     int tamanho = j[bicho]["tamanho"].get<int>();
     int visao = j[bicho]["visao"].get<int>();
     std::string nome = j[bicho]["nome"].get<std::string>();
-    
+
+    char simbolo = simb[0];
     //Atributos
-    int forca = engine.random(j[bicho]["atributos"]["forcaMin"].get<int>(), j[bicho]["atributos"]["forcaMax"].get<int>(), 1);
-    int destreza = engine.random(j[bicho]["atributos"]["destrezaMin"].get<int>(), j[bicho]["atributos"]["destrezaMax"].get<int>(), 1);
-    int vigor = engine.random(j[bicho]["atributos"]["vigorMin"].get<int>(), j[bicho]["atributos"]["vigorMax"].get<int>(), 1);
-    int resistencia = engine.random(j[bicho]["atributos"]["resistenciaMin"].get<int>(), j[bicho]["atributos"]["resistenciaMax"].get<int>(), 1);
-    int agilidade = engine.random(j[bicho]["atributos"]["agilidadeMin"].get<int>(), j[bicho]["atributos"]["agilidadeMax"].get<int>(), 1);
+    int forca = engine.random(j[bicho]["atributos"]["forcaMin"].get<int>(), j[bicho]["atributos"]["forcaMax"].get<int>());
+    int destreza = engine.random(j[bicho]["atributos"]["destrezaMin"].get<int>(), j[bicho]["atributos"]["destrezaMax"].get<int>());
+    int vigor = engine.random(j[bicho]["atributos"]["vigorMin"].get<int>(), j[bicho]["atributos"]["vigorMax"].get<int>());
+    int resistencia = engine.random(j[bicho]["atributos"]["resistenciaMin"].get<int>(), j[bicho]["atributos"]["resistenciaMax"].get<int>());
+    int agilidade = engine.random(j[bicho]["atributos"]["agilidadeMin"].get<int>(), j[bicho]["atributos"]["agilidadeMax"].get<int>());
 
     //Habilidades
-    //int ataque = engine.random(j[bicho]["habilidades"]["ataqueMin"].get<int>(), j[bicho]["habiliades"]["ataqueMax"].get<int>(),1);
-
+    int desarmado = engine.random(j[bicho]["habilidades"]["desarmadoMin"].get<int>(), j[bicho]["habilidades"]["desarmadoMax"].get<int>());
+    
+    int espada = engine.random(j[bicho]["habilidades"]["espadaMin"].get<int>(), j[bicho]["habilidades"]["espadaMax"].get<int>());
+    
     Entidade* monstro = new Entidade(x, y, simbolo,tamanho,visao, nome, TCOD_darker_green);
     monstro->visao = visao;
     monstro->destrutivel = new destrutivelMonstro(monstro,vigor, resistencia, agilidade, "Cadaver de "+nome);
-    monstro->atacador = new Atacador(monstro,forca,destreza);
+    monstro->atacador = new Atacador(monstro,forca,destreza,desarmado,espada);
     monstro->container = new Container(5);
     monstro->ai = new aiMonstro(monstro,1);
     mover(monstro->x,monstro->y,monstro);
     engine.entidades.push_back(monstro);
 }
 
-void Mapa::adcionarItem(int x, int y, int simbolo,std::string nome, int valor, const TCODColor& cor, int peso)
+void Mapa::adcionarItem(int x, int y, int simbolo,std::string nome,std::string tipo,std::string descricao, int valor, const TCODColor& cor, int peso)
 {
-    Item* obj = new Item(nome,simbolo,cor,peso);
+    Item* obj = new Item(nome, tipo, descricao, simbolo, cor, peso);
+    if (tipo == "Espada")
+    {
+        obj->eArma = true;
+    }
     if (getTile(x,y)->itens->adcionar(obj))
     {
         return;
@@ -290,7 +297,7 @@ void Mapa::criarSala(bool primeiro, int x1, int x2, int y1, int y2)
         }
         else
         {
-            adcmonstro(engine.random(x1+1, x2-1, 1), engine.random(y1+1, y2-1, 1));
+            adcmonstro(engine.random(x1, x2), engine.random(y1, y2));
         }
     }
 }

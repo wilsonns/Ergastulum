@@ -25,21 +25,26 @@ public:
     Entidade* fim;//cria um pointer para 
     LOGGER *logger;//cria o log externo para debug
     GUI *gui;//Cria a interface do jogo
+    
     TCOD_key_t ultimoBotao;
     TCOD_mouse_t mouse;
-    std::vector<TCODBsp*> folhas;
-    std::vector<Entidade*> aRemover;
 
     bool rodando; //o jogo está rodando?
     bool debug; // o jogo esta no modo debug?
     bool mostrarPath; //mostrar caminhos de cada entidade
     
+    //CURSOR
+    int cursx;
+    int cursy;
+    int cursSimb;
+    int cursS;
+    bool cursVisivel;
     
     Engine(int largura, int altura); //ctor
     virtual ~Engine();//dtor/
 
-    int random(int minimo, int maximo, int bonus); // retorna um valor inteiro entre minimo e maximo + o bonus
-    int randomf(float minimo, float maximo, float bonus);
+    int random(int minimo, int maximo, int bonus=0); // retorna um valor inteiro entre minimo e maximo + o bonus
+    int randomf(float minimo, float maximo, float bonus=0);
 
     void mandarParaOInicio(Entidade* entidade);
 

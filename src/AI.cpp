@@ -13,14 +13,14 @@ AI::~AI()
     //dtor
 }
 
+void AI::atualizar()
+{
+    pa = 5 * (self->atributos["Destreza"]->nivelAjustado + self->atributos["Agilidade"]->nivelAjustado);
+}
+
 float AI::condicaoFisica()
 {
     return self->destrutivel->hp / self->destrutivel->hpMax;
-}
-
-void AI::atualizar()
-{
-    this->pa += ((int)(self->atributos["Agilidade"]->nivelAjustado * 100) * condicaoFisica());
 }
 
 aiJogador::aiJogador(Entidade* self)
@@ -48,8 +48,8 @@ void aiJogador::atualizar()
             
             static const int LARGURA_INVENTARIO = 50;
             static const int ALTURA_INVENTARIO = 14;
-
-            static TCODConsole con(LARGURA_INVENTARIO, ALTURA_INVENTARIO);
+            
+            TCODConsole con(LARGURA_INVENTARIO, ALTURA_INVENTARIO);
 
             con.setDefaultForeground(TCODColor(200, 180, 50));
             con.printFrame(0, 0, LARGURA_INVENTARIO, ALTURA_INVENTARIO, true, TCOD_BKGND_DEFAULT, entidade->nome.c_str());
@@ -185,6 +185,78 @@ Item* aiJogador::escolherDoInventario(Container* container, bool inventarioDoJog
     return NULL;
 }
 
+Entidade* aiJogador::mirar(int alcance)
+{
+    engine.cursx = self->x;
+    engine.cursy = self->y;
+    bool buscando = true;
+    engine.cursVisivel = true;
+    while (buscando)
+    {
+        engine.render();
+        TCOD_key_t key;
+        TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL);
+        switch (key.vk)
+        {
+        case TCODK_UP:
+            if (self->distanciaDiag(self->x, self->y, engine.cursx, engine.cursy - 1) < alcance)
+                {
+                    engine.cursy -= 1;
+                }
+            break;
+
+        case TCODK_DOWN:
+            if (self->distanciaDiag(self->x, self->y, engine.cursx, engine.cursy + 1) < alcance)
+                {
+                    engine.cursy += 1;
+                }
+           break;
+
+        case TCODK_LEFT:
+
+            if (self->distanciaDiag(self->x, self->y, engine.cursx-1, engine.cursy) < alcance)
+            {
+                engine.cursx -= 1;
+            }
+            break;
+
+        case TCODK_RIGHT:
+
+            if (self->distanciaDiag(self->x, self->y, engine.cursx + 1, engine.cursy) < alcance)
+            {
+                engine.cursx += 1;
+            }
+            break;
+        case TCODK_ESCAPE:
+            buscando = false;
+            break;
+        case TCODK_ENTER:
+            Tile* tile = engine.mapa->getTile(engine.cursx, engine.cursy);
+            if (tile->ocupante)
+            {
+
+                engine.cursVisivel = false;
+                int X = tile->ocupante->x - self->x;
+                int Y = tile->ocupante->y - self->y;
+                int x = pow((double)X, 2);
+                int y = pow((double)Y, 2);
+                int d = abs(sqrt((double)x +(double)y));
+                double anguloRadiano = atan2((double)X, (double)Y);
+                double anguloGraus = anguloRadiano * 180 / 3.14;
+                engine.logger->debugLog("Radianos: {}", std::to_string(anguloRadiano));
+                engine.logger->debugLog("Graus: {}", std::to_string(anguloGraus));
+                return tile->ocupante;
+            }
+            break;
+        }
+    }
+    engine.cursVisivel = false;
+
+
+    Entidade * fodase = NULL;
+    return fodase;
+}
+
 void aiJogador::mostrarPersonagem()
 {
     static const int LARGURA_INVENTARIO = 50;
@@ -222,8 +294,10 @@ void aiJogador::botaoAcao(int ascii)
 {
     switch (ascii)
     {
-    case 'g':
-    case 'G'://Pegar um item no chão abaixo de vc
+    case 'f':
+        self->atacador->atacarRanged(mirar(5));
+        break;
+    case 'p'://Pegar um item no chão abaixo de vc
     {
         Tile* tile = engine.mapa->getTile(self->x, self->y);
         if (tile->itens->inventario.empty())
@@ -233,15 +307,17 @@ void aiJogador::botaoAcao(int ascii)
         else
         {
             Item* item = escolherDoInventario(tile->itens);
-            item->pegar(self);
-            tile->itens->remover(item);
+            if (item)
+            {
+                item->pegar(self);
+                tile->itens->remover(item);
+            }
         }
     }
     break;
-    case 'i':
-    case 'I'://Abrir o inventario
+    case 'i'://Abrir o inventario
     {
-        Item* item = escolherDoInventario(self->container,true);
+        Item* item = escolherDoInventario(self->container, true);
         if (item)
         {
             if (item->usar())
@@ -252,12 +328,10 @@ void aiJogador::botaoAcao(int ascii)
         }
         break;
     }
-    case 'c':
-    case 'C'://Não lembro o que isso era pra fazer :p vai ser teste invocar minion
+    case 'P':
         mostrarPersonagem();
         break;
-    case 'd':
-    case 'D'://Derrubar um item no local onde a entidade está
+    case 'd'://Derrubar um item no local onde a entidade está
     {
         Item* item = escolherDoInventario(self->container);
         if (item)
@@ -267,66 +341,75 @@ void aiJogador::botaoAcao(int ascii)
                 engine.statusJogo = Engine::TURNO_INIMIGO;
             }
         }
-    }break;
-
+    }
+    break;
+    case 't'://Teste de criacao de janela
+        if (engine.gui->janela)
+        {
+            delete engine.gui->janela;
+            engine.gui->janela = nullptr;
+        }
+        else
+        {
+            engine.gui->janela = engine.gui->criarJanela("Fodase", 10, 10, 10, 10);
+        }
+        break;
     case 'x':
         engine.debug = !engine.debug;
         break;
-
-
     case'u':
         self->uparHabilidade("Ataque", 200);
         break;
-        /*
-            case's':
+    case's':
+    {
+        std::string q = "Qual direcao deseja atacar?";
+        int largura = q.length();
+        int altura = 3;
+
+        static TCODConsole mensagem(largura, altura);
+        mensagem.setDefaultForeground(TCODColor(200, 180, 50));
+        mensagem.printFrame(0, 0, largura, altura, true, TCOD_BKGND_DEFAULT);
+        mensagem.printf(1, 1, q.c_str());
+
+        TCOD_key_t key;
+        TCODConsole::blit(&mensagem, 0, 0, largura, altura, TCODConsole::root, 0, 0, 0.9f, 0.9f);
+        TCODConsole::flush();
+        TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, true);
+
+        switch (key.vk)
             {
-                std::string q = "Qual direcao deseja atacar?";
-                int largura = q.length();
-                int altura = 3;
 
-                static TCODConsole mensagem(largura, altura);
-                mensagem.setDefaultForeground(TCODColor(200, 180, 50));
-                mensagem.printFrame(0, 0, largura, altura, true, TCOD_BKGND_DEFAULT);
-                mensagem.printf(1, 1, q.c_str());
-
-                TCOD_key_t key;
-                TCODConsole::blit(&mensagem, 0, 0, largura, altura, TCODConsole::root, 0, 0, 0.9f, 0.9f);
-                TCODConsole::flush();
-                TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, true);
-                switch (key.vk)
-                {
-
-                case TCODK_UP:
-                case TCODK_KP8:
-                    self->atacador->atacar(engine.mapa->getTile(self->x , self->y - 1));
-                    break;
-                case TCODK_DOWN:
-                case TCODK_KP2:
-                    self->atacador->atacar(engine.mapa->getTile(self->x, self->y + 1));
-                    break;
-                case TCODK_LEFT:
-                case TCODK_KP4:
-                    self->atacador->atacar(engine.mapa->getTile(self->x-1, self->y));
-                    break;
-                case TCODK_RIGHT:
-                case TCODK_KP6:
-                    self->atacador->atacar(engine.mapa->getTile(self->x+1, self->y));
-                    break;
-                case TCODK_KP7:
-                    break;
-                case TCODK_KP9:
-                    break;
-                case TCODK_KP1:
-                    break;
-                case TCODK_KP3:
-                    break;
-                default:
-                    break;
-
-                }
-
+            case TCODK_UP:
+            case TCODK_KP8:
+                self->atacador->atacar(engine.mapa->getTile(self->x, self->y - 1));
                 break;
-            }*/
+            case TCODK_DOWN:
+            case TCODK_KP2:
+                self->atacador->atacar(engine.mapa->getTile(self->x, self->y + 1));
+                break;
+            case TCODK_LEFT:
+            case TCODK_KP4:
+                self->atacador->atacar(engine.mapa->getTile(self->x - 1, self->y));
+                break;
+            case TCODK_RIGHT:
+            case TCODK_KP6:
+                self->atacador->atacar(engine.mapa->getTile(self->x + 1, self->y));
+                break;
+            case TCODK_KP7:
+                break;
+            case TCODK_KP9:
+                break;
+            case TCODK_KP1:
+                break;
+            case TCODK_KP3:
+                break;
+            default:
+                break;
+
+            }
+
+        break;
+        }
     }
 }
 
@@ -341,7 +424,6 @@ aiMonstro::aiMonstro(Entidade* self, int inteligencia)
 void aiMonstro::atualizar()
 {
     AI::atualizar();
-
     if (self->destrutivel && self->destrutivel->morreu())
     {
         return;

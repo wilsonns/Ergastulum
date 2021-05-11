@@ -21,7 +21,7 @@ void GUI::render()
 
     renderBarra(1, 1, LARGURA_BARRA, engine.jogador->destrutivel->hp, engine.jogador->destrutivel->hpMax, TCOD_light_red, TCOD_darker_red);
     con->printf(1, 2, "Forca:%i", engine.jogador->atributos["Forca"]->nivelAjustado);
-    con->printf(1, 3, "Acoes:%i", engine.jogador->ai->pa);
+    con->printf(1, 3, "Arma:%s", engine.jogador->container->arma? engine.jogador->container->arma->nome.c_str():"Desarmado");
 
    
 
@@ -48,6 +48,11 @@ void GUI::render()
     renderMouse();
     TCODConsole::blit(con, 0, 0, engine.largura, ALTURA_PAINEL, 
         TCODConsole::root, 0, engine.altura - ALTURA_PAINEL);
+    if (janela)
+    {
+        janela->con->printFrame(0, 0, janela->largura, janela->altura,true, TCOD_BKGND_DEFAULT, janela->titulo.c_str());
+        TCODConsole::blit(janela->con, 0, 0, janela->largura, janela->altura, TCODConsole::root, janela->posx, janela->posy, 0.7, 0.7);
+    }
 }///Desenha a moldura da UI
 
 void GUI::renderBarra(int x, int y, int largura, int valor, int valormax, const TCODColor& corBarra, const TCODColor& corFundo)
@@ -55,8 +60,8 @@ void GUI::renderBarra(int x, int y, int largura, int valor, int valormax, const 
     con->setDefaultBackground(corFundo);
     con->rect(x, y, largura, 1, false, TCOD_BKGND_SET);
 
-    float larguraBarra = (float)valor / (float)valormax; 
-    larguraBarra *= largura;
+    float larguraBarra = ((float)valor / (float)valormax)*largura;
+
     if (larguraBarra > 0)
     {
         con->setDefaultBackground(corBarra);
@@ -119,4 +124,11 @@ void GUI::renderMouse()
     }
     con->setDefaultForeground(TCOD_white);
     con->printf(1, 0, buf.c_str());
+}
+
+Janela* GUI::criarJanela(std::string titulo, int largura, int altura, int posx, int posy)
+{
+    Janela* janela = new Janela(titulo, largura, altura, posx, posy);
+
+    return janela;
 }

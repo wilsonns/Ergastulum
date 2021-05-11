@@ -17,11 +17,29 @@ struct Mensagem
     }
 };
 
+struct Janela
+{
+    TCODConsole* con;
+    std::string titulo;
+    int posx, posy, largura, altura;
+    Janela(std::string titulo, int largura, int altura, int posx, int posy)
+    {
+        this->titulo = titulo;
+        this->posx = posx;
+        this->posy = posy;
+        this->largura = largura;
+        this->altura = altura;
+        this->con = new TCODConsole(largura,altura);
+    }
+};
+
 class GUI
 {
     public:
         GUI();//ctor
         virtual ~GUI();//dtor
+
+        Janela* janela;
 
         static const int ALTURA_PAINEL = 7;
         static const int LARGURA_BARRA = 20;
@@ -30,6 +48,8 @@ class GUI
         static const int ALTURA_PAINEL_MSG = ALTURA_PAINEL - 1;
 
         void render();//desenhar a interface na tela
+
+        Janela* criarJanela(std::string titulo, int largura, int altura, int posx, int posy);
 
         //MENSAGENS
         void mensagem(const TCODColor& cor, std::string texto, ...);

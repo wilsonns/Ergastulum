@@ -6,7 +6,7 @@
 #include "Destrutivel.h"
 
 class Container;
-class destrutivelTerreno;
+class DestrutivelTerreno;
 
 struct Tile
 {
@@ -14,7 +14,7 @@ struct Tile
     Tile(int simbolo, TCODColor cor);
     ~Tile();
 
-    Destrutivel* destrutivel;
+    DestrutivelTerreno* destrutivel;
     
     int simbolo;
     TCODColor cor;
@@ -98,7 +98,14 @@ public:
 
     //ADCIONAR ENTIDADES
     void adcmonstro(int x, int y);//adciona um monstro ao mapa
-    void adcionarItem(int x, int y, int simbolo, std::string nome, int valor, const TCODColor& cor,int peso);//adciona um item(atualmente, uma poção de cura, o único item nessa porra) na posição x/y
+    
+    /*
+    adciona item em uma coordenada no mapa
+    */
+    void adcionarItem(int x, int y, int simbolo, 
+        std::string nome, std::string tipo, std::string descricao, 
+        int valor, const TCODColor& cor, int peso);//adciona um item(atualmente, uma poção de cura, o único item nessa porra) na posição x/y
+    
     void adcionarItem(Entidade* portador, int simbolo, std::string nome, int valor, const TCODColor& cor);//adciona um item direto no inventario de uma entidade
     void mover(int x, int y, Entidade* ocupante);
 

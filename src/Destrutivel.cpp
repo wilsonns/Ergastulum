@@ -61,9 +61,8 @@ for (std::vector<Item*>::iterator it = self->container->inventario.begin(); it !
     Item* item = *it;
     item->soltar();
 }
-engine.mandarParaOInicio(self);
-
-
+engine.mapa->adcionarItem(self->x, self->y, self->simbolo, self->nome, "Cadaver", "", 0, TCOD_darker_red, 0);
+engine.entidades.erase((std::find(engine.entidades.begin(),engine.entidades.end(),self)));
 }
 
 destrutivelMonstro::destrutivelMonstro(Entidade *self, int vigor, int resistencia,int agilidade, std::string nomeCadaver) : 
@@ -87,12 +86,27 @@ void destrutivelJogador::morrer()
     Destrutivel::morrer();
 
     engine.rodando = false;
-    }
+}
 
-destrutivelTerreno::destrutivelTerreno(Tile* self, int resistencia)
+DestrutivelTerreno::DestrutivelTerreno(Tile* self, int resistencia)
 {
-    this->self2 = self;
+    this->self = self;
     this->resistencia = resistencia;
     this->hpMax = 20;
     this->hp = hpMax;
+}
+
+void DestrutivelTerreno::destruir()
+{
+    self->passavel = true;
+}
+
+int DestrutivelTerreno::tomarDano(int dano)
+{
+    hp -= dano;
+    if (hp <= 0)
+    {
+        this->destruir();
+    }
+    return dano;
 }

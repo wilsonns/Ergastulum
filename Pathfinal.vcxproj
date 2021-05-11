@@ -159,6 +159,7 @@
     <ClCompile Include="src\Pathfinding.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\Stats.cpp" />
+    <ClCompile Include="Terreno.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Acoes.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="include\Pathfinding.h" />
     <ClInclude Include="include\Item.h" />
     <ClInclude Include="include\Stats.h" />
+    <ClInclude Include="Terreno.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

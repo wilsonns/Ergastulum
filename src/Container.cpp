@@ -4,6 +4,7 @@ Container::Container(int tamanho)
 {
 	this->tamanho = tamanho;
 	this->pesoAtual = 0;
+	armadura = arma = escudo = NULL;
 
 }
 

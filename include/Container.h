@@ -11,10 +11,10 @@ public:
 	std::vector<Item*> inventario;//o vetor inventario
 
 	//Os slots de Equipamento
-	/*Entidade* armadura;
-	Entidade* arma;
-	Entidade* escudo;
-	*/
+	Item* armadura;
+	Item* arma;
+	Item* escudo;
+	
 	Container(int tamanho);//ctor
 	~Container();//dtor
 

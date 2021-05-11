@@ -1,13 +1,13 @@
 1 - AI
 
 2 - MAPA
---Gerador de mapas aleatório
+--Gerador de mapas aleatório \/
 --Tipos de terreno diferentes além de chão e parede
 --Armadilhas
 --Portas(Provavelmente serão entidades)
 
 3 - Entidades
---Capacidade de portar itens pra aumentar o dano causado
---Tipos diferentes de materiais e interações causadas por isso
+--Capacidade de portar itens pra aumentar o dano causado \/
+--Tipos diferentes de materiais e interações causadas por isso 
 
 4 - Mudanças de planos... Itens são da Classe Item somente, não mais da classe Entidade

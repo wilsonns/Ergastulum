@@ -4,15 +4,25 @@
 Engine::Engine(int largura, int altura)
 {
     srand(time(NULL));
+    
     this->largura = largura;
     this->altura = altura;
-    TCODConsole::initRoot(largura, altura, "Joguim sem Nome do Will", false);
     
+    cursx = cursy = 5;
+    cursSimb = 'X';
+    cursS = 0;
+    cursVisivel = true;
+
+    TCODConsole::initRoot(largura, altura, "Ergastulum", false);
+
     logger = new LOGGER();
+    
     gui = new GUI();
+    
+    
     jogador = new Entidade(1, 1, '@' ,5,3,"Will",TCOD_black);
     jogador->destrutivel = new destrutivelJogador(jogador,5, 2, 3, "Cadaver de" + jogador->nome);
-    jogador->atacador = new Atacador(jogador,20,2,1); 
+    jogador->atacador = new Atacador(jogador,50,2,1,1); 
     jogador->ai = new aiJogador(jogador);
     jogador->container = new Container(5*jogador->atributos["Forca"]->nivelAjustado);
 
@@ -24,7 +34,7 @@ Engine::Engine(int largura, int altura)
 
     entidades.push_back(jogador);
   
-    mapa->adcionarItem(mapa->dungeon[0]->xcentro + 1, mapa->dungeon[0]->ycentro + 1, '/',"Espada de Xessus", 5, TCOD_black,5);
+    mapa->adcionarItem(mapa->dungeon[0]->xcentro + 1, mapa->dungeon[0]->ycentro + 1, '/',"Espada de Xessus","Espada","Uma espada abencoada por xessus", 5, TCOD_black,5);
     rodando = true;
     debug = true;
     mostrarPath = false;
@@ -48,12 +58,33 @@ void Engine::render()
     for (std::vector<Entidade*>::iterator it = entidades.begin(); it != entidades.end(); it++)
     {
         Entidade* entidade = *it;
-        if (mapa->eVisivel(entidade->x, entidade->y))
+        if (mapa->eVisivel(entidade->x, entidade->y)||debug)
         {
             entidade->render();
         }
     }
     gui->render();
+
+    if (cursVisivel)
+    {
+
+        TCODConsole::root->setChar(cursx - 1, cursy - 1, 218);
+        TCODConsole::root->setCharForeground(cursx - 1, cursy - 1, TCOD_dark_gray);
+        
+
+        TCODConsole::root->setChar(cursx + 1, cursy + 1, 217);
+        TCODConsole::root->setCharForeground(cursx + 1, cursy + 1, TCOD_dark_gray);
+
+
+        TCODConsole::root->setChar(cursx + 1, cursy - 1, 191);
+        TCODConsole::root->setCharForeground(cursx + 1, cursy - 1, TCOD_dark_gray);
+
+
+        TCODConsole::root->setChar(cursx - 1, cursy + 1, 192);
+        TCODConsole::root->setCharForeground(cursx - 1, cursy + 1, TCOD_dark_gray);
+    }
+    root->flush();
+
 }
 
 void Engine::atualizar()
@@ -98,7 +129,13 @@ void Engine::atualizar()
 
 int Engine::random(int minimo, int maximo, int bonus)
 {
-    return rand() % ((maximo - minimo + 1) + minimo)+bonus;
+    if (minimo > maximo)
+    {
+        int tmp = maximo;
+        maximo = minimo;
+        minimo = tmp;
+    }
+    return minimo + (rand() % maximo);
 }
 
 void Engine::mandarParaOInicio(Entidade* entidade)

@@ -47,7 +47,7 @@ void Entidade::render()
 
 void Entidade::atualizar()
 {
-     if (ai) { ai->atualizar(); }
+     if (ai) { ai   ->atualizar(); }
 }
 float Entidade::maximo(float a, float b)
 {
@@ -68,10 +68,10 @@ void Entidade::FOV()
 {
     if (!engine.debug)
     {
-        for (int i = 0; i < 360; i++)
+        for (unsigned short int i = 0; i < 360; i++)
         {
-            int nx = 0;
-            int ny = 0;
+            unsigned int nx = 0;
+            unsigned int ny = 0;
             float grau = i * 0.0174532f;
             nx = round(cos(grau) * visao) + x;
             ny = round(sin(grau) * visao) + y;
@@ -155,6 +155,18 @@ void Entidade::uparHabilidade(std::string s_habilidade, int xp)
         }
     }
 }
+
+int Entidade::getAtributo(std::string atributo)
+{
+    return atributos[atributo]->nivelAjustado;
+}
+
+
+int Entidade::getHabilidade(std::string habilidade)
+{
+    return habilidades[habilidade]->nivelAjustado;
+}
+
 /*
 Mobilia::Mobilia(int x, int y, int simbolo, int simboloAberto, std::string nome, const TCODColor cor)
 {
