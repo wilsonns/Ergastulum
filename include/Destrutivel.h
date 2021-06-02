@@ -20,7 +20,7 @@ class Destrutivel
         std::string nomeCadaver;//o nome que a entidade terá quando morrer
 
         Destrutivel();
-        Destrutivel(Entidade *self,int vigor=1, int resistencia=1, int agilidade=1, std::string nomeCadaver = "Cadaver");//ctor
+        Destrutivel(Entidade *self, std::string nomeCadaver = "Cadaver");//ctor
         inline bool morreu()
         {
             if(hp<=0)
@@ -34,7 +34,7 @@ class Destrutivel
 
         int curar(int valor);//recupera pontos de vida da entidade e retorna a quantidade de pvs curados
 
-        virtual void morrer();//Função virtual que mata a entidade, tirando-a do vetor entidades e enfiando-a no vetor mortos
+        void morrer();//Função virtual que mata a entidade, tirando-a do vetor entidades e enfiando-a no vetor mortos
 
         virtual ~Destrutivel();//dtor
 
@@ -46,14 +46,14 @@ class Destrutivel
 class destrutivelMonstro : public Destrutivel
 {
     public:
-        destrutivelMonstro(Entidade *self, int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
+        destrutivelMonstro(Entidade *self, std::string nomeCadaver);//ctor
         void morrer();
 };
 
 class destrutivelJogador : public Destrutivel
 {
     public:
-        destrutivelJogador(Entidade* self, int vigor, int resistencia, int agilidade, std::string nomeCadaver);//ctor
+        destrutivelJogador(Entidade* self, std::string nomeCadaver);//ctor
         void morrer();
 };
 

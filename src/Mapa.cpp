@@ -10,8 +10,9 @@ Tile::Tile(int simbolo, TCODColor cor)
 {
     this->simbolo = simbolo;
     this->cor = cor;
-    destrutivel = new DestrutivelTerreno(this, 5);
     itens = new Container(10);
+    int rand = engine.random(0, engine.materiais.size(), 0);
+    terreno = new Parede('#',engine.materiais["Madeira"]);
     if (itens->inventario.size() > 0)
     {
         engine.logger->debugLog("Deu ruim mano");
@@ -73,7 +74,8 @@ bool BSPListener::visitNode(TCODBsp* node, void* userData)
         a = rng->getInt(TAM_MIN, node->h - 2);
         x = rng->getInt(node->x + 1, node->x + node->w - l - 1);
         y = rng->getInt(node->y + 1, node->y + node->h - a - 1);
-        mapa.criarSala(nSala == 0, x, x + l - 1, y, y + a - 1);
+        bool f = true;
+        mapa.criarSala(f , x, x + l - 1, y, y + a - 1);
         if (nSala != 0)
         {
             mapa.cavar(ultx, x + l / 2, ulty, ulty);
@@ -96,10 +98,26 @@ Mapa::~Mapa()
     //dtor
 }
 
-void Mapa::fazerParede(int x, int y)
+void Mapa::fazerParede(int x, int y,Material*material)
 {
     int index = x + y * largura;
-    tiles[index]->passavel = false;
+    if (tiles[index]->terreno)
+    {
+        delete tiles[index]->terreno;
+    }
+    tiles[index]->terreno = new Parede('#', material);
+
+    //tiles[index]->passavel = false;
+}
+
+void Mapa::fazerPorta(int x, int y, Material* material)
+{
+    int index = x + y * largura;
+    if (tiles[index]->terreno)
+    {
+        delete tiles[index]->terreno;
+    }
+    tiles[index]->terreno = new Porta('+', '/', engine.materiais["Madeira"]);
 }
 
 void Mapa::cavar(int x1, int x2, int y1, int y2)
@@ -117,20 +135,32 @@ void Mapa::cavar(int x1, int x2, int y1, int y2)
     for (int tilex = x1; tilex <= x2; tilex++) {
         for (int tiley = y1; tiley <= y2; tiley++) {
             int index = tilex + tiley * largura;
-            tiles[index]->passavel = true;
+            Material* mat = tiles[index]->terreno->material;
+            delete tiles[index]->terreno;
+            int rand = engine.random(0, engine.materiais.size(), 0);
+            tiles[index]->terreno = new Chao('.',mat);
         }
     }
 }
 
 void Mapa::cavar(Tile* tile)
 {
-    tile->passavel = true;
+    Material *mat = tile->terreno->material;
+    delete tile->terreno;
+    int rand = engine.random(0, engine.materiais.size(), 0);
+    tile->terreno = new Chao('.', mat);
 }
 
-bool Mapa::eParede(int x, int y)
+bool Mapa::eDenso(int x, int y)
 {
     int index = x + y * largura;
-    return !tiles[index]->passavel;
+    return tiles[index]->terreno->eDenso();
+}
+
+bool Mapa::eOpaco(int x, int y)
+{
+    int index = x + y * largura;
+    return tiles[index]->terreno->eOpaco();
 }
 
 bool Mapa::temEntidade(int x, int y)
@@ -157,7 +187,11 @@ bool Mapa::temEntidade(int x, int y, Entidade* entidade)
 
 bool Mapa::podeAndar(int x, int y)
 {
-    if (eParede(x, y) || temEntidade(x,y))
+    if (getTile(x, y)->terreno->porta && !temEntidade(x,y))
+    {
+        return true;
+    }
+    if (eDenso(x, y) || temEntidade(x,y))
     {
         return false;
     }
@@ -225,28 +259,16 @@ void Mapa::adcmonstro(int x, int y)
 
     std::string simb = j[bicho]["simbolo"].get<std::string>();
     int tamanho = j[bicho]["tamanho"].get<int>();
-    int visao = j[bicho]["visao"].get<int>();
+    
     std::string nome = j[bicho]["nome"].get<std::string>();
 
     char simbolo = simb[0];
-    //Atributos
-    int forca = engine.random(j[bicho]["atributos"]["forcaMin"].get<int>(), j[bicho]["atributos"]["forcaMax"].get<int>());
-    int destreza = engine.random(j[bicho]["atributos"]["destrezaMin"].get<int>(), j[bicho]["atributos"]["destrezaMax"].get<int>());
-    int vigor = engine.random(j[bicho]["atributos"]["vigorMin"].get<int>(), j[bicho]["atributos"]["vigorMax"].get<int>());
-    int resistencia = engine.random(j[bicho]["atributos"]["resistenciaMin"].get<int>(), j[bicho]["atributos"]["resistenciaMax"].get<int>());
-    int agilidade = engine.random(j[bicho]["atributos"]["agilidadeMin"].get<int>(), j[bicho]["atributos"]["agilidadeMax"].get<int>());
-
-    //Habilidades
-    int desarmado = engine.random(j[bicho]["habilidades"]["desarmadoMin"].get<int>(), j[bicho]["habilidades"]["desarmadoMax"].get<int>());
     
-    int espada = engine.random(j[bicho]["habilidades"]["espadaMin"].get<int>(), j[bicho]["habilidades"]["espadaMax"].get<int>());
+    Entidade* monstro = new Entidade(x, y, simbolo,tamanho,0, nome, TCOD_darker_green);
     
-    Entidade* monstro = new Entidade(x, y, simbolo,tamanho,visao, nome, TCOD_darker_green);
-    monstro->visao = visao;
-    monstro->destrutivel = new destrutivelMonstro(monstro,vigor, resistencia, agilidade, "Cadaver de "+nome);
-    monstro->atacador = new Atacador(monstro,forca,destreza,desarmado,espada);
     monstro->container = new Container(5);
     monstro->ai = new aiMonstro(monstro,1);
+    
     mover(monstro->x,monstro->y,monstro);
     engine.entidades.push_back(monstro);
 }
@@ -304,30 +326,43 @@ void Mapa::criarSala(bool primeiro, int x1, int x2, int y1, int y2)
 
 void Mapa::render()
 {
+    /*
     static const TCODColor paredeEscura(0, 0, 100);
     static const TCODColor chaoEscuro(50, 50, 150);
     static const TCODColor paredeClara(130, 110, 50);
     static const TCODColor chaoClaro(200, 180, 50);
-
+    */
     for (int x = 0; x < largura; x++)
     {
         for (int y = 0; y < altura; y += 1)
         {
+            Tile* tile = getTile(x, y);
+            TCODColor cor = tile->terreno->material->cor;
             if (eVisivel(x, y))
             {
-                TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? TCOD_lighter_grey : TCOD_lightest_gray);
-                Tile* tile = getTile(x,y);
+//                TCODConsole::root->setCharBackground(x, y, !eDenso(x, y) ? TCOD_lighter_grey : TCOD_lightest_gray);
+
+                TCODConsole::root->setCharBackground(x, y, cor);
                 if (!tile->itens->inventario.empty())
                 {
                     Item* item = tile->itens->inventario.back();
                     TCODConsole::root->setChar(x, y, item->simbolo);
                     TCODConsole::root->setCharForeground(x, y, item->cor);
                 }
+                else
+                {
+                    TCODConsole::root->setChar(x, y, tile->terreno->simbAtual);
+                    TCODConsole::root->setCharForeground(x, y, TCOD_white);
+                }
             }
 
             else if (!eVisivel(x, y) && eExplorado(x, y))
             {
-                TCODConsole::root->setCharBackground(x, y, eParede(x, y) ? TCOD_darkest_grey : TCOD_darker_gray);
+                float coefCor = 0.3f;
+                TCODConsole::root->setChar(x, y, tile->terreno->simbAtual);
+                TCODConsole::root->setCharBackground(x, y, (cor*coefCor));
+                TCODConsole::root->setCharForeground(x, y, TCOD_dark_grey);
+            //    TCODConsole::root->setCharBackground(x, y, !eDenso(x, y) ? TCOD_darkest_grey : TCOD_darker_gray);
             }
         }
     }

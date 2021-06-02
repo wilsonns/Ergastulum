@@ -16,11 +16,13 @@ public:
 	int simbolo;
 	TCODColor cor;
 	
-
 	//BOOLS
 	bool eArma;//se o item pode ser usado como arma
-		bool eRanged;//se o item pode fazer ataques à distancia
+	bool eRanged;//se o item pode fazer ataques à distancia
 	bool eArmadura;//se o item pode ser usado como armadura
+	void fazerArma();
+	void fazerRanged();
+	void fazerArmadura();
 
 	//INTS
 	int cargas;//se o item tem uma quantidade de cargas
@@ -28,6 +30,11 @@ public:
 	int dano;//dano causado pelo objeto se usado como arma
 	int blindagem;//a quantidade de dano tankado pelo item se usado como armadura
 	int peso;//o peso do item para caber no inventario do personagem
+	void setCargas(int cargas);
+	void setMaxCargas(int cargas);
+	void setDano(int dano);
+	void setBlindagem(int blindagem);
+	void setPeso(int peso);
 
 	bool pegar(Entidade* portador);//se conseguir pegar o item, retorna verdadeiro
 	bool usar();//função virtual para usar o item, veja a referencia de cada classe filha

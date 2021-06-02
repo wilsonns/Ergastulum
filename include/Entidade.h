@@ -2,6 +2,11 @@
 #define ENTIDADE_H
 #include <main.h>
 
+const std::string ST = "Forca";
+const std::string DX = "Destreza";
+const std::string IQ = "Inteligencia";
+const std::string HT = "Vitalidade";
+
 struct Nodo; //FORWARD DO NODO DECLARADO EM PATHFINDING.H
 
 class Entidade
@@ -17,22 +22,18 @@ class Entidade
 
         std::string nome; //Nome da entidade
         bool denso;//pode-se passar por essa entidade?
-
-        Atacador *atacador; //é uma entidade capaz de atacar?
-        Destrutivel *destrutivel; //é uma entidade mortal/destrutivel?
         AI *ai;//é uma entidade que se auto-atualiza?
-        Item* item;//é uma entidade que pode ser pega e guardada em um contaienr?
         Container* container;//é uma entidade que pode guardar outras entidades?
 
         //Atributos e Habilidades
-        std::unordered_map<std::string, Habilidade*> habilidades;
-        std::unordered_map<std::string, Stats*> atributos;
+        std::unordered_map<std::string, int> habilidades;
+        std::unordered_map<std::string, int> atributos;
 
         //Funções para Habilidades e Atributos
-        void adcionarAtributo(std::string s_atributo);
+        void adcionarAtributo(std::string s_atributo, int nivel = 0);
         void modificarAtributo(std::string s_atributo, int valor);//preciso verificar se preciso deletar individualmente cada habilidade/atributo
 
-        void adcionarHabilidade(std::string s_habilidade);
+        void adcionarHabilidade(std::string s_habilidade, int nivel = 0);
         void modificarHabilidade(std::string s_habilidade, int valor);
         void uparHabilidade(std::string s_habilidade, int xp);
 
@@ -57,6 +58,21 @@ class Entidade
         void atualizar();//chama a atualização da IA da entidade
 
         //////FLAGS
+
+        int tomarDano(int dano);//subtrai o dano sofrido dos pontos de vida atuais e retorna a quantidade de dano que foi causada
+        int curar(int valor);//recupera pontos de vida da entidade e retorna a quantidade de pvs curados
+        void morrer();//Função que mata a entidade, tirando-a do vetor entidades e enfiando-a no vetor mortos
+        inline bool morreu()
+        {
+            if (getAtributo("PV") <= 0)
+            {
+                return true;
+            }
+            return false;
+        }//Retorna verdadeiro se tiver morrido, falso se não
+        void atacar(Entidade* alvo);//self ataca o alvo destrutivel e causa dano
+        void atacarRanged(Entidade* alvo);//ataca o alvo à distancia
+
 
 };
 /*

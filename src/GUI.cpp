@@ -19,10 +19,13 @@ void GUI::render()
     con->setDefaultBackground(TCOD_lighter_gray);
     con->clear();
 
-    renderBarra(1, 1, LARGURA_BARRA, engine.jogador->destrutivel->hp, engine.jogador->destrutivel->hpMax, TCOD_light_red, TCOD_darker_red);
-    con->printf(1, 2, "Forca:%i", engine.jogador->atributos["Forca"]->nivelAjustado);
-    con->printf(1, 3, "Arma:%s", engine.jogador->container->arma? engine.jogador->container->arma->nome.c_str():"Desarmado");
+    renderBarra(1, 1, LARGURA_BARRA, engine.jogador->getAtributo("PV"), engine.jogador->getAtributo("PVmax"), TCOD_light_red, TCOD_darker_red);
+    renderBarra(1, 2, LARGURA_BARRA, engine.jogador->getAtributo("PF"), engine.jogador->getAtributo("PFmax"), TCOD_light_yellow, TCOD_darker_yellow);
+    renderBarra(1, 3, LARGURA_BARRA, engine.jogador->getAtributo("Mana"), engine.jogador->getAtributo("Manamax"), TCOD_light_blue, TCOD_darker_blue);
 
+    con->printf(1, 0, "%s", engine.jogador->nome.c_str());
+    /*con->printf(1, 3, "Arma:%s", engine.jogador->container->arma? engine.jogador->container->arma->nome.c_str():"Desarmado");
+    */
    
 
     int y = 1;
@@ -55,21 +58,24 @@ void GUI::render()
     }
 }///Desenha a moldura da UI
 
-void GUI::renderBarra(int x, int y, int largura, int valor, int valormax, const TCODColor& corBarra, const TCODColor& corFundo)
+void GUI::renderBarra(int x, int y, int largura, int valor, int valormax, const TCODColor& corBarra, const TCODColor& corFundo, bool nome)
 {
     con->setDefaultBackground(corFundo);
     con->rect(x, y, largura, 1, false, TCOD_BKGND_SET);
 
-    float larguraBarra = ((float)valor / (float)valormax)*largura;
+    float larguraBarra = ((float)valor / (float)valormax) * largura;
 
     if (larguraBarra > 0)
     {
         con->setDefaultBackground(corBarra);
         con->rect(x, y, larguraBarra, 1, false, TCOD_BKGND_SET);
     }
+
     con->setDefaultForeground(TCOD_white);
-    con->printf(x + largura / 2, y, TCOD_BKGND_NONE, TCOD_CENTER, "%s:%i/%i", engine.jogador->nome.c_str(), valor, valormax);
+    con->printf(x + largura / 2, y, TCOD_BKGND_NONE, TCOD_CENTER, "%i/%i", valor, valormax);
+
 }
+
 
 
 void GUI::mensagem(const TCODColor& cor, std::string texto, ...)

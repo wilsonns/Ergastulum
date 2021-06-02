@@ -9,5 +9,14 @@
 3 - Entidades
 --Capacidade de portar itens pra aumentar o dano causado \/
 --Tipos diferentes de materiais e interações causadas por isso 
+///
+Atributos:
+Força
+Destreza
+Inteligencia
+Vitalidade
+
+
+
 
 4 - Mudanças de planos... Itens são da Classe Item somente, não mais da classe Entidade

@@ -15,12 +15,12 @@ AI::~AI()
 
 void AI::atualizar()
 {
-    pa = 5 * (self->atributos["Destreza"]->nivelAjustado + self->atributos["Agilidade"]->nivelAjustado);
+    //pa = 5 * (self->atributos["Destreza"]->nivelAjustado + self->atributos["Agilidade"]->nivelAjustado);
 }
 
 float AI::condicaoFisica()
 {
-    return self->destrutivel->hp / self->destrutivel->hpMax;
+    return self->getAtributo("PV") / self->getAtributo("PVmax");
 }
 
 aiJogador::aiJogador(Entidade* self)
@@ -32,7 +32,7 @@ aiJogador::aiJogador(Entidade* self)
 void aiJogador::atualizar()
 {
     AI::atualizar();
-    if (self->destrutivel && self->destrutivel->morreu())
+    if (self->morreu())
     {
         return;
     }
@@ -66,14 +66,14 @@ void aiJogador::atualizar()
             }
         }
         else if (engine.debug == true && tile->ocupante == NULL)
-        {
+        {/*
             Entidade* entidade = new Entidade(engine.mouse.cx, engine.mouse.cy, 'D', 5, 5, "Debugão",TCOD_color_add(TCOD_red,TCOD_black));
             entidade->destrutivel = new Destrutivel(entidade, 1, 1, 1);
             entidade->atacador = new Atacador(entidade, 1, 1, 1);
             entidade->ai = new aiMonstro(entidade, 1);
             engine.mapa->mover(engine.mouse.cx, engine.mouse.cy, entidade);
             engine.entidades.push_back(entidade);
-        }
+        */}
     }
 
     switch (engine.ultimoBotao.vk)
@@ -127,18 +127,21 @@ void aiJogador::atualizar()
 
 bool aiJogador::moverOuAtacar(int xalvo, int yalvo)
 {
-    if(engine.mapa->eParede(xalvo,yalvo))
+    if(engine.mapa->eDenso(xalvo,yalvo) && !engine.mapa->getTile(xalvo,yalvo)->terreno->porta)
     {
         return false;
     }
-    for (std::vector<Entidade*>::iterator it = engine.entidades.begin(); it != engine.entidades.end(); it++)
+    Entidade *entidade = engine.mapa->getTile(xalvo, yalvo)->ocupante;
+    if (entidade && !entidade->morreu() && entidade != self)
     {
-        Entidade* entidade = *it;
-        if(entidade->x == xalvo && entidade->y == yalvo && entidade->destrutivel && !entidade->destrutivel->morreu() && entidade != self)
-        {
-            self->atacador->atacar(entidade);
-            return false;
-        }
+        self->atacar(entidade);
+        return false;
+    }
+    Tile* tile = engine.mapa->getTile(xalvo, yalvo);
+    if (tile->terreno->porta && !tile->terreno->aberto)
+    {
+        tile->terreno->operar();
+        return false;
     }
     engine.mapa->mover(xalvo, yalvo, self);
     self->x = xalvo;
@@ -269,14 +272,14 @@ void aiJogador::mostrarPersonagem()
     int i = 3;
     for (auto x:self->atributos)
     {
-        per.printf(1, i, "%s: %i/%i", x.first.c_str(), x.second->nivelBase, x.second->nivelAjustado);
+        per.printf(1, i, "%s: %i", x.first.c_str(), x.second);
         i++;
     }
-    per.printf(30, 3, "Hp:%i/%i", self->destrutivel->hp, self->destrutivel->hpMax);
+    per.printf(30, 3, "Hp:%i/%i", self->getAtributo("PV"), self->getAtributo("PVmax"));
     i = 5;
     for (auto x : self->habilidades)
     {
-        per.printf(1, i, "%s: %i/%i", x.first.c_str(), x.second->nivelBase, x.second->nivelAjustado);
+        per.printf(1, i, "%s: %i", x.first.c_str(), x.second);
         i++;
     }
 
@@ -295,7 +298,7 @@ void aiJogador::botaoAcao(int ascii)
     switch (ascii)
     {
     case 'f':
-        self->atacador->atacarRanged(mirar(5));
+        self->atacarRanged(mirar(5));
         break;
     case 'p'://Pegar um item no chão abaixo de vc
     {
@@ -381,19 +384,19 @@ void aiJogador::botaoAcao(int ascii)
 
             case TCODK_UP:
             case TCODK_KP8:
-                self->atacador->atacar(engine.mapa->getTile(self->x, self->y - 1));
+                //self->atacador->atacar(engine.mapa->getTile(self->x, self->y - 1));
                 break;
             case TCODK_DOWN:
             case TCODK_KP2:
-                self->atacador->atacar(engine.mapa->getTile(self->x, self->y + 1));
+                //self->atacador->atacar(engine.mapa->getTile(self->x, self->y + 1));
                 break;
             case TCODK_LEFT:
             case TCODK_KP4:
-                self->atacador->atacar(engine.mapa->getTile(self->x - 1, self->y));
+                //self->atacador->atacar(engine.mapa->getTile(self->x - 1, self->y));
                 break;
             case TCODK_RIGHT:
             case TCODK_KP6:
-                self->atacador->atacar(engine.mapa->getTile(self->x + 1, self->y));
+                //self->atacador->atacar(engine.mapa->getTile(self->x + 1, self->y));
                 break;
             case TCODK_KP7:
                 break;
@@ -424,7 +427,7 @@ aiMonstro::aiMonstro(Entidade* self, int inteligencia)
 void aiMonstro::atualizar()
 {
     AI::atualizar();
-    if (self->destrutivel && self->destrutivel->morreu())
+    if (self->morreu())
     {
         return;
     }
@@ -450,7 +453,7 @@ void aiMonstro::moverOuAtacar()
     }
     else if(self->caminho.size() <= 1)
     {
-        self->atacador->atacar(alvo);
+        self->atacar(alvo);
     }
 }
 

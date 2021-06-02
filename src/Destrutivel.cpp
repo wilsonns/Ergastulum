@@ -5,21 +5,11 @@ Destrutivel::Destrutivel()
     //dummy
 }
 
-Destrutivel::Destrutivel(Entidade* self, int vigor, int resistencia, int agilidade, std::string nomeCadaver)
+Destrutivel::Destrutivel(Entidade* self, std::string nomeCadaver)
 {
-    this->self = self;
-    self->adcionarAtributo("Vigor");
-    self->modificarAtributo("Vigor", vigor);
-    self->adcionarAtributo("Resistencia");
-    self->modificarAtributo("Resistencia", resistencia);
-    self->adcionarAtributo("Agilidade");
-    self->modificarAtributo("Agilidade", agilidade);
-
-    this->hpMax = self->atributos["Vigor"]->nivelAjustado * self->tamanho;
-    this->hp = hpMax;
-    
+    /*this->self = self;
     this->nomeCadaver = nomeCadaver;
-
+    */
     //ctor
 }
 
@@ -65,13 +55,13 @@ engine.mapa->adcionarItem(self->x, self->y, self->simbolo, self->nome, "Cadaver"
 engine.entidades.erase((std::find(engine.entidades.begin(),engine.entidades.end(),self)));
 }
 
-destrutivelMonstro::destrutivelMonstro(Entidade *self, int vigor, int resistencia,int agilidade, std::string nomeCadaver) : 
-    Destrutivel(self, vigor,resistencia,agilidade,nomeCadaver)
+destrutivelMonstro::destrutivelMonstro(Entidade *self, std::string nomeCadaver) : 
+    Destrutivel(self,nomeCadaver)
 {
 }
 
-destrutivelJogador::destrutivelJogador(Entidade* self, int vigor, int resistencia, int agilidade, std::string nomeCadaver) :
-    Destrutivel(self, vigor, resistencia, agilidade, nomeCadaver)
+destrutivelJogador::destrutivelJogador(Entidade* self, std::string nomeCadaver) :
+    Destrutivel(self, nomeCadaver)
 {
 }
 
@@ -98,7 +88,7 @@ DestrutivelTerreno::DestrutivelTerreno(Tile* self, int resistencia)
 
 void DestrutivelTerreno::destruir()
 {
-    self->passavel = true;
+  //  self->passavel = true;
 }
 
 int DestrutivelTerreno::tomarDano(int dano)

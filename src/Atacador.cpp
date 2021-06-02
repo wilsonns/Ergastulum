@@ -1,20 +1,10 @@
 #include "Atacador.h"
 
-Atacador::Atacador(Entidade *self, int forca, int destreza, int desarmado, int espada)
+Atacador::Atacador(Entidade *self)
 {
-    this->self = self;
-    self->adcionarAtributo("Forca");
-    self->modificarAtributo("Forca", forca);
-    self->adcionarAtributo("Destreza");
-    self->modificarAtributo("Destreza", destreza);
+    //this->self = self;
     
     //SKILLS
-    self->adcionarHabilidade("Desarmado");
-    self->modificarHabilidade("Desarmado", desarmado);
-    self->adcionarHabilidade("Espada");
-    self->modificarHabilidade("Espada", espada);
-    self->adcionarHabilidade("Arco");
-    self->modificarHabilidade("Arco", 1);
     //ctor
 }
 
@@ -27,7 +17,7 @@ Atacador::~Atacador()
 
 void Atacador::atacar(Entidade* alvo)
 {
-    if (alvo->destrutivel && !alvo->destrutivel->morreu())
+    if (!alvo->morreu())
     {
         //Primeiro passo: self ataca e o alvo tenta se esquivar
         //Tipo de dano
@@ -37,18 +27,19 @@ void Atacador::atacar(Entidade* alvo)
         if(arma)
         {
             std::string tipo = self->container->arma->tipo;
-            nivel = self->habilidades[tipo]->nivelAjustado == 0 ? -3 : self->habilidades[tipo]->nivelAjustado;
+            //nivel = self->habilidades[tipo]->nivelAjustado == 0 ? -3 : self->habilidades[tipo]->nivelAjustado;
             }
         else
         {
-            nivel = self->habilidades["Desarmado"]->nivelAjustado == 0 ? -3 : self->habilidades["Desarmado"]->nivelAjustado;
+            //nivel = self->habilidades["Desarmado"]->nivelAjustado == 0 ? -3 : self->habilidades["Desarmado"]->nivelAjustado;
             
         }
         acerto = engine.random(1, 100, nivel);
 
         
         int esquiva;
-        int agilidade = alvo->atributos["Agilidade"]->nivelAjustado;
+        int agilidade = 0;
+        //= alvo->atributos["Agilidade"]->nivelAjustado;
         if (agilidade == 0)
         {
             esquiva = -99;
@@ -87,29 +78,27 @@ void Atacador::atacar(Entidade* alvo)
             int dano;
             if (arma)
             {
-                dano = engine.random(1, arma->dano, self->atributos["Forca"]->nivelAjustado);
+                dano = engine.random(1, arma->dano, self->getAtributo(ST));
             }
             else
             {
-                dano = engine.random(1, self->atributos["Forca"]->nivelAjustado, (int)(self->atributos["Forca"]->nivelAjustado * 0.1f));
+                //dano = engine.random(1, self->atributos["Forca"]->nivelAjustado, (int)(self->atributos["Forca"]->nivelAjustado * 0.1f));
             }
 
-            dano -= alvo->atributos["Resistencia"]->nivelAjustado;
-            
             if (dano <= 0)
             {
                 dano = 1;
             }
             engine.gui->mensagem(TCOD_white, "{} {} {} causando {} dano!", self->nome,ataque, alvo->nome, std::to_string(dano));
             /// MENSAGEM
-            alvo->destrutivel->tomarDano(dano);
+            alvo->tomarDano(dano);
         }
     }
 }
 
 void Atacador::atacarRanged(Entidade* alvo)
 {
-    if (alvo && alvo->destrutivel && !alvo->destrutivel->morreu() /*&& self->container->arma->eRanged*/)
+    if (alvo && !alvo->morreu() /*&& self->container->arma->eRanged*/)
     {
         int acerto = engine.random(0, 100, self->getAtributo("Destreza") + self->getHabilidade("Arco"));
         if (acerto > 50)
@@ -117,7 +106,7 @@ void Atacador::atacarRanged(Entidade* alvo)
             int dano = engine.random(1, 6);
             if (dano > 0)
             {
-                dano = alvo->destrutivel->tomarDano(dano);
+                dano = alvo->tomarDano(dano);
                 engine.gui->mensagem(TCOD_white, "{} dispara contra {} e acerta, causando {} dano!", self->nome, alvo->nome, std::to_string(dano));
             }
         }
@@ -136,12 +125,13 @@ void Atacador::atacarRanged(Entidade* alvo)
 
 void Atacador::atacar(Tile* alvo)
 {
-    if (alvo->destrutivel && !alvo->destrutivel->destruido() && !alvo->passavel)
+    /*if (alvo->destrutivel && !alvo->destrutivel->destruido() && !alvo->passavel)
     {
-        int dano = self->atributos["Forca"]->nivelAjustado - alvo->destrutivel->resistencia;
+        //int dano = self->atributos["Forca"]->nivelAjustado - alvo->destrutivel->resistencia;
+        int dano = 0;
         if (dano > 0)
         {
             alvo->destrutivel->tomarDano(dano);
         }
-    }
+    }*/
 }

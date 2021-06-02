@@ -2,6 +2,7 @@
 #define ENGINE_H
 
 #include <main.h>
+#include "Material.h"
 
 class Engine
 {
@@ -15,10 +16,13 @@ public:
         VITORIA,
         DERROTA
     }statusJogo;//O status do jogo
+    std::map<int, std::string> danoGdP;
+    std::map<int, std::string> danoBal;
 
     int largura, altura; //Largura e altura da tela
 
     Mapa *mapa;//cria o mapa
+    std::unordered_map<std::string,Material*> materiais;//cria a lista de materiais que sera utilizada no jogo
     Pathfinding* pathMapa;//cria o mapa de pathfinding compartilhado por todas as entidades que se movem
     std::vector<Entidade*> entidades;//cria uma std::vector de entidades livres no mapa(inimigos, itens)
     Entidade *jogador;//cria um pointer para o jogador

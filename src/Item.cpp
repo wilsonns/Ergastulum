@@ -16,6 +16,51 @@ Item::~Item()
 	//dtor
 }
 
+void Item::fazerArma()
+{
+	this->eArma = true;
+}
+
+void Item::fazerRanged()
+{
+	this->eRanged = true;
+}
+
+void Item::fazerArmadura()
+{
+	this->eArmadura = true;
+}
+
+
+void Item::setCargas(int cargas)
+{
+	this->cargas = cargas;
+}
+
+void Item::setMaxCargas(int cargas)
+{
+	maxCargas = cargas;
+	if (this->cargas > maxCargas)
+	{
+		this->cargas = maxCargas;
+	}
+}
+void Item::setDano(int dano)
+{
+	this->dano = dano;
+}
+
+void Item::setBlindagem(int blindagem)
+{
+	this->blindagem = blindagem;
+}
+
+void Item::setPeso(int peso)
+{
+	this->peso = peso;
+}
+
+
 bool Item::pegar(Entidade* portador)
 {
 	if (portador->container && portador->container->adcionar(this))

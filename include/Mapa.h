@@ -4,9 +4,16 @@
 #include "main.h"
 #include "Container.h"
 #include "Destrutivel.h"
+#include "Terreno.h"
+#include "Material.h"
 
 class Container;
 class DestrutivelTerreno;
+class Terreno;
+class Parede;
+class Chao;
+class Porta;
+class Material;
 
 struct Tile
 {
@@ -19,10 +26,11 @@ struct Tile
     int simbolo;
     TCODColor cor;
         
-    bool passavel = false;//as entidades podem passar por aqui?
+    //bool passavel = false;//as entidades podem passar por aqui?
     bool explorado = false;//o jogador ja explorou aqui?
     bool visivel = false;//o jogador pode ver aqui?
     
+    Terreno* terreno = NULL;
     Entidade* ocupante = NULL;//se ha uma entidade ocupante aqui atualmente
     Container* itens;
 };
@@ -73,8 +81,10 @@ public:
     void render();//Desenha o mapa na tela;;;;
 
     //PAREDE
-    bool eParede(int x, int y); //Detecta paredes na posição x/y
-    void fazerParede(int x, int y); //Torna x/y numa parede
+    bool eDenso(int x, int y); //Detecta denso na posição x/y
+    bool eOpaco(int x, int y);//detecta opacidade na posição x/y
+    void fazerParede(int x, int y, Material*material); //Torna x/y numa parede
+    void fazerPorta(int x, int y, Material* material); //faz uma porta em x/y
     void cavar(int x1, int x2, int y1, int y2); // Tira a parede de x/y
     void cavar(Tile* tile);//tira a parede num tile especifico
     bool podeAndar(int x, int y); //Verifica se x/y é caminhável

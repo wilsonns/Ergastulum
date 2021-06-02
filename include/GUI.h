@@ -61,7 +61,7 @@ class GUI
         void renderMouse();
 
 
-        void renderBarra(int x, int y, int largura, int valor, int valormax, const TCODColor& corBarra, const TCODColor& corFundo);
+        void renderBarra(int x, int y, int largura, int valor, int valormax, const TCODColor& corBarra, const TCODColor& corFundo,bool nome = false);
 
     private:
 };
