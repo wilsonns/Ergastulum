@@ -8,28 +8,30 @@ const std::string IQ = "Inteligencia";
 const std::string HT = "Vitalidade";
 
 struct Nodo; //FORWARD DO NODO DECLARADO EM PATHFINDING.H
+class Pos;
+class Desenhavel;
 
 class Entidade
 {
     public:
-        //POSIÇÃO
-        int x, y;//posição x e y da entdidade
+        //POSIÃ‡ÃƒO
+        int x, y;//posiÃ§Ã£o x e y da entdidade
         int simbolo; //simnbolo desenhado
-        int visao; //raio da visão da entidade
-        int tamanho; //uma abstração do tamanho de uma entidade; 1 - rato, 5- humano, 10 - carro, assim por diante
+        int visao; //raio da visÃ£o da entidade
+        int tamanho; //uma abstraÃ§Ã£o do tamanho de uma entidade; 1 - rato, 5- humano, 10 - carro, assim por diante
         
         TCODColor cor;
 
         std::string nome; //Nome da entidade
         bool denso;//pode-se passar por essa entidade?
-        AI *ai;//é uma entidade que se auto-atualiza?
-        Container* container;//é uma entidade que pode guardar outras entidades?
+        AI *ai;//Ã© uma entidade que se auto-atualiza?
+        Container* container;//Ã© uma entidade que pode guardar outras entidades?
 
         //Atributos e Habilidades
         std::unordered_map<std::string, int> habilidades;
         std::unordered_map<std::string, int> atributos;
 
-        //Funções para Habilidades e Atributos
+        //FunÃ§Ãµes para Habilidades e Atributos
         void adcionarAtributo(std::string s_atributo, int nivel = 0);
         void modificarAtributo(std::string s_atributo, int valor);//preciso verificar se preciso deletar individualmente cada habilidade/atributo
 
@@ -40,7 +42,7 @@ class Entidade
         int getAtributo(std::string atributo);
         int getHabilidade(std::string habilidade);
 
-        std::vector<Nodo*> caminho;//O caminho retornado pelas funções de pathfinding
+        std::vector<Nodo*> caminho;//O caminho retornado pelas funÃ§Ãµes de pathfinding
 
         Entidade(int x, int y,int simbolo, int tamanho, int visao,  std::string nome, const TCODColor cor);//CTOR
         virtual ~Entidade(); //DTOR
@@ -50,18 +52,18 @@ class Entidade
         /// FOV
         float maximo(float a, float b);//retorna o valor maior
         int distanciaDiag(int x0, int y0, int x1, int y1);//retorna a distancia  entre os pontos
-        float lerp(float inicio, float fim, float t);//retorna a interpolação linear
+        float lerp(float inicio, float fim, float t);//retorna a interpolaÃ§Ã£o linear
 
         void FOV();//realiza todos os calculos de FOV()
 
         void render(); //Desenha a entidade na tela
-        void atualizar();//chama a atualização da IA da entidade
+        void atualizar();//chama a atualizaÃ§Ã£o da IA da entidade
 
         //////FLAGS
 
         int tomarDano(int dano);//subtrai o dano sofrido dos pontos de vida atuais e retorna a quantidade de dano que foi causada
         int curar(int valor);//recupera pontos de vida da entidade e retorna a quantidade de pvs curados
-        void morrer();//Função que mata a entidade, tirando-a do vetor entidades e enfiando-a no vetor mortos
+        void morrer();//FunÃ§Ã£o que mata a entidade, tirando-a do vetor entidades e enfiando-a no vetor mortos
         inline bool morreu()
         {
             if (getAtributo("PV") <= 0)
@@ -69,15 +71,15 @@ class Entidade
                 return true;
             }
             return false;
-        }//Retorna verdadeiro se tiver morrido, falso se não
+        }//Retorna verdadeiro se tiver morrido, falso se nÃ£o
         void atacar(Entidade* alvo);//self ataca o alvo destrutivel e causa dano
-        void atacarRanged(Entidade* alvo);//ataca o alvo à distancia
+        void atacarRanged(Entidade* alvo);//ataca o alvo Ã  distancia
 
 
 };
 /*
 
-class Mobilia : public Entidade//////UM TIPO DE ENTIDADE QUE REPRESENTA PORTAS, BAÚS, E TODOS OS OUTROS TIPOS DE OBJETOS DO MAPA
+class Mobilia : public Entidade//////UM TIPO DE ENTIDADE QUE REPRESENTA PORTAS, BAÃšS, E TODOS OS OUTROS TIPOS DE OBJETOS DO MAPA
 {
 public:
     Mobilia(int x, int y, int simbolo, int simboloAberto, std::string nome, const TCODColor cor);
